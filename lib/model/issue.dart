@@ -1,5 +1,9 @@
 import 'package:comic_book/model/comic_character.dart';
 import 'package:comic_book/model/comic_image.dart';
+import 'package:comic_book/model/comic_object.dart';
+import 'package:comic_book/model/location.dart';
+import 'package:comic_book/model/person.dart';
+import 'package:comic_book/model/team.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'issue.freezed.dart';
@@ -16,6 +20,8 @@ class Issue with _$Issue {
       name: 'id',
     )
     required int id,
+    @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+    required String detailUrl,
     @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
     required DateTime dateAdded,
     @JsonKey(name: 'name') String? name,
@@ -31,6 +37,8 @@ class Issue with _$Issue {
   const factory Issue.details({
     @JsonKey(required: true, disallowNullValue: true)
     required int id,
+    @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+    required String detailUrl,
     @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
     required DateTime coverDate,
     @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
@@ -41,6 +49,14 @@ class Issue with _$Issue {
     required ComicImage image,
     @JsonKey(defaultValue: [], name: 'character_credits')
     required List<SimpleComicCharacter> character,
+    @JsonKey(defaultValue: [], name: 'location_credits')
+    required List<Location> locations,
+    @JsonKey(defaultValue: [], name: 'team_credits')
+    required List<Team> teams,
+    @JsonKey(defaultValue: [], name: 'person_credits')
+    required List<Person> people,
+    @JsonKey(defaultValue: [], name: 'object_credits')
+    required List<ComicObject> comicObjects,
     @JsonKey(name: 'name') String? name,
     @JsonKey(
       required: true,

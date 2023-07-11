@@ -46,7 +46,7 @@ class IssueDetailsScreen extends StatelessWidget {
           title: BlocBuilder<DetailsIssuesBloc, BState<DetailedIssue>>(
             builder: (context, state) {
               final String? title = switch (state) {
-                DataValue<DetailedIssue> s when s.value != null => s.value!.name,
+                DataValue<DetailedIssue> s when s.value != null => s.value!.completeName,
                 _ => initialTitle,
               };
               if (title == null) return const SizedBox();

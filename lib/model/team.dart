@@ -1,19 +1,19 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'comic_character.freezed.dart';
-part 'comic_character.g.dart';
+part 'team.freezed.dart';
+part 'team.g.dart';
 
 @freezed
-class ComicCharacter with _$ComicCharacter {
-  const factory ComicCharacter({
+class Team with _$Team {
+  const factory Team({
     @JsonKey(required: true, disallowNullValue: true)
     required int id,
     @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
     required String detailUrl,
     @JsonKey(required: true, disallowNullValue: true)
     required String name,
-  }) = SimpleComicCharacter;
+  }) = _Team;
 	
-  factory ComicCharacter.fromJson(Map<String, dynamic> json) =>
-			_$ComicCharacterFromJson(json);
+  factory Team.fromJson(Map<String, dynamic> json) =>
+			_$TeamFromJson(json);
 }

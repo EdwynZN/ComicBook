@@ -31,6 +31,8 @@ Issue _$IssueFromJson(Map<String, dynamic> json) {
 mixin _$Issue {
   @JsonKey(required: true, disallowNullValue: true, name: 'id')
   int get id => throw _privateConstructorUsedError;
+  @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+  String get detailUrl => throw _privateConstructorUsedError;
   @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
   DateTime get dateAdded => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
@@ -45,6 +47,9 @@ mixin _$Issue {
             @JsonKey(required: true, disallowNullValue: true, name: 'id')
             int id,
             @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
+            @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
             @JsonKey(name: 'name') String? name,
@@ -55,6 +60,9 @@ mixin _$Issue {
         reduced,
     required TResult Function(
             @JsonKey(required: true, disallowNullValue: true) int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'cover_date')
             DateTime coverDate,
@@ -69,6 +77,13 @@ mixin _$Issue {
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
             @JsonKey(defaultValue: [], name: 'character_credits')
             List<SimpleComicCharacter> character,
+            @JsonKey(defaultValue: [], name: 'location_credits')
+            List<Location> locations,
+            @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
+            @JsonKey(defaultValue: [], name: 'person_credits')
+            List<Person> people,
+            @JsonKey(defaultValue: [], name: 'object_credits')
+            List<ComicObject> comicObjects,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
@@ -82,6 +97,9 @@ mixin _$Issue {
             @JsonKey(required: true, disallowNullValue: true, name: 'id')
             int id,
             @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
+            @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
             @JsonKey(name: 'name') String? name,
@@ -92,6 +110,9 @@ mixin _$Issue {
         reduced,
     TResult? Function(
             @JsonKey(required: true, disallowNullValue: true) int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'cover_date')
             DateTime coverDate,
@@ -106,6 +127,13 @@ mixin _$Issue {
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
             @JsonKey(defaultValue: [], name: 'character_credits')
             List<SimpleComicCharacter> character,
+            @JsonKey(defaultValue: [], name: 'location_credits')
+            List<Location> locations,
+            @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
+            @JsonKey(defaultValue: [], name: 'person_credits')
+            List<Person> people,
+            @JsonKey(defaultValue: [], name: 'object_credits')
+            List<ComicObject> comicObjects,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
@@ -119,6 +147,9 @@ mixin _$Issue {
             @JsonKey(required: true, disallowNullValue: true, name: 'id')
             int id,
             @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
+            @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
             @JsonKey(name: 'name') String? name,
@@ -129,6 +160,9 @@ mixin _$Issue {
         reduced,
     TResult Function(
             @JsonKey(required: true, disallowNullValue: true) int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'cover_date')
             DateTime coverDate,
@@ -143,6 +177,13 @@ mixin _$Issue {
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
             @JsonKey(defaultValue: [], name: 'character_credits')
             List<SimpleComicCharacter> character,
+            @JsonKey(defaultValue: [], name: 'location_credits')
+            List<Location> locations,
+            @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
+            @JsonKey(defaultValue: [], name: 'person_credits')
+            List<Person> people,
+            @JsonKey(defaultValue: [], name: 'object_credits')
+            List<ComicObject> comicObjects,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
@@ -182,6 +223,8 @@ abstract class $IssueCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(required: true, disallowNullValue: true, name: 'id') int id,
+      @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+      String detailUrl,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
       DateTime dateAdded,
       @JsonKey(name: 'name') String? name,
@@ -206,6 +249,7 @@ class _$IssueCopyWithImpl<$Res, $Val extends Issue>
   @override
   $Res call({
     Object? id = null,
+    Object? detailUrl = null,
     Object? dateAdded = null,
     Object? name = freezed,
     Object? number = null,
@@ -216,6 +260,10 @@ class _$IssueCopyWithImpl<$Res, $Val extends Issue>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      detailUrl: null == detailUrl
+          ? _value.detailUrl
+          : detailUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       dateAdded: null == dateAdded
           ? _value.dateAdded
           : dateAdded // ignore: cast_nullable_to_non_nullable
@@ -253,6 +301,8 @@ abstract class _$$SimpleIssueCopyWith<$Res> implements $IssueCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(required: true, disallowNullValue: true, name: 'id') int id,
+      @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+      String detailUrl,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
       DateTime dateAdded,
       @JsonKey(name: 'name') String? name,
@@ -276,6 +326,7 @@ class __$$SimpleIssueCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? detailUrl = null,
     Object? dateAdded = null,
     Object? name = freezed,
     Object? number = null,
@@ -286,6 +337,10 @@ class __$$SimpleIssueCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      detailUrl: null == detailUrl
+          ? _value.detailUrl
+          : detailUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       dateAdded: null == dateAdded
           ? _value.dateAdded
           : dateAdded // ignore: cast_nullable_to_non_nullable
@@ -312,6 +367,8 @@ class _$SimpleIssue extends SimpleIssue {
   const _$SimpleIssue(
       {@JsonKey(required: true, disallowNullValue: true, name: 'id')
       required this.id,
+      @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+      required this.detailUrl,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
       required this.dateAdded,
       @JsonKey(name: 'name') this.name,
@@ -328,6 +385,9 @@ class _$SimpleIssue extends SimpleIssue {
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'id')
   final int id;
+  @override
+  @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+  final String detailUrl;
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
   final DateTime dateAdded;
@@ -346,7 +406,7 @@ class _$SimpleIssue extends SimpleIssue {
 
   @override
   String toString() {
-    return 'Issue.reduced(id: $id, dateAdded: $dateAdded, name: $name, number: $number, image: $image)';
+    return 'Issue.reduced(id: $id, detailUrl: $detailUrl, dateAdded: $dateAdded, name: $name, number: $number, image: $image)';
   }
 
   @override
@@ -355,6 +415,8 @@ class _$SimpleIssue extends SimpleIssue {
         (other.runtimeType == runtimeType &&
             other is _$SimpleIssue &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.detailUrl, detailUrl) ||
+                other.detailUrl == detailUrl) &&
             (identical(other.dateAdded, dateAdded) ||
                 other.dateAdded == dateAdded) &&
             (identical(other.name, name) || other.name == name) &&
@@ -365,7 +427,7 @@ class _$SimpleIssue extends SimpleIssue {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, dateAdded, name, number, image);
+      Object.hash(runtimeType, id, detailUrl, dateAdded, name, number, image);
 
   @JsonKey(ignore: true)
   @override
@@ -380,6 +442,9 @@ class _$SimpleIssue extends SimpleIssue {
             @JsonKey(required: true, disallowNullValue: true, name: 'id')
             int id,
             @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
+            @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
             @JsonKey(name: 'name') String? name,
@@ -391,6 +456,9 @@ class _$SimpleIssue extends SimpleIssue {
     required TResult Function(
             @JsonKey(required: true, disallowNullValue: true) int id,
             @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
+            @JsonKey(
                 required: true, disallowNullValue: true, name: 'cover_date')
             DateTime coverDate,
             @JsonKey(
@@ -404,13 +472,20 @@ class _$SimpleIssue extends SimpleIssue {
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
             @JsonKey(defaultValue: [], name: 'character_credits')
             List<SimpleComicCharacter> character,
+            @JsonKey(defaultValue: [], name: 'location_credits')
+            List<Location> locations,
+            @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
+            @JsonKey(defaultValue: [], name: 'person_credits')
+            List<Person> people,
+            @JsonKey(defaultValue: [], name: 'object_credits')
+            List<ComicObject> comicObjects,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
             String number)
         details,
   }) {
-    return reduced(id, dateAdded, name, number, image);
+    return reduced(id, detailUrl, dateAdded, name, number, image);
   }
 
   @override
@@ -420,6 +495,9 @@ class _$SimpleIssue extends SimpleIssue {
             @JsonKey(required: true, disallowNullValue: true, name: 'id')
             int id,
             @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
+            @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
             @JsonKey(name: 'name') String? name,
@@ -431,6 +509,9 @@ class _$SimpleIssue extends SimpleIssue {
     TResult? Function(
             @JsonKey(required: true, disallowNullValue: true) int id,
             @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
+            @JsonKey(
                 required: true, disallowNullValue: true, name: 'cover_date')
             DateTime coverDate,
             @JsonKey(
@@ -444,13 +525,20 @@ class _$SimpleIssue extends SimpleIssue {
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
             @JsonKey(defaultValue: [], name: 'character_credits')
             List<SimpleComicCharacter> character,
+            @JsonKey(defaultValue: [], name: 'location_credits')
+            List<Location> locations,
+            @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
+            @JsonKey(defaultValue: [], name: 'person_credits')
+            List<Person> people,
+            @JsonKey(defaultValue: [], name: 'object_credits')
+            List<ComicObject> comicObjects,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
             String number)?
         details,
   }) {
-    return reduced?.call(id, dateAdded, name, number, image);
+    return reduced?.call(id, detailUrl, dateAdded, name, number, image);
   }
 
   @override
@@ -459,6 +547,9 @@ class _$SimpleIssue extends SimpleIssue {
     TResult Function(
             @JsonKey(required: true, disallowNullValue: true, name: 'id')
             int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
@@ -471,6 +562,9 @@ class _$SimpleIssue extends SimpleIssue {
     TResult Function(
             @JsonKey(required: true, disallowNullValue: true) int id,
             @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
+            @JsonKey(
                 required: true, disallowNullValue: true, name: 'cover_date')
             DateTime coverDate,
             @JsonKey(
@@ -484,6 +578,13 @@ class _$SimpleIssue extends SimpleIssue {
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
             @JsonKey(defaultValue: [], name: 'character_credits')
             List<SimpleComicCharacter> character,
+            @JsonKey(defaultValue: [], name: 'location_credits')
+            List<Location> locations,
+            @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
+            @JsonKey(defaultValue: [], name: 'person_credits')
+            List<Person> people,
+            @JsonKey(defaultValue: [], name: 'object_credits')
+            List<ComicObject> comicObjects,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
@@ -492,7 +593,7 @@ class _$SimpleIssue extends SimpleIssue {
     required TResult orElse(),
   }) {
     if (reduced != null) {
-      return reduced(id, dateAdded, name, number, image);
+      return reduced(id, detailUrl, dateAdded, name, number, image);
     }
     return orElse();
   }
@@ -540,6 +641,8 @@ abstract class SimpleIssue extends Issue {
   const factory SimpleIssue(
       {@JsonKey(required: true, disallowNullValue: true, name: 'id')
       required final int id,
+      @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+      required final String detailUrl,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
       required final DateTime dateAdded,
       @JsonKey(name: 'name') final String? name,
@@ -555,6 +658,9 @@ abstract class SimpleIssue extends Issue {
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'id')
   int get id;
+  @override
+  @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+  String get detailUrl;
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
   DateTime get dateAdded;
@@ -582,6 +688,8 @@ abstract class _$$DetailedIssueCopyWith<$Res> implements $IssueCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(required: true, disallowNullValue: true) int id,
+      @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+      String detailUrl,
       @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
       DateTime coverDate,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
@@ -592,6 +700,12 @@ abstract class _$$DetailedIssueCopyWith<$Res> implements $IssueCopyWith<$Res> {
       @JsonKey(required: true, disallowNullValue: true) ComicImage image,
       @JsonKey(defaultValue: [], name: 'character_credits')
       List<SimpleComicCharacter> character,
+      @JsonKey(defaultValue: [], name: 'location_credits')
+      List<Location> locations,
+      @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
+      @JsonKey(defaultValue: [], name: 'person_credits') List<Person> people,
+      @JsonKey(defaultValue: [], name: 'object_credits')
+      List<ComicObject> comicObjects,
       @JsonKey(name: 'name') String? name,
       @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
       String number});
@@ -612,11 +726,16 @@ class __$$DetailedIssueCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? detailUrl = null,
     Object? coverDate = null,
     Object? dateAdded = null,
     Object? dateLastUpdated = null,
     Object? image = null,
     Object? character = null,
+    Object? locations = null,
+    Object? teams = null,
+    Object? people = null,
+    Object? comicObjects = null,
     Object? name = freezed,
     Object? number = null,
   }) {
@@ -625,6 +744,10 @@ class __$$DetailedIssueCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      detailUrl: null == detailUrl
+          ? _value.detailUrl
+          : detailUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       coverDate: null == coverDate
           ? _value.coverDate
           : coverDate // ignore: cast_nullable_to_non_nullable
@@ -645,6 +768,22 @@ class __$$DetailedIssueCopyWithImpl<$Res>
           ? _value._character
           : character // ignore: cast_nullable_to_non_nullable
               as List<SimpleComicCharacter>,
+      locations: null == locations
+          ? _value._locations
+          : locations // ignore: cast_nullable_to_non_nullable
+              as List<Location>,
+      teams: null == teams
+          ? _value._teams
+          : teams // ignore: cast_nullable_to_non_nullable
+              as List<Team>,
+      people: null == people
+          ? _value._people
+          : people // ignore: cast_nullable_to_non_nullable
+              as List<Person>,
+      comicObjects: null == comicObjects
+          ? _value._comicObjects
+          : comicObjects // ignore: cast_nullable_to_non_nullable
+              as List<ComicObject>,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -662,6 +801,8 @@ class __$$DetailedIssueCopyWithImpl<$Res>
 class _$DetailedIssue extends DetailedIssue {
   const _$DetailedIssue(
       {@JsonKey(required: true, disallowNullValue: true) required this.id,
+      @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+      required this.detailUrl,
       @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
       required this.coverDate,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
@@ -672,11 +813,23 @@ class _$DetailedIssue extends DetailedIssue {
       @JsonKey(required: true, disallowNullValue: true) required this.image,
       @JsonKey(defaultValue: [], name: 'character_credits')
       required final List<SimpleComicCharacter> character,
+      @JsonKey(defaultValue: [], name: 'location_credits')
+      required final List<Location> locations,
+      @JsonKey(defaultValue: [], name: 'team_credits')
+      required final List<Team> teams,
+      @JsonKey(defaultValue: [], name: 'person_credits')
+      required final List<Person> people,
+      @JsonKey(defaultValue: [], name: 'object_credits')
+      required final List<ComicObject> comicObjects,
       @JsonKey(name: 'name') this.name,
       @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
       required this.number,
       final String? $type})
       : _character = character,
+        _locations = locations,
+        _teams = teams,
+        _people = people,
+        _comicObjects = comicObjects,
         $type = $type ?? 'details',
         super._();
 
@@ -686,6 +839,9 @@ class _$DetailedIssue extends DetailedIssue {
   @override
   @JsonKey(required: true, disallowNullValue: true)
   final int id;
+  @override
+  @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+  final String detailUrl;
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
   final DateTime coverDate;
@@ -707,6 +863,42 @@ class _$DetailedIssue extends DetailedIssue {
     return EqualUnmodifiableListView(_character);
   }
 
+  final List<Location> _locations;
+  @override
+  @JsonKey(defaultValue: [], name: 'location_credits')
+  List<Location> get locations {
+    if (_locations is EqualUnmodifiableListView) return _locations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_locations);
+  }
+
+  final List<Team> _teams;
+  @override
+  @JsonKey(defaultValue: [], name: 'team_credits')
+  List<Team> get teams {
+    if (_teams is EqualUnmodifiableListView) return _teams;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_teams);
+  }
+
+  final List<Person> _people;
+  @override
+  @JsonKey(defaultValue: [], name: 'person_credits')
+  List<Person> get people {
+    if (_people is EqualUnmodifiableListView) return _people;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_people);
+  }
+
+  final List<ComicObject> _comicObjects;
+  @override
+  @JsonKey(defaultValue: [], name: 'object_credits')
+  List<ComicObject> get comicObjects {
+    if (_comicObjects is EqualUnmodifiableListView) return _comicObjects;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_comicObjects);
+  }
+
   @override
   @JsonKey(name: 'name')
   final String? name;
@@ -719,7 +911,7 @@ class _$DetailedIssue extends DetailedIssue {
 
   @override
   String toString() {
-    return 'Issue.details(id: $id, coverDate: $coverDate, dateAdded: $dateAdded, dateLastUpdated: $dateLastUpdated, image: $image, character: $character, name: $name, number: $number)';
+    return 'Issue.details(id: $id, detailUrl: $detailUrl, coverDate: $coverDate, dateAdded: $dateAdded, dateLastUpdated: $dateLastUpdated, image: $image, character: $character, locations: $locations, teams: $teams, people: $people, comicObjects: $comicObjects, name: $name, number: $number)';
   }
 
   @override
@@ -728,6 +920,8 @@ class _$DetailedIssue extends DetailedIssue {
         (other.runtimeType == runtimeType &&
             other is _$DetailedIssue &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.detailUrl, detailUrl) ||
+                other.detailUrl == detailUrl) &&
             (identical(other.coverDate, coverDate) ||
                 other.coverDate == coverDate) &&
             (identical(other.dateAdded, dateAdded) ||
@@ -737,6 +931,12 @@ class _$DetailedIssue extends DetailedIssue {
             (identical(other.image, image) || other.image == image) &&
             const DeepCollectionEquality()
                 .equals(other._character, _character) &&
+            const DeepCollectionEquality()
+                .equals(other._locations, _locations) &&
+            const DeepCollectionEquality().equals(other._teams, _teams) &&
+            const DeepCollectionEquality().equals(other._people, _people) &&
+            const DeepCollectionEquality()
+                .equals(other._comicObjects, _comicObjects) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.number, number) || other.number == number));
   }
@@ -746,11 +946,16 @@ class _$DetailedIssue extends DetailedIssue {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      detailUrl,
       coverDate,
       dateAdded,
       dateLastUpdated,
       image,
       const DeepCollectionEquality().hash(_character),
+      const DeepCollectionEquality().hash(_locations),
+      const DeepCollectionEquality().hash(_teams),
+      const DeepCollectionEquality().hash(_people),
+      const DeepCollectionEquality().hash(_comicObjects),
       name,
       number);
 
@@ -767,6 +972,9 @@ class _$DetailedIssue extends DetailedIssue {
             @JsonKey(required: true, disallowNullValue: true, name: 'id')
             int id,
             @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
+            @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
             @JsonKey(name: 'name') String? name,
@@ -778,6 +986,9 @@ class _$DetailedIssue extends DetailedIssue {
     required TResult Function(
             @JsonKey(required: true, disallowNullValue: true) int id,
             @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
+            @JsonKey(
                 required: true, disallowNullValue: true, name: 'cover_date')
             DateTime coverDate,
             @JsonKey(
@@ -791,14 +1002,21 @@ class _$DetailedIssue extends DetailedIssue {
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
             @JsonKey(defaultValue: [], name: 'character_credits')
             List<SimpleComicCharacter> character,
+            @JsonKey(defaultValue: [], name: 'location_credits')
+            List<Location> locations,
+            @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
+            @JsonKey(defaultValue: [], name: 'person_credits')
+            List<Person> people,
+            @JsonKey(defaultValue: [], name: 'object_credits')
+            List<ComicObject> comicObjects,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
             String number)
         details,
   }) {
-    return details(id, coverDate, dateAdded, dateLastUpdated, image, character,
-        name, number);
+    return details(id, detailUrl, coverDate, dateAdded, dateLastUpdated, image,
+        character, locations, teams, people, comicObjects, name, number);
   }
 
   @override
@@ -808,6 +1026,9 @@ class _$DetailedIssue extends DetailedIssue {
             @JsonKey(required: true, disallowNullValue: true, name: 'id')
             int id,
             @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
+            @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
             @JsonKey(name: 'name') String? name,
@@ -819,6 +1040,9 @@ class _$DetailedIssue extends DetailedIssue {
     TResult? Function(
             @JsonKey(required: true, disallowNullValue: true) int id,
             @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
+            @JsonKey(
                 required: true, disallowNullValue: true, name: 'cover_date')
             DateTime coverDate,
             @JsonKey(
@@ -832,14 +1056,21 @@ class _$DetailedIssue extends DetailedIssue {
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
             @JsonKey(defaultValue: [], name: 'character_credits')
             List<SimpleComicCharacter> character,
+            @JsonKey(defaultValue: [], name: 'location_credits')
+            List<Location> locations,
+            @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
+            @JsonKey(defaultValue: [], name: 'person_credits')
+            List<Person> people,
+            @JsonKey(defaultValue: [], name: 'object_credits')
+            List<ComicObject> comicObjects,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
             String number)?
         details,
   }) {
-    return details?.call(id, coverDate, dateAdded, dateLastUpdated, image,
-        character, name, number);
+    return details?.call(id, detailUrl, coverDate, dateAdded, dateLastUpdated,
+        image, character, locations, teams, people, comicObjects, name, number);
   }
 
   @override
@@ -848,6 +1079,9 @@ class _$DetailedIssue extends DetailedIssue {
     TResult Function(
             @JsonKey(required: true, disallowNullValue: true, name: 'id')
             int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
@@ -860,6 +1094,9 @@ class _$DetailedIssue extends DetailedIssue {
     TResult Function(
             @JsonKey(required: true, disallowNullValue: true) int id,
             @JsonKey(
+                required: true, disallowNullValue: true, name: 'api_detail_url')
+            String detailUrl,
+            @JsonKey(
                 required: true, disallowNullValue: true, name: 'cover_date')
             DateTime coverDate,
             @JsonKey(
@@ -873,6 +1110,13 @@ class _$DetailedIssue extends DetailedIssue {
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
             @JsonKey(defaultValue: [], name: 'character_credits')
             List<SimpleComicCharacter> character,
+            @JsonKey(defaultValue: [], name: 'location_credits')
+            List<Location> locations,
+            @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
+            @JsonKey(defaultValue: [], name: 'person_credits')
+            List<Person> people,
+            @JsonKey(defaultValue: [], name: 'object_credits')
+            List<ComicObject> comicObjects,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
@@ -881,8 +1125,20 @@ class _$DetailedIssue extends DetailedIssue {
     required TResult orElse(),
   }) {
     if (details != null) {
-      return details(id, coverDate, dateAdded, dateLastUpdated, image,
-          character, name, number);
+      return details(
+          id,
+          detailUrl,
+          coverDate,
+          dateAdded,
+          dateLastUpdated,
+          image,
+          character,
+          locations,
+          teams,
+          people,
+          comicObjects,
+          name,
+          number);
     }
     return orElse();
   }
@@ -929,6 +1185,8 @@ class _$DetailedIssue extends DetailedIssue {
 abstract class DetailedIssue extends Issue {
   const factory DetailedIssue(
       {@JsonKey(required: true, disallowNullValue: true) required final int id,
+      @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+      required final String detailUrl,
       @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
       required final DateTime coverDate,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
@@ -940,6 +1198,14 @@ abstract class DetailedIssue extends Issue {
       required final ComicImage image,
       @JsonKey(defaultValue: [], name: 'character_credits')
       required final List<SimpleComicCharacter> character,
+      @JsonKey(defaultValue: [], name: 'location_credits')
+      required final List<Location> locations,
+      @JsonKey(defaultValue: [], name: 'team_credits')
+      required final List<Team> teams,
+      @JsonKey(defaultValue: [], name: 'person_credits')
+      required final List<Person> people,
+      @JsonKey(defaultValue: [], name: 'object_credits')
+      required final List<ComicObject> comicObjects,
       @JsonKey(name: 'name') final String? name,
       @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
       required final String number}) = _$DetailedIssue;
@@ -951,6 +1217,9 @@ abstract class DetailedIssue extends Issue {
   @override
   @JsonKey(required: true, disallowNullValue: true)
   int get id;
+  @override
+  @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
+  String get detailUrl;
   @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
   DateTime get coverDate;
   @override
@@ -963,6 +1232,14 @@ abstract class DetailedIssue extends Issue {
   ComicImage get image;
   @JsonKey(defaultValue: [], name: 'character_credits')
   List<SimpleComicCharacter> get character;
+  @JsonKey(defaultValue: [], name: 'location_credits')
+  List<Location> get locations;
+  @JsonKey(defaultValue: [], name: 'team_credits')
+  List<Team> get teams;
+  @JsonKey(defaultValue: [], name: 'person_credits')
+  List<Person> get people;
+  @JsonKey(defaultValue: [], name: 'object_credits')
+  List<ComicObject> get comicObjects;
   @override
   @JsonKey(name: 'name')
   String? get name;
