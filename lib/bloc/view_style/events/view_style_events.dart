@@ -2,14 +2,14 @@ sealed class ViewEvent {
   const ViewEvent();
 }
 
-class ListStyleView extends ViewEvent {
-  const ListStyleView();
+class ListStyleViewEvent extends ViewEvent {
+  const ListStyleViewEvent();
 }
 
-class GridStyleView extends ViewEvent {
-  const GridStyleView();
+class GridStyleViewEvent extends ViewEvent {
+  const GridStyleViewEvent();
 }
 
-class ToggleStyleView extends ViewEvent {
-  const ToggleStyleView();
+class ToggleStyleViewEvent extends ViewEvent {
+  const ToggleStyleViewEvent();
 }

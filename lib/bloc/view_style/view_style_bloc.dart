@@ -12,9 +12,9 @@ class ViewStyleBloc extends Bloc<ViewEvent, ViewStyle> {
   }
 
   ViewStyleBloc._(this.prefRepository, super.initialState) {
-    on<ListStyleView>((event, emit) => _saveAndEmit(emit, ViewStyle.list));
-    on<GridStyleView>((event, emit) => _saveAndEmit(emit, ViewStyle.grid));
-    on<ToggleStyleView>((event, emit) async {
+    on<ListStyleViewEvent>((event, emit) => _saveAndEmit(emit, ViewStyle.list));
+    on<GridStyleViewEvent>((event, emit) => _saveAndEmit(emit, ViewStyle.grid));
+    on<ToggleStyleViewEvent>((event, emit) async {
       final newState = switch (state) {
         ViewStyle.list => ViewStyle.grid,
         ViewStyle.grid => ViewStyle.list,

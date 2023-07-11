@@ -170,11 +170,12 @@ class _BottomFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 360.0),
-      child: Column(
-        children: [
-          Row(
+    final Size size = MediaQuery.sizeOf(context);
+    return Column(
+      children: [
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 700.0),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(
@@ -185,28 +186,81 @@ class _BottomFilter extends StatelessWidget {
                 child: const Text('Latest Issue'),
               ),
               const Spacer(),
-              TextButton.icon(
-                style: const ButtonStyle(
-                  foregroundColor: MaterialStatePropertyAll(Colors.black),
-                ),
-                onPressed: () {
-                  context.read<ViewStyleBloc>().add(const ToggleStyleView());
-                },
-                icon: BlocBuilder<ViewStyleBloc, ViewStyle>(
+              if (size.width > 600) ...[
+                BlocBuilder<ViewStyleBloc, ViewStyle>(
                   builder: (context, state) {
-                    return switch (state) {
-                      ViewStyle.list => const Icon(Icons.menu),
-                      ViewStyle.grid => const Icon(Icons.grid_view_sharp),
-                    };
+                    return TextButton.icon(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.resolveWith((states) {
+                          if (states.contains(MaterialState.disabled)) {
+                            return null;
+                          } else if (state == ViewStyle.list) {
+                            return Colors.green.shade700;
+                          }
+                          return Colors.black;
+                        }),
+                      ),
+                      onPressed: () {
+                        context
+                            .read<ViewStyleBloc>()
+                            .add(const ListStyleViewEvent());
+                      },
+                      icon: const Icon(Icons.menu),
+                      label: const Text('List'),
+                    );
                   },
                 ),
-                label: const Text('View'),
-              ),
+                const SizedBox(width: 16.0),
+                BlocBuilder<ViewStyleBloc, ViewStyle>(
+                  builder: (context, state) {
+                    return TextButton.icon(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.resolveWith((states) {
+                          if (states.contains(MaterialState.disabled)) {
+                            return null;
+                          } else if (state == ViewStyle.grid) {
+                            return Colors.green.shade700;
+                          }
+                          return Colors.black;
+                        }),
+                      ),
+                      onPressed: () {
+                        context
+                            .read<ViewStyleBloc>()
+                            .add(const GridStyleViewEvent());
+                      },
+                      icon: const Icon(Icons.grid_view_sharp),
+                      label: const Text('Grid'),
+                    );
+                  },
+                ),
+              ] else
+                TextButton.icon(
+                  style: const ButtonStyle(
+                    foregroundColor: MaterialStatePropertyAll(Colors.black),
+                  ),
+                  onPressed: () {
+                    context
+                        .read<ViewStyleBloc>()
+                        .add(const ToggleStyleViewEvent());
+                  },
+                  icon: BlocBuilder<ViewStyleBloc, ViewStyle>(
+                    builder: (context, state) {
+                      return switch (state) {
+                        ViewStyle.list => const Icon(Icons.menu),
+                        ViewStyle.grid => const Icon(Icons.grid_view_sharp),
+                      };
+                    },
+                  ),
+                  label: const Text('View'),
+                ),
             ],
           ),
-          const Divider(height: 1.0, thickness: 1.0, color: Colors.black12),
-        ],
-      ),
+        ),
+        const Divider(height: 1.0, thickness: 1.0, color: Colors.black12),
+      ],
     );
   }
 }
@@ -222,7 +276,8 @@ class _PaginatedLoader extends HookWidget {
       child: BlocBuilder<IssuesBloc, BState<List<Issue>>>(
         builder: (context, state) {
           return switch (state) {
-            LoadingState s when s.value != null && !s.isRefreshing => const Center(
+            LoadingState s when s.value != null && !s.isRefreshing =>
+              const Center(
                 child: CircularProgressIndicator.adaptive(),
               ),
             ErrorState e => TextButton(
