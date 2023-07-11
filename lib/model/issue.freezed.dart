@@ -74,9 +74,13 @@ mixin _$Issue {
                 disallowNullValue: true,
                 name: 'date_last_updated')
             DateTime dateLastUpdated,
+            @JsonKey(name: 'store_date') DateTime? storeDate,
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(required: true, disallowNullValue: true) Volume volume,
+            @JsonKey(defaultValue: [], name: 'story_arc_credits')
+            List<StoryArc> storyArcs,
             @JsonKey(defaultValue: [], name: 'character_credits')
-            List<SimpleComicCharacter> character,
+            List<SimpleComicCharacter> characters,
             @JsonKey(defaultValue: [], name: 'location_credits')
             List<Location> locations,
             @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
@@ -84,6 +88,8 @@ mixin _$Issue {
             List<Person> people,
             @JsonKey(defaultValue: [], name: 'object_credits')
             List<ComicObject> comicObjects,
+            @JsonKey(defaultValue: [], name: 'concept_credits')
+            List<Concept> concepts,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
@@ -124,9 +130,13 @@ mixin _$Issue {
                 disallowNullValue: true,
                 name: 'date_last_updated')
             DateTime dateLastUpdated,
+            @JsonKey(name: 'store_date') DateTime? storeDate,
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(required: true, disallowNullValue: true) Volume volume,
+            @JsonKey(defaultValue: [], name: 'story_arc_credits')
+            List<StoryArc> storyArcs,
             @JsonKey(defaultValue: [], name: 'character_credits')
-            List<SimpleComicCharacter> character,
+            List<SimpleComicCharacter> characters,
             @JsonKey(defaultValue: [], name: 'location_credits')
             List<Location> locations,
             @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
@@ -134,6 +144,8 @@ mixin _$Issue {
             List<Person> people,
             @JsonKey(defaultValue: [], name: 'object_credits')
             List<ComicObject> comicObjects,
+            @JsonKey(defaultValue: [], name: 'concept_credits')
+            List<Concept> concepts,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
@@ -174,9 +186,13 @@ mixin _$Issue {
                 disallowNullValue: true,
                 name: 'date_last_updated')
             DateTime dateLastUpdated,
+            @JsonKey(name: 'store_date') DateTime? storeDate,
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(required: true, disallowNullValue: true) Volume volume,
+            @JsonKey(defaultValue: [], name: 'story_arc_credits')
+            List<StoryArc> storyArcs,
             @JsonKey(defaultValue: [], name: 'character_credits')
-            List<SimpleComicCharacter> character,
+            List<SimpleComicCharacter> characters,
             @JsonKey(defaultValue: [], name: 'location_credits')
             List<Location> locations,
             @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
@@ -184,6 +200,8 @@ mixin _$Issue {
             List<Person> people,
             @JsonKey(defaultValue: [], name: 'object_credits')
             List<ComicObject> comicObjects,
+            @JsonKey(defaultValue: [], name: 'concept_credits')
+            List<Concept> concepts,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
@@ -469,9 +487,13 @@ class _$SimpleIssue extends SimpleIssue {
                 disallowNullValue: true,
                 name: 'date_last_updated')
             DateTime dateLastUpdated,
+            @JsonKey(name: 'store_date') DateTime? storeDate,
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(required: true, disallowNullValue: true) Volume volume,
+            @JsonKey(defaultValue: [], name: 'story_arc_credits')
+            List<StoryArc> storyArcs,
             @JsonKey(defaultValue: [], name: 'character_credits')
-            List<SimpleComicCharacter> character,
+            List<SimpleComicCharacter> characters,
             @JsonKey(defaultValue: [], name: 'location_credits')
             List<Location> locations,
             @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
@@ -479,6 +501,8 @@ class _$SimpleIssue extends SimpleIssue {
             List<Person> people,
             @JsonKey(defaultValue: [], name: 'object_credits')
             List<ComicObject> comicObjects,
+            @JsonKey(defaultValue: [], name: 'concept_credits')
+            List<Concept> concepts,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
@@ -522,9 +546,13 @@ class _$SimpleIssue extends SimpleIssue {
                 disallowNullValue: true,
                 name: 'date_last_updated')
             DateTime dateLastUpdated,
+            @JsonKey(name: 'store_date') DateTime? storeDate,
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(required: true, disallowNullValue: true) Volume volume,
+            @JsonKey(defaultValue: [], name: 'story_arc_credits')
+            List<StoryArc> storyArcs,
             @JsonKey(defaultValue: [], name: 'character_credits')
-            List<SimpleComicCharacter> character,
+            List<SimpleComicCharacter> characters,
             @JsonKey(defaultValue: [], name: 'location_credits')
             List<Location> locations,
             @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
@@ -532,6 +560,8 @@ class _$SimpleIssue extends SimpleIssue {
             List<Person> people,
             @JsonKey(defaultValue: [], name: 'object_credits')
             List<ComicObject> comicObjects,
+            @JsonKey(defaultValue: [], name: 'concept_credits')
+            List<Concept> concepts,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
@@ -575,9 +605,13 @@ class _$SimpleIssue extends SimpleIssue {
                 disallowNullValue: true,
                 name: 'date_last_updated')
             DateTime dateLastUpdated,
+            @JsonKey(name: 'store_date') DateTime? storeDate,
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(required: true, disallowNullValue: true) Volume volume,
+            @JsonKey(defaultValue: [], name: 'story_arc_credits')
+            List<StoryArc> storyArcs,
             @JsonKey(defaultValue: [], name: 'character_credits')
-            List<SimpleComicCharacter> character,
+            List<SimpleComicCharacter> characters,
             @JsonKey(defaultValue: [], name: 'location_credits')
             List<Location> locations,
             @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
@@ -585,6 +619,8 @@ class _$SimpleIssue extends SimpleIssue {
             List<Person> people,
             @JsonKey(defaultValue: [], name: 'object_credits')
             List<ComicObject> comicObjects,
+            @JsonKey(defaultValue: [], name: 'concept_credits')
+            List<Concept> concepts,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
@@ -697,21 +733,28 @@ abstract class _$$DetailedIssueCopyWith<$Res> implements $IssueCopyWith<$Res> {
       @JsonKey(
           required: true, disallowNullValue: true, name: 'date_last_updated')
       DateTime dateLastUpdated,
+      @JsonKey(name: 'store_date') DateTime? storeDate,
       @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+      @JsonKey(required: true, disallowNullValue: true) Volume volume,
+      @JsonKey(defaultValue: [], name: 'story_arc_credits')
+      List<StoryArc> storyArcs,
       @JsonKey(defaultValue: [], name: 'character_credits')
-      List<SimpleComicCharacter> character,
+      List<SimpleComicCharacter> characters,
       @JsonKey(defaultValue: [], name: 'location_credits')
       List<Location> locations,
       @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
       @JsonKey(defaultValue: [], name: 'person_credits') List<Person> people,
       @JsonKey(defaultValue: [], name: 'object_credits')
       List<ComicObject> comicObjects,
+      @JsonKey(defaultValue: [], name: 'concept_credits')
+      List<Concept> concepts,
       @JsonKey(name: 'name') String? name,
       @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
       String number});
 
   @override
   $ComicImageCopyWith<$Res> get image;
+  $VolumeCopyWith<$Res> get volume;
 }
 
 /// @nodoc
@@ -730,12 +773,16 @@ class __$$DetailedIssueCopyWithImpl<$Res>
     Object? coverDate = null,
     Object? dateAdded = null,
     Object? dateLastUpdated = null,
+    Object? storeDate = freezed,
     Object? image = null,
-    Object? character = null,
+    Object? volume = null,
+    Object? storyArcs = null,
+    Object? characters = null,
     Object? locations = null,
     Object? teams = null,
     Object? people = null,
     Object? comicObjects = null,
+    Object? concepts = null,
     Object? name = freezed,
     Object? number = null,
   }) {
@@ -760,13 +807,25 @@ class __$$DetailedIssueCopyWithImpl<$Res>
           ? _value.dateLastUpdated
           : dateLastUpdated // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      storeDate: freezed == storeDate
+          ? _value.storeDate
+          : storeDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as ComicImage,
-      character: null == character
-          ? _value._character
-          : character // ignore: cast_nullable_to_non_nullable
+      volume: null == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as Volume,
+      storyArcs: null == storyArcs
+          ? _value._storyArcs
+          : storyArcs // ignore: cast_nullable_to_non_nullable
+              as List<StoryArc>,
+      characters: null == characters
+          ? _value._characters
+          : characters // ignore: cast_nullable_to_non_nullable
               as List<SimpleComicCharacter>,
       locations: null == locations
           ? _value._locations
@@ -784,6 +843,10 @@ class __$$DetailedIssueCopyWithImpl<$Res>
           ? _value._comicObjects
           : comicObjects // ignore: cast_nullable_to_non_nullable
               as List<ComicObject>,
+      concepts: null == concepts
+          ? _value._concepts
+          : concepts // ignore: cast_nullable_to_non_nullable
+              as List<Concept>,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -793,6 +856,14 @@ class __$$DetailedIssueCopyWithImpl<$Res>
           : number // ignore: cast_nullable_to_non_nullable
               as String,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $VolumeCopyWith<$Res> get volume {
+    return $VolumeCopyWith<$Res>(_value.volume, (value) {
+      return _then(_value.copyWith(volume: value));
+    });
   }
 }
 
@@ -810,9 +881,13 @@ class _$DetailedIssue extends DetailedIssue {
       @JsonKey(
           required: true, disallowNullValue: true, name: 'date_last_updated')
       required this.dateLastUpdated,
+      @JsonKey(name: 'store_date') this.storeDate,
       @JsonKey(required: true, disallowNullValue: true) required this.image,
+      @JsonKey(required: true, disallowNullValue: true) required this.volume,
+      @JsonKey(defaultValue: [], name: 'story_arc_credits')
+      required final List<StoryArc> storyArcs,
       @JsonKey(defaultValue: [], name: 'character_credits')
-      required final List<SimpleComicCharacter> character,
+      required final List<SimpleComicCharacter> characters,
       @JsonKey(defaultValue: [], name: 'location_credits')
       required final List<Location> locations,
       @JsonKey(defaultValue: [], name: 'team_credits')
@@ -821,15 +896,19 @@ class _$DetailedIssue extends DetailedIssue {
       required final List<Person> people,
       @JsonKey(defaultValue: [], name: 'object_credits')
       required final List<ComicObject> comicObjects,
+      @JsonKey(defaultValue: [], name: 'concept_credits')
+      required final List<Concept> concepts,
       @JsonKey(name: 'name') this.name,
       @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
       required this.number,
       final String? $type})
-      : _character = character,
+      : _storyArcs = storyArcs,
+        _characters = characters,
         _locations = locations,
         _teams = teams,
         _people = people,
         _comicObjects = comicObjects,
+        _concepts = concepts,
         $type = $type ?? 'details',
         super._();
 
@@ -852,15 +931,30 @@ class _$DetailedIssue extends DetailedIssue {
   @JsonKey(required: true, disallowNullValue: true, name: 'date_last_updated')
   final DateTime dateLastUpdated;
   @override
+  @JsonKey(name: 'store_date')
+  final DateTime? storeDate;
+  @override
   @JsonKey(required: true, disallowNullValue: true)
   final ComicImage image;
-  final List<SimpleComicCharacter> _character;
+  @override
+  @JsonKey(required: true, disallowNullValue: true)
+  final Volume volume;
+  final List<StoryArc> _storyArcs;
+  @override
+  @JsonKey(defaultValue: [], name: 'story_arc_credits')
+  List<StoryArc> get storyArcs {
+    if (_storyArcs is EqualUnmodifiableListView) return _storyArcs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_storyArcs);
+  }
+
+  final List<SimpleComicCharacter> _characters;
   @override
   @JsonKey(defaultValue: [], name: 'character_credits')
-  List<SimpleComicCharacter> get character {
-    if (_character is EqualUnmodifiableListView) return _character;
+  List<SimpleComicCharacter> get characters {
+    if (_characters is EqualUnmodifiableListView) return _characters;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_character);
+    return EqualUnmodifiableListView(_characters);
   }
 
   final List<Location> _locations;
@@ -899,6 +993,15 @@ class _$DetailedIssue extends DetailedIssue {
     return EqualUnmodifiableListView(_comicObjects);
   }
 
+  final List<Concept> _concepts;
+  @override
+  @JsonKey(defaultValue: [], name: 'concept_credits')
+  List<Concept> get concepts {
+    if (_concepts is EqualUnmodifiableListView) return _concepts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_concepts);
+  }
+
   @override
   @JsonKey(name: 'name')
   final String? name;
@@ -911,7 +1014,7 @@ class _$DetailedIssue extends DetailedIssue {
 
   @override
   String toString() {
-    return 'Issue.details(id: $id, detailUrl: $detailUrl, coverDate: $coverDate, dateAdded: $dateAdded, dateLastUpdated: $dateLastUpdated, image: $image, character: $character, locations: $locations, teams: $teams, people: $people, comicObjects: $comicObjects, name: $name, number: $number)';
+    return 'Issue.details(id: $id, detailUrl: $detailUrl, coverDate: $coverDate, dateAdded: $dateAdded, dateLastUpdated: $dateLastUpdated, storeDate: $storeDate, image: $image, volume: $volume, storyArcs: $storyArcs, characters: $characters, locations: $locations, teams: $teams, people: $people, comicObjects: $comicObjects, concepts: $concepts, name: $name, number: $number)';
   }
 
   @override
@@ -928,15 +1031,21 @@ class _$DetailedIssue extends DetailedIssue {
                 other.dateAdded == dateAdded) &&
             (identical(other.dateLastUpdated, dateLastUpdated) ||
                 other.dateLastUpdated == dateLastUpdated) &&
+            (identical(other.storeDate, storeDate) ||
+                other.storeDate == storeDate) &&
             (identical(other.image, image) || other.image == image) &&
+            (identical(other.volume, volume) || other.volume == volume) &&
             const DeepCollectionEquality()
-                .equals(other._character, _character) &&
+                .equals(other._storyArcs, _storyArcs) &&
+            const DeepCollectionEquality()
+                .equals(other._characters, _characters) &&
             const DeepCollectionEquality()
                 .equals(other._locations, _locations) &&
             const DeepCollectionEquality().equals(other._teams, _teams) &&
             const DeepCollectionEquality().equals(other._people, _people) &&
             const DeepCollectionEquality()
                 .equals(other._comicObjects, _comicObjects) &&
+            const DeepCollectionEquality().equals(other._concepts, _concepts) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.number, number) || other.number == number));
   }
@@ -950,12 +1059,16 @@ class _$DetailedIssue extends DetailedIssue {
       coverDate,
       dateAdded,
       dateLastUpdated,
+      storeDate,
       image,
-      const DeepCollectionEquality().hash(_character),
+      volume,
+      const DeepCollectionEquality().hash(_storyArcs),
+      const DeepCollectionEquality().hash(_characters),
       const DeepCollectionEquality().hash(_locations),
       const DeepCollectionEquality().hash(_teams),
       const DeepCollectionEquality().hash(_people),
       const DeepCollectionEquality().hash(_comicObjects),
+      const DeepCollectionEquality().hash(_concepts),
       name,
       number);
 
@@ -999,9 +1112,13 @@ class _$DetailedIssue extends DetailedIssue {
                 disallowNullValue: true,
                 name: 'date_last_updated')
             DateTime dateLastUpdated,
+            @JsonKey(name: 'store_date') DateTime? storeDate,
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(required: true, disallowNullValue: true) Volume volume,
+            @JsonKey(defaultValue: [], name: 'story_arc_credits')
+            List<StoryArc> storyArcs,
             @JsonKey(defaultValue: [], name: 'character_credits')
-            List<SimpleComicCharacter> character,
+            List<SimpleComicCharacter> characters,
             @JsonKey(defaultValue: [], name: 'location_credits')
             List<Location> locations,
             @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
@@ -1009,14 +1126,32 @@ class _$DetailedIssue extends DetailedIssue {
             List<Person> people,
             @JsonKey(defaultValue: [], name: 'object_credits')
             List<ComicObject> comicObjects,
+            @JsonKey(defaultValue: [], name: 'concept_credits')
+            List<Concept> concepts,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
             String number)
         details,
   }) {
-    return details(id, detailUrl, coverDate, dateAdded, dateLastUpdated, image,
-        character, locations, teams, people, comicObjects, name, number);
+    return details(
+        id,
+        detailUrl,
+        coverDate,
+        dateAdded,
+        dateLastUpdated,
+        storeDate,
+        image,
+        volume,
+        storyArcs,
+        characters,
+        locations,
+        teams,
+        people,
+        comicObjects,
+        concepts,
+        name,
+        number);
   }
 
   @override
@@ -1053,9 +1188,13 @@ class _$DetailedIssue extends DetailedIssue {
                 disallowNullValue: true,
                 name: 'date_last_updated')
             DateTime dateLastUpdated,
+            @JsonKey(name: 'store_date') DateTime? storeDate,
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(required: true, disallowNullValue: true) Volume volume,
+            @JsonKey(defaultValue: [], name: 'story_arc_credits')
+            List<StoryArc> storyArcs,
             @JsonKey(defaultValue: [], name: 'character_credits')
-            List<SimpleComicCharacter> character,
+            List<SimpleComicCharacter> characters,
             @JsonKey(defaultValue: [], name: 'location_credits')
             List<Location> locations,
             @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
@@ -1063,14 +1202,32 @@ class _$DetailedIssue extends DetailedIssue {
             List<Person> people,
             @JsonKey(defaultValue: [], name: 'object_credits')
             List<ComicObject> comicObjects,
+            @JsonKey(defaultValue: [], name: 'concept_credits')
+            List<Concept> concepts,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
             String number)?
         details,
   }) {
-    return details?.call(id, detailUrl, coverDate, dateAdded, dateLastUpdated,
-        image, character, locations, teams, people, comicObjects, name, number);
+    return details?.call(
+        id,
+        detailUrl,
+        coverDate,
+        dateAdded,
+        dateLastUpdated,
+        storeDate,
+        image,
+        volume,
+        storyArcs,
+        characters,
+        locations,
+        teams,
+        people,
+        comicObjects,
+        concepts,
+        name,
+        number);
   }
 
   @override
@@ -1107,9 +1264,13 @@ class _$DetailedIssue extends DetailedIssue {
                 disallowNullValue: true,
                 name: 'date_last_updated')
             DateTime dateLastUpdated,
+            @JsonKey(name: 'store_date') DateTime? storeDate,
             @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(required: true, disallowNullValue: true) Volume volume,
+            @JsonKey(defaultValue: [], name: 'story_arc_credits')
+            List<StoryArc> storyArcs,
             @JsonKey(defaultValue: [], name: 'character_credits')
-            List<SimpleComicCharacter> character,
+            List<SimpleComicCharacter> characters,
             @JsonKey(defaultValue: [], name: 'location_credits')
             List<Location> locations,
             @JsonKey(defaultValue: [], name: 'team_credits') List<Team> teams,
@@ -1117,6 +1278,8 @@ class _$DetailedIssue extends DetailedIssue {
             List<Person> people,
             @JsonKey(defaultValue: [], name: 'object_credits')
             List<ComicObject> comicObjects,
+            @JsonKey(defaultValue: [], name: 'concept_credits')
+            List<Concept> concepts,
             @JsonKey(name: 'name') String? name,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'issue_number')
@@ -1131,12 +1294,16 @@ class _$DetailedIssue extends DetailedIssue {
           coverDate,
           dateAdded,
           dateLastUpdated,
+          storeDate,
           image,
-          character,
+          volume,
+          storyArcs,
+          characters,
           locations,
           teams,
           people,
           comicObjects,
+          concepts,
           name,
           number);
     }
@@ -1194,10 +1361,15 @@ abstract class DetailedIssue extends Issue {
       @JsonKey(
           required: true, disallowNullValue: true, name: 'date_last_updated')
       required final DateTime dateLastUpdated,
+      @JsonKey(name: 'store_date') final DateTime? storeDate,
       @JsonKey(required: true, disallowNullValue: true)
       required final ComicImage image,
+      @JsonKey(required: true, disallowNullValue: true)
+      required final Volume volume,
+      @JsonKey(defaultValue: [], name: 'story_arc_credits')
+      required final List<StoryArc> storyArcs,
       @JsonKey(defaultValue: [], name: 'character_credits')
-      required final List<SimpleComicCharacter> character,
+      required final List<SimpleComicCharacter> characters,
       @JsonKey(defaultValue: [], name: 'location_credits')
       required final List<Location> locations,
       @JsonKey(defaultValue: [], name: 'team_credits')
@@ -1206,6 +1378,8 @@ abstract class DetailedIssue extends Issue {
       required final List<Person> people,
       @JsonKey(defaultValue: [], name: 'object_credits')
       required final List<ComicObject> comicObjects,
+      @JsonKey(defaultValue: [], name: 'concept_credits')
+      required final List<Concept> concepts,
       @JsonKey(name: 'name') final String? name,
       @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
       required final String number}) = _$DetailedIssue;
@@ -1227,11 +1401,17 @@ abstract class DetailedIssue extends Issue {
   DateTime get dateAdded;
   @JsonKey(required: true, disallowNullValue: true, name: 'date_last_updated')
   DateTime get dateLastUpdated;
+  @JsonKey(name: 'store_date')
+  DateTime? get storeDate;
   @override
   @JsonKey(required: true, disallowNullValue: true)
   ComicImage get image;
+  @JsonKey(required: true, disallowNullValue: true)
+  Volume get volume;
+  @JsonKey(defaultValue: [], name: 'story_arc_credits')
+  List<StoryArc> get storyArcs;
   @JsonKey(defaultValue: [], name: 'character_credits')
-  List<SimpleComicCharacter> get character;
+  List<SimpleComicCharacter> get characters;
   @JsonKey(defaultValue: [], name: 'location_credits')
   List<Location> get locations;
   @JsonKey(defaultValue: [], name: 'team_credits')
@@ -1240,6 +1420,8 @@ abstract class DetailedIssue extends Issue {
   List<Person> get people;
   @JsonKey(defaultValue: [], name: 'object_credits')
   List<ComicObject> get comicObjects;
+  @JsonKey(defaultValue: [], name: 'concept_credits')
+  List<Concept> get concepts;
   @override
   @JsonKey(name: 'name')
   String? get name;
