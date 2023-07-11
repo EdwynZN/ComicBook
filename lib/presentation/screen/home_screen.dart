@@ -276,7 +276,7 @@ class _PaginatedLoader extends HookWidget {
       child: BlocBuilder<IssuesBloc, BState<List<Issue>>>(
         builder: (context, state) {
           return switch (state) {
-            LoadingState s when s.value != null && !s.isRefreshing =>
+            LoadingState s when s.value != null =>
               const Center(
                 child: CircularProgressIndicator.adaptive(),
               ),
