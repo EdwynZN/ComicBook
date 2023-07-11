@@ -1,17 +1,30 @@
 import 'package:comic_book/bloc/view_style/events/view_style_events.dart';
 import 'package:comic_book/bloc/view_style/state/view_style_event.dart';
+import 'package:comic_book/repository/preferences_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ViewStyleBloc extends Bloc<ViewEvent, ViewStyle> {
-  ViewStyleBloc() : super(ViewStyle.list) {
-    on<ListStyleView>((event, emit) => emit(ViewStyle.list));
-    on<GridStyleView>((event, emit) => emit(ViewStyle.grid));
-    on<ToggleStyleView>((event, emit) {
+  final Preferences prefRepository;
+
+  factory ViewStyleBloc.fromPreferences(Preferences prefRepository) {
+    final initialStyle = prefRepository.viewStyle;
+    return ViewStyleBloc._(prefRepository, initialStyle);
+  }
+
+  ViewStyleBloc._(this.prefRepository, super.initialState) {
+    on<ListStyleView>((event, emit) => _saveAndEmit(emit, ViewStyle.list));
+    on<GridStyleView>((event, emit) => _saveAndEmit(emit, ViewStyle.grid));
+    on<ToggleStyleView>((event, emit) async {
       final newState = switch (state) {
         ViewStyle.list => ViewStyle.grid,
         ViewStyle.grid => ViewStyle.list,
       };
-      emit(newState);
+      await _saveAndEmit(emit, newState);
     });
+  }
+
+  Future<void> _saveAndEmit(Emitter<ViewStyle> emit, ViewStyle newState) async {
+    emit(newState);
+    await prefRepository.saveViewStyle(newState);
   }
 }

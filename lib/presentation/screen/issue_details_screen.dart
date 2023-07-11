@@ -53,6 +53,8 @@ class IssueDetailsScreen extends StatelessWidget {
               if (title == null) return const SizedBox();
               return Text(
                 title,
+                maxLines: 1,
+                overflow: TextOverflow.fade,
                 style: const TextStyle(
                   fontSize: 28.0,
                   letterSpacing: -1.25,

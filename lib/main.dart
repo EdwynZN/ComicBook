@@ -2,6 +2,7 @@ import 'package:comic_book/bloc/issues/issues_bloc.dart';
 import 'package:comic_book/bloc/view_style/view_style_bloc.dart';
 import 'package:comic_book/presentation/route/router.dart';
 import 'package:comic_book/repository/comic_book_repository.dart';
+import 'package:comic_book/repository/preferences_repository.dart';
 import 'package:comic_book/utils/api_key.dart';
 import 'package:comic_book/utils/request_interceptor.dart';
 import 'package:comic_book/utils/response_interceptor.dart';
@@ -9,18 +10,26 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const ComicApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final preferences = await SharedPreferences.getInstance();
+
+  runApp(ComicApp(preferences: preferences));
 }
 
 class ComicApp extends StatelessWidget {
-  const ComicApp({super.key});
+  final SharedPreferences preferences;
+  const ComicApp({super.key, required this.preferences});
 
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider<SharedPreferences>.value(value: preferences),
+        RepositoryProvider<Preferences>(
+            create: (_) => Preferences(preferences)),
         RepositoryProvider<GoRouter>(
           create: (_) => createRouter(),
         ),
@@ -33,10 +42,11 @@ class ComicApp extends StatelessWidget {
               responseType: ResponseType.json,
               contentType: 'application/json; charset=utf-8',
             );
-            final Dio dio = Dio(options)..interceptors.addAll([
-              const ResponseWrapperInterceptor(),
-              RequestInterceptor(apiKey),
-            ]);
+            final Dio dio = Dio(options)
+              ..interceptors.addAll([
+                const ResponseWrapperInterceptor(),
+                RequestInterceptor(apiKey),
+              ]);
             return ComicBookRepository(dio);
           },
         ),
@@ -52,7 +62,15 @@ class ComicApp extends StatelessWidget {
               return IssuesBloc(repository: repository);
             },
           ),
-          BlocProvider<ViewStyleBloc>(create: (_) => ViewStyleBloc()),
+          BlocProvider<ViewStyleBloc>(
+            create: (context) {
+              final repository = RepositoryProvider.of<Preferences>(
+                context,
+                listen: false,
+              );
+              return ViewStyleBloc.fromPreferences(repository);
+            },
+          ),
         ],
         child: Builder(
           builder: (context) {
