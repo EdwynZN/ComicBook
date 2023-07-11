@@ -16,7 +16,7 @@ _$SimpleIssue _$$SimpleIssueFromJson(Map<String, dynamic> json) {
     id: json['id'] as int,
     date: DateTime.parse(json['date_added'] as String),
     name: _concatName(json, 'issue_number') as String,
-    imageUrl: _originalImage(json, 'image') as String,
+    image: ComicImage.fromJson(json['image'] as Map<String, dynamic>),
   );
 }
 
@@ -25,5 +25,5 @@ Map<String, dynamic> _$$SimpleIssueToJson(_$SimpleIssue instance) =>
       'id': instance.id,
       'date_added': instance.date.toIso8601String(),
       'issue_number': instance.name,
-      'image': instance.imageUrl,
+      'image': instance.image.toJson(),
     };

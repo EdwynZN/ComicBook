@@ -30,12 +30,8 @@ mixin _$Issue {
       name: 'issue_number',
       readValue: _concatName)
   String get name => throw _privateConstructorUsedError;
-  @JsonKey(
-      required: true,
-      disallowNullValue: true,
-      name: 'image',
-      readValue: _originalImage)
-  String get imageUrl => throw _privateConstructorUsedError;
+  @JsonKey(required: true, disallowNullValue: true)
+  ComicImage get image => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -50,12 +46,7 @@ mixin _$Issue {
                 name: 'issue_number',
                 readValue: _concatName)
             String name,
-            @JsonKey(
-                required: true,
-                disallowNullValue: true,
-                name: 'image',
-                readValue: _originalImage)
-            String imageUrl)
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)
         reduced,
   }) =>
       throw _privateConstructorUsedError;
@@ -73,12 +64,7 @@ mixin _$Issue {
                 name: 'issue_number',
                 readValue: _concatName)
             String name,
-            @JsonKey(
-                required: true,
-                disallowNullValue: true,
-                name: 'image',
-                readValue: _originalImage)
-            String imageUrl)?
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
         reduced,
   }) =>
       throw _privateConstructorUsedError;
@@ -96,12 +82,7 @@ mixin _$Issue {
                 name: 'issue_number',
                 readValue: _concatName)
             String name,
-            @JsonKey(
-                required: true,
-                disallowNullValue: true,
-                name: 'image',
-                readValue: _originalImage)
-            String imageUrl)?
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
         reduced,
     required TResult orElse(),
   }) =>
@@ -142,12 +123,9 @@ abstract class $IssueCopyWith<$Res> {
           name: 'issue_number',
           readValue: _concatName)
       String name,
-      @JsonKey(
-          required: true,
-          disallowNullValue: true,
-          name: 'image',
-          readValue: _originalImage)
-      String imageUrl});
+      @JsonKey(required: true, disallowNullValue: true) ComicImage image});
+
+  $ComicImageCopyWith<$Res> get image;
 }
 
 /// @nodoc
@@ -166,7 +144,7 @@ class _$IssueCopyWithImpl<$Res, $Val extends Issue>
     Object? id = null,
     Object? date = null,
     Object? name = null,
-    Object? imageUrl = null,
+    Object? image = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -181,11 +159,19 @@ class _$IssueCopyWithImpl<$Res, $Val extends Issue>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as ComicImage,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ComicImageCopyWith<$Res> get image {
+    return $ComicImageCopyWith<$Res>(_value.image, (value) {
+      return _then(_value.copyWith(image: value) as $Val);
+    });
   }
 }
 
@@ -206,12 +192,10 @@ abstract class _$$SimpleIssueCopyWith<$Res> implements $IssueCopyWith<$Res> {
           name: 'issue_number',
           readValue: _concatName)
       String name,
-      @JsonKey(
-          required: true,
-          disallowNullValue: true,
-          name: 'image',
-          readValue: _originalImage)
-      String imageUrl});
+      @JsonKey(required: true, disallowNullValue: true) ComicImage image});
+
+  @override
+  $ComicImageCopyWith<$Res> get image;
 }
 
 /// @nodoc
@@ -228,7 +212,7 @@ class __$$SimpleIssueCopyWithImpl<$Res>
     Object? id = null,
     Object? date = null,
     Object? name = null,
-    Object? imageUrl = null,
+    Object? image = null,
   }) {
     return _then(_$SimpleIssue(
       id: null == id
@@ -243,17 +227,17 @@ class __$$SimpleIssueCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as ComicImage,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$SimpleIssue implements SimpleIssue {
+class _$SimpleIssue extends SimpleIssue {
   const _$SimpleIssue(
       {@JsonKey(required: true, disallowNullValue: true, name: 'id')
       required this.id,
@@ -265,12 +249,8 @@ class _$SimpleIssue implements SimpleIssue {
           name: 'issue_number',
           readValue: _concatName)
       required this.name,
-      @JsonKey(
-          required: true,
-          disallowNullValue: true,
-          name: 'image',
-          readValue: _originalImage)
-      required this.imageUrl});
+      @JsonKey(required: true, disallowNullValue: true) required this.image})
+      : super._();
 
   factory _$SimpleIssue.fromJson(Map<String, dynamic> json) =>
       _$$SimpleIssueFromJson(json);
@@ -289,16 +269,12 @@ class _$SimpleIssue implements SimpleIssue {
       readValue: _concatName)
   final String name;
   @override
-  @JsonKey(
-      required: true,
-      disallowNullValue: true,
-      name: 'image',
-      readValue: _originalImage)
-  final String imageUrl;
+  @JsonKey(required: true, disallowNullValue: true)
+  final ComicImage image;
 
   @override
   String toString() {
-    return 'Issue.reduced(id: $id, date: $date, name: $name, imageUrl: $imageUrl)';
+    return 'Issue.reduced(id: $id, date: $date, name: $name, image: $image)';
   }
 
   @override
@@ -309,13 +285,12 @@ class _$SimpleIssue implements SimpleIssue {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl));
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, date, name, imageUrl);
+  int get hashCode => Object.hash(runtimeType, id, date, name, image);
 
   @JsonKey(ignore: true)
   @override
@@ -338,15 +313,10 @@ class _$SimpleIssue implements SimpleIssue {
                 name: 'issue_number',
                 readValue: _concatName)
             String name,
-            @JsonKey(
-                required: true,
-                disallowNullValue: true,
-                name: 'image',
-                readValue: _originalImage)
-            String imageUrl)
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)
         reduced,
   }) {
-    return reduced(id, date, name, imageUrl);
+    return reduced(id, date, name, image);
   }
 
   @override
@@ -364,15 +334,10 @@ class _$SimpleIssue implements SimpleIssue {
                 name: 'issue_number',
                 readValue: _concatName)
             String name,
-            @JsonKey(
-                required: true,
-                disallowNullValue: true,
-                name: 'image',
-                readValue: _originalImage)
-            String imageUrl)?
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
         reduced,
   }) {
-    return reduced?.call(id, date, name, imageUrl);
+    return reduced?.call(id, date, name, image);
   }
 
   @override
@@ -390,17 +355,12 @@ class _$SimpleIssue implements SimpleIssue {
                 name: 'issue_number',
                 readValue: _concatName)
             String name,
-            @JsonKey(
-                required: true,
-                disallowNullValue: true,
-                name: 'image',
-                readValue: _originalImage)
-            String imageUrl)?
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
         reduced,
     required TResult orElse(),
   }) {
     if (reduced != null) {
-      return reduced(id, date, name, imageUrl);
+      return reduced(id, date, name, image);
     }
     return orElse();
   }
@@ -441,7 +401,7 @@ class _$SimpleIssue implements SimpleIssue {
   }
 }
 
-abstract class SimpleIssue implements Issue {
+abstract class SimpleIssue extends Issue {
   const factory SimpleIssue(
       {@JsonKey(required: true, disallowNullValue: true, name: 'id')
       required final int id,
@@ -453,12 +413,9 @@ abstract class SimpleIssue implements Issue {
           name: 'issue_number',
           readValue: _concatName)
       required final String name,
-      @JsonKey(
-          required: true,
-          disallowNullValue: true,
-          name: 'image',
-          readValue: _originalImage)
-      required final String imageUrl}) = _$SimpleIssue;
+      @JsonKey(required: true, disallowNullValue: true)
+      required final ComicImage image}) = _$SimpleIssue;
+  const SimpleIssue._() : super._();
 
   factory SimpleIssue.fromJson(Map<String, dynamic> json) =
       _$SimpleIssue.fromJson;
@@ -477,12 +434,8 @@ abstract class SimpleIssue implements Issue {
       readValue: _concatName)
   String get name;
   @override
-  @JsonKey(
-      required: true,
-      disallowNullValue: true,
-      name: 'image',
-      readValue: _originalImage)
-  String get imageUrl;
+  @JsonKey(required: true, disallowNullValue: true)
+  ComicImage get image;
   @override
   @JsonKey(ignore: true)
   _$$SimpleIssueCopyWith<_$SimpleIssue> get copyWith =>

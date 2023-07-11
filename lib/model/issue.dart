@@ -1,3 +1,4 @@
+import 'package:comic_book/model/comic_image.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'issue.freezed.dart';
@@ -12,13 +13,10 @@ String _concatName(Map<dynamic, dynamic> json, String key) {
   return '$name #$issueNumber';
 }
 
-String _originalImage(Map<dynamic, dynamic> json, String key) {
-  final mapImage = json[key] as Map<String, dynamic>;
-  return mapImage['original_url'];
-}
-
 @freezed
 class Issue with _$Issue {
+  const Issue._();
+
   const factory Issue.reduced({
     @JsonKey(
       required: true,
@@ -35,14 +33,10 @@ class Issue with _$Issue {
       readValue: _concatName,
     )
     required String name,
-    @JsonKey(
-      required: true,
-      disallowNullValue: true,
-      name: 'image',
-      readValue: _originalImage,
-    )
-    required String imageUrl,
+    @JsonKey(required: true, disallowNullValue: true) required ComicImage image,
   }) = SimpleIssue;
+
+  String get imageUrl => image.originalUrl;
 
   factory Issue.fromJson(Map<String, dynamic> json) => _$IssueFromJson(json);
 }

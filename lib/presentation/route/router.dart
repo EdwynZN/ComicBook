@@ -1,3 +1,4 @@
+import 'package:comic_book/model/issue.dart';
 import 'package:comic_book/presentation/screen/home_screen.dart';
 import 'package:comic_book/presentation/screen/issue_details_screen.dart';
 import 'package:flutter/foundation.dart';
@@ -37,8 +38,13 @@ GoRouter createRouter({
             name: 'issue_details',
             path: 'issue/:issueId',
             builder: (_, state) {
-              //final id = state.pathParameters['issueId'];
-              return const IssueDetailsScreen();
+              final id = state.pathParameters['issueId'];
+              final SimpleIssue? issue =
+                  state.extra is SimpleIssue ? state.extra as SimpleIssue: null;
+              return IssueDetailsScreen(
+                url: 'https://comicvine.gamespot.com/api/issue/4000-$id/',
+                initialTitle: issue?.name,
+              );
             },
           ),
         ],

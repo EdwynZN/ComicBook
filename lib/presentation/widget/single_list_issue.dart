@@ -24,7 +24,9 @@ class SingleListIssue extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       context.pushNamed('issue_details',
-                          pathParameters: {'issueId': issue.id.toString()});
+                        pathParameters: {'issueId': issue.id.toString()},
+                        extra: issue,
+                      );
                     },
                     child: IssueImage(url: issue.imageUrl),
                   ),
