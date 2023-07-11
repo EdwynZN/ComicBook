@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class IssueImage extends StatelessWidget {
@@ -7,15 +8,20 @@ class IssueImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xff7c94b6),
-        image: DecorationImage(
-          image: NetworkImage(url),
-          fit: BoxFit.fill,
-        ),
-        border: Border.all(width: 2, color: Colors.black),
-      ),
+    return CachedNetworkImage(
+      fit: BoxFit.fill,
+      placeholder: (context, url) =>
+        const Center(child: CircularProgressIndicator.adaptive()),
+      imageBuilder: (context, imageProvider) {
+        return Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFF7C94B6),
+            border: Border.all(width: 2, color: Colors.black),
+            image: DecorationImage(image: imageProvider, fit: BoxFit.fill)
+          ),
+        );
+      },
+      imageUrl: url,
     );
   }
 }
