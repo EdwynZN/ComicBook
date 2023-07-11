@@ -3,13 +3,13 @@ import 'package:comic_book/bloc/view_style/state/view_style_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ViewStyleBloc extends Bloc<ViewEvent, ViewStyle> {
-  ViewStyleBloc() : super(ViewStyle.List) {
-    on<ListStyleView>((event, emit) => emit(ViewStyle.List));
-    on<GridStyleView>((event, emit) => emit(ViewStyle.Grid));
+  ViewStyleBloc() : super(ViewStyle.list) {
+    on<ListStyleView>((event, emit) => emit(ViewStyle.list));
+    on<GridStyleView>((event, emit) => emit(ViewStyle.grid));
     on<ToggleStyleView>((event, emit) {
       final newState = switch (state) {
-        ViewStyle.List => ViewStyle.Grid,
-        ViewStyle.Grid => ViewStyle.List,
+        ViewStyle.list => ViewStyle.grid,
+        ViewStyle.grid => ViewStyle.list,
       };
       emit(newState);
     });

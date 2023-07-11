@@ -1,3 +1,4 @@
+import 'package:comic_book/bloc/issues/events/issue_events.dart';
 import 'package:comic_book/bloc/issues/issues_bloc.dart';
 import 'package:comic_book/bloc/view_style/events/view_style_events.dart';
 import 'package:comic_book/bloc/view_style/state/view_style_event.dart';
@@ -9,13 +10,31 @@ import 'package:comic_book/presentation/widget/single_list_issue.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-class HomeScreen extends StatelessWidget {
+const double _kFactorViewport = 0.5;
+
+class HomeScreen extends HookWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = useScrollController(keys: const []);
+    final bloc = BlocProvider.of<IssuesBloc>(context);
+    useEffect(() {
+      void listenScroll() {
+        final position = controller.position;
+        if (bloc.state is DataState<List<Issue>> &&
+            position.extentAfter <
+                (position.viewportDimension * _kFactorViewport)) {
+          bloc.add(const IssuesPaginationIncrement());
+        }
+      }
+
+      controller.addListener(listenScroll);
+      return () => controller.removeListener(listenScroll);
+    }, [controller, bloc]);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -42,41 +61,61 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: BlocConsumer<IssuesBloc, BState<List<Issue>>>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return CustomScrollView(
-            slivers: [
-              SliverPadding(
-                padding: const EdgeInsets.all(16.0),
-                sliver: switch (state) {
-                  DataValue<List<SimpleIssue>> s when s.value != null =>
-                    BlocBuilder<ViewStyleBloc, ViewStyle>(
-                      builder: (context, state) {
-                        final issues = s.value!;
-                        return switch (state) {
-                          ViewStyle.List => _ListView(issues: issues),
-                          ViewStyle.Grid => _GridView(issues: issues),
-                        };
-                      },
-                    ),
-                  LoadingState _ => const SliverFillRemaining(
-                      hasScrollBody: false,
-                      child: Center(
-                        child: CircularProgressIndicator.adaptive(),
+      body: Scrollbar(
+        controller: controller,
+        thumbVisibility: true,
+        child: CustomScrollView(
+          controller: controller,
+          slivers: [
+            BlocConsumer<IssuesBloc, BState<List<Issue>>>(
+              listener: (context, state) {
+                if (controller.hasClients &&
+                    controller.position.extentAfter <
+                        (controller.position.viewportDimension *
+                            _kFactorViewport)) {
+                  context
+                      .read<IssuesBloc>()
+                      .add(const IssuesPaginationIncrement());
+                }
+              },
+              listenWhen: (previous, current) =>
+                  current is DataState<List<Issue>>,
+              builder: (context, state) {
+                return SliverPadding(
+                  padding: const EdgeInsets.all(16.0),
+                  sliver: switch (state) {
+                    DataValue<List<SimpleIssue>> s when s.value != null =>
+                      BlocBuilder<ViewStyleBloc, ViewStyle>(
+                        builder: (context, state) {
+                          final issues = s.value!;
+                          return switch (state) {
+                            ViewStyle.list => _ListView(issues: issues),
+                            ViewStyle.grid => _GridView(issues: issues),
+                          };
+                        },
                       ),
-                    ),
-                  ErrorState e => SliverToBoxAdapter(
-                      child: Center(
-                        child: Text(e.toString()),
+                    LoadingState _ => const SliverFillRemaining(
+                        hasScrollBody: false,
+                        child: Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        ),
                       ),
-                    ),
-                  _ => const SliverToBoxAdapter(),
-                },
-              ),
-            ],
-          );
-        },
+                    ErrorState e => SliverToBoxAdapter(
+                        child: Center(
+                          child: Text(e.toString()),
+                        ),
+                      ),
+                    _ => const SliverToBoxAdapter(),
+                  },
+                );
+              },
+            ),
+            const SliverFillRemaining(
+              hasScrollBody: false,
+              child: _PaginatedLoader(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -156,8 +195,8 @@ class _BottomFilter extends StatelessWidget {
                 icon: BlocBuilder<ViewStyleBloc, ViewStyle>(
                   builder: (context, state) {
                     return switch (state) {
-                      ViewStyle.List => const Icon(Icons.menu),
-                      ViewStyle.Grid => const Icon(Icons.grid_view_sharp),
+                      ViewStyle.list => const Icon(Icons.menu),
+                      ViewStyle.grid => const Icon(Icons.grid_view_sharp),
                     };
                   },
                 ),
@@ -172,117 +211,35 @@ class _BottomFilter extends StatelessWidget {
   }
 }
 
-// ignore: unused_element
-class _FilterButton extends StatelessWidget {
-  final WidgetBuilder builder;
-  final List<String>? filters;
-  final bool active;
-  final String title;
-
-  const _FilterButton({
-    Key? key,
-    required this.builder,
-    required this.filters,
-    required this.title,
-    // ignore: unused_element
-    this.active = true,
-  }) : super(key: key);
+class _PaginatedLoader extends HookWidget {
+  // ignore: unused_element
+  const _PaginatedLoader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final primary = theme.primaryColorLight;
-    const textStyle = TextStyle(
-      fontSize: 12.0,
-      letterSpacing: -0.15,
-      height: 1.25,
-      fontWeight: FontWeight.w600,
-    );
-    final ButtonStyle style = ButtonStyle(
-      elevation: const MaterialStatePropertyAll(4.0),
-      shadowColor: const MaterialStatePropertyAll(Color(0xA0E9E9E9)),
-      overlayColor: MaterialStatePropertyAll(primary.withOpacity(0.12)),
-      visualDensity: const VisualDensity(vertical: -1.0),
-      textStyle: const MaterialStatePropertyAll(textStyle),
-      padding: const MaterialStatePropertyAll(
-        EdgeInsets.symmetric(horizontal: 8.0),
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: BlocBuilder<IssuesBloc, BState<List<Issue>>>(
+        builder: (context, state) {
+          return switch (state) {
+            LoadingState s when s.value != null && !s.isRefreshing => const Center(
+                child: CircularProgressIndicator.adaptive(),
+              ),
+            ErrorState e => TextButton(
+                onPressed: () {
+                  context
+                      .read<IssuesBloc>()
+                      .add(const IssuesPaginationIncrement());
+                },
+                child: Text(e.error.toString()),
+              ),
+            NoMoreDataState() => const Center(
+                child: Text('No more data'),
+              ),
+            _ => const SizedBox(),
+          };
+        },
       ),
-      tapTargetSize: MaterialTapTargetSize.padded,
-      foregroundColor:
-          MaterialStateProperty.all(active ? primary : const Color(0xFF666666)),
-      backgroundColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.disabled)) return null;
-        return Colors.white;
-      }),
-      side: MaterialStatePropertyAll(
-        BorderSide(
-          color: primary,
-          style: active ? BorderStyle.solid : BorderStyle.none,
-          width: 1.0,
-        ),
-      ),
-      shape: MaterialStateProperty.all(const StadiumBorder()),
-    );
-    final label = Text(title);
-    final list = filters;
-    if (list == null || list.length <= 1) {
-      return ElevatedButton(
-        style: style,
-        onPressed: () {},
-        child: label,
-      );
-    }
-    return ElevatedButton.icon(
-      style: style,
-      onPressed: () {
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          showDragHandle: true,
-          clipBehavior: Clip.hardEdge,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(16.0),
-            ),
-          ),
-          backgroundColor: Colors.white,
-          useRootNavigator: false,
-          isDismissible: true,
-          builder: (context) {
-            return DraggableScrollableSheet(
-              key: const Key('Draggable'),
-              maxChildSize: 0.85,
-              minChildSize: 0.20,
-              expand: false,
-              snap: false,
-              initialChildSize: (list.length / 8.0).clamp(0.18, 0.85),
-              builder: (context, scrollController) {
-                return ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  controller: scrollController,
-                  itemExtent: 56.0,
-                  itemCount: list.length,
-                  itemBuilder: (context, index) {
-                    return CheckboxListTile(
-                      value: true,
-                      onChanged: (val) {},
-                      title: Text(
-                        list[index],
-                        style: const TextStyle(color: Colors.black),
-                      ),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      ),
-                    );
-                  },
-                );
-              },
-            );
-          },
-        );
-      },
-      icon: const Icon(Icons.arrow_drop_down, size: 18.0),
-      label: label,
     );
   }
 }
