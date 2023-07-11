@@ -37,7 +37,7 @@ GoRouter createRouter({
             name: 'issue_details',
             path: 'issue/:issueId',
             builder: (_, state) {
-              final id = state.pathParameters['issueId'];
+              //final id = state.pathParameters['issueId'];
               return const IssueDetailsScreen();
             },
           ),

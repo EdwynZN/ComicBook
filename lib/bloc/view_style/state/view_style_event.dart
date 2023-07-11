@@ -1,0 +1,1 @@
+enum ViewStyle { List, Grid }

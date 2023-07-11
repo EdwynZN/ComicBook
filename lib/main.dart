@@ -1,4 +1,5 @@
 import 'package:comic_book/bloc/issues/issues_bloc.dart';
+import 'package:comic_book/bloc/view_style/view_style_bloc.dart';
 import 'package:comic_book/presentation/route/router.dart';
 import 'package:comic_book/repository/comic_book_repository.dart';
 import 'package:comic_book/utils/api_key.dart';
@@ -51,6 +52,7 @@ class ComicApp extends StatelessWidget {
               return IssuesBloc(repository: repository);
             },
           ),
+          BlocProvider<ViewStyleBloc>(create: (_) => ViewStyleBloc()),
         ],
         child: Builder(
           builder: (context) {
