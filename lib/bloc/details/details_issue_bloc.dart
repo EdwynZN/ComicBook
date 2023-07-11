@@ -1,10 +1,10 @@
 import 'package:comic_book/bloc/details/events/details_event.dart';
-import 'package:comic_book/model/details_issue.dart';
+import 'package:comic_book/model/issue.dart';
 import 'package:comic_book/model/state.dart';
 import 'package:comic_book/repository/comic_book_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DetailsIssuesBloc extends Bloc<DetailsIssueEvent, BState<DetailsIssue>> {
+class DetailsIssuesBloc extends Bloc<DetailsIssueEvent, BState<DetailedIssue>> {
   final String url;
   final ComicBookRepository repository;
 
@@ -13,14 +13,14 @@ class DetailsIssuesBloc extends Bloc<DetailsIssueEvent, BState<DetailsIssue>> {
     required this.url,
   }) : super(const InitialState()) {
     on<FetchIssueEvent>((event, emit) async {
-      if (state is LoadingState<DetailsIssue>) return;
-      final DetailsIssue? data = _data;
+      if (state is LoadingState<DetailedIssue>) return;
+      final DetailedIssue? data = _data;
       try {
-        emit(LoadingState<DetailsIssue>.refresh(data));
+        emit(LoadingState<DetailedIssue>.refresh(data));
         final result = await _loadIssue();
-        emit(DataState<DetailsIssue>(result));
+        emit(DataState<DetailedIssue>(result));
       } catch (e) {
-        emit(ErrorState<DetailsIssue>(error: e, value: data));
+        emit(ErrorState<DetailedIssue>(error: e, value: data));
       }
     });
 
@@ -29,13 +29,13 @@ class DetailsIssuesBloc extends Bloc<DetailsIssueEvent, BState<DetailsIssue>> {
   }
 
   /// Any State that has data (excludes Initial)
-  DetailsIssue? get _data => switch (state) {
-        DataValue<DetailsIssue> s => s.value,
+  DetailedIssue? get _data => switch (state) {
+        DataValue<DetailedIssue> s => s.value,
         _ => null,
       };
 
-  Future<DetailsIssue> _loadIssue() async {
-    final issue = await repository.issueDetailsFromDetailsUrl(url: url);
+  Future<DetailedIssue> _loadIssue() async {
+    final issue = await repository.issueDetailsFromUrl(url: url);
     return issue;
   }
 }

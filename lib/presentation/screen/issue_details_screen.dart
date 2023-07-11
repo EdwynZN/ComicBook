@@ -1,5 +1,4 @@
 import 'package:comic_book/bloc/details/details_issue_bloc.dart';
-import 'package:comic_book/model/details_issue.dart';
 import 'package:comic_book/model/issue.dart';
 import 'package:comic_book/model/state.dart';
 import 'package:comic_book/repository/comic_book_repository.dart';
@@ -44,10 +43,10 @@ class IssueDetailsScreen extends StatelessWidget {
             statusBarIconBrightness: Brightness.dark,
           ),
           centerTitle: true,
-          title: BlocBuilder<DetailsIssuesBloc, BState<DetailsIssue>>(
+          title: BlocBuilder<DetailsIssuesBloc, BState<DetailedIssue>>(
             builder: (context, state) {
               final String? title = switch (state) {
-                DataValue<DetailsIssue> s when s.value != null => s.value!.name,
+                DataValue<DetailedIssue> s when s.value != null => s.value!.name,
                 _ => initialTitle,
               };
               if (title == null) return const SizedBox();
@@ -65,7 +64,7 @@ class IssueDetailsScreen extends StatelessWidget {
             },
           ),
         ),
-        body: BlocBuilder<DetailsIssuesBloc, BState<DetailsIssue>>(
+        body: BlocBuilder<DetailsIssuesBloc, BState<DetailedIssue>>(
           builder: (context, state) {
             return const SizedBox();
           },

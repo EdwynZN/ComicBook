@@ -15,7 +15,16 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Issue _$IssueFromJson(Map<String, dynamic> json) {
-  return SimpleIssue.fromJson(json);
+  switch (json['runtimeType']) {
+    case 'reduced':
+      return SimpleIssue.fromJson(json);
+    case 'details':
+      return DetailedIssue.fromJson(json);
+
+    default:
+      throw CheckedFromJsonException(json, 'runtimeType', 'Issue',
+          'Invalid union type "${json['runtimeType']}"!');
+  }
 }
 
 /// @nodoc
@@ -23,13 +32,11 @@ mixin _$Issue {
   @JsonKey(required: true, disallowNullValue: true, name: 'id')
   int get id => throw _privateConstructorUsedError;
   @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
-  DateTime get date => throw _privateConstructorUsedError;
-  @JsonKey(
-      required: true,
-      disallowNullValue: true,
-      name: 'issue_number',
-      readValue: _concatName)
-  String get name => throw _privateConstructorUsedError;
+  DateTime get dateAdded => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
+  String get number => throw _privateConstructorUsedError;
   @JsonKey(required: true, disallowNullValue: true)
   ComicImage get image => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,15 +46,34 @@ mixin _$Issue {
             int id,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
-            DateTime date,
+            DateTime dateAdded,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)
+        reduced,
+    required TResult Function(
+            @JsonKey(required: true, disallowNullValue: true) int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'cover_date')
+            DateTime coverDate,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'date_added')
+            DateTime dateAdded,
             @JsonKey(
                 required: true,
                 disallowNullValue: true,
-                name: 'issue_number',
-                readValue: _concatName)
-            String name,
-            @JsonKey(required: true, disallowNullValue: true) ComicImage image)
-        reduced,
+                name: 'date_last_updated')
+            DateTime dateLastUpdated,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(defaultValue: [], name: 'character_credits')
+            List<SimpleComicCharacter> character,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number)
+        details,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,15 +83,34 @@ mixin _$Issue {
             int id,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
-            DateTime date,
+            DateTime dateAdded,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
+        reduced,
+    TResult? Function(
+            @JsonKey(required: true, disallowNullValue: true) int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'cover_date')
+            DateTime coverDate,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'date_added')
+            DateTime dateAdded,
             @JsonKey(
                 required: true,
                 disallowNullValue: true,
-                name: 'issue_number',
-                readValue: _concatName)
-            String name,
-            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
-        reduced,
+                name: 'date_last_updated')
+            DateTime dateLastUpdated,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(defaultValue: [], name: 'character_credits')
+            List<SimpleComicCharacter> character,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number)?
+        details,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,31 +120,53 @@ mixin _$Issue {
             int id,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
-            DateTime date,
+            DateTime dateAdded,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
+        reduced,
+    TResult Function(
+            @JsonKey(required: true, disallowNullValue: true) int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'cover_date')
+            DateTime coverDate,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'date_added')
+            DateTime dateAdded,
             @JsonKey(
                 required: true,
                 disallowNullValue: true,
-                name: 'issue_number',
-                readValue: _concatName)
-            String name,
-            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
-        reduced,
+                name: 'date_last_updated')
+            DateTime dateLastUpdated,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(defaultValue: [], name: 'character_credits')
+            List<SimpleComicCharacter> character,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number)?
+        details,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SimpleIssue value) reduced,
+    required TResult Function(DetailedIssue value) details,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SimpleIssue value)? reduced,
+    TResult? Function(DetailedIssue value)? details,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SimpleIssue value)? reduced,
+    TResult Function(DetailedIssue value)? details,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,13 +183,10 @@ abstract class $IssueCopyWith<$Res> {
   $Res call(
       {@JsonKey(required: true, disallowNullValue: true, name: 'id') int id,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
-      DateTime date,
-      @JsonKey(
-          required: true,
-          disallowNullValue: true,
-          name: 'issue_number',
-          readValue: _concatName)
-      String name,
+      DateTime dateAdded,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
+      String number,
       @JsonKey(required: true, disallowNullValue: true) ComicImage image});
 
   $ComicImageCopyWith<$Res> get image;
@@ -142,8 +206,9 @@ class _$IssueCopyWithImpl<$Res, $Val extends Issue>
   @override
   $Res call({
     Object? id = null,
-    Object? date = null,
-    Object? name = null,
+    Object? dateAdded = null,
+    Object? name = freezed,
+    Object? number = null,
     Object? image = null,
   }) {
     return _then(_value.copyWith(
@@ -151,13 +216,17 @@ class _$IssueCopyWithImpl<$Res, $Val extends Issue>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      dateAdded: null == dateAdded
+          ? _value.dateAdded
+          : dateAdded // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      number: null == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
               as String,
       image: null == image
           ? _value.image
@@ -185,13 +254,10 @@ abstract class _$$SimpleIssueCopyWith<$Res> implements $IssueCopyWith<$Res> {
   $Res call(
       {@JsonKey(required: true, disallowNullValue: true, name: 'id') int id,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
-      DateTime date,
-      @JsonKey(
-          required: true,
-          disallowNullValue: true,
-          name: 'issue_number',
-          readValue: _concatName)
-      String name,
+      DateTime dateAdded,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
+      String number,
       @JsonKey(required: true, disallowNullValue: true) ComicImage image});
 
   @override
@@ -210,8 +276,9 @@ class __$$SimpleIssueCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? date = null,
-    Object? name = null,
+    Object? dateAdded = null,
+    Object? name = freezed,
+    Object? number = null,
     Object? image = null,
   }) {
     return _then(_$SimpleIssue(
@@ -219,13 +286,17 @@ class __$$SimpleIssueCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      dateAdded: null == dateAdded
+          ? _value.dateAdded
+          : dateAdded // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      number: null == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
               as String,
       image: null == image
           ? _value.image
@@ -242,15 +313,14 @@ class _$SimpleIssue extends SimpleIssue {
       {@JsonKey(required: true, disallowNullValue: true, name: 'id')
       required this.id,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
-      required this.date,
-      @JsonKey(
-          required: true,
-          disallowNullValue: true,
-          name: 'issue_number',
-          readValue: _concatName)
-      required this.name,
-      @JsonKey(required: true, disallowNullValue: true) required this.image})
-      : super._();
+      required this.dateAdded,
+      @JsonKey(name: 'name') this.name,
+      @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
+      required this.number,
+      @JsonKey(required: true, disallowNullValue: true) required this.image,
+      final String? $type})
+      : $type = $type ?? 'reduced',
+        super._();
 
   factory _$SimpleIssue.fromJson(Map<String, dynamic> json) =>
       _$$SimpleIssueFromJson(json);
@@ -260,21 +330,23 @@ class _$SimpleIssue extends SimpleIssue {
   final int id;
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
-  final DateTime date;
+  final DateTime dateAdded;
   @override
-  @JsonKey(
-      required: true,
-      disallowNullValue: true,
-      name: 'issue_number',
-      readValue: _concatName)
-  final String name;
+  @JsonKey(name: 'name')
+  final String? name;
+  @override
+  @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
+  final String number;
   @override
   @JsonKey(required: true, disallowNullValue: true)
   final ComicImage image;
 
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
   @override
   String toString() {
-    return 'Issue.reduced(id: $id, date: $date, name: $name, image: $image)';
+    return 'Issue.reduced(id: $id, dateAdded: $dateAdded, name: $name, number: $number, image: $image)';
   }
 
   @override
@@ -283,14 +355,17 @@ class _$SimpleIssue extends SimpleIssue {
         (other.runtimeType == runtimeType &&
             other is _$SimpleIssue &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.date, date) || other.date == date) &&
+            (identical(other.dateAdded, dateAdded) ||
+                other.dateAdded == dateAdded) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.number, number) || other.number == number) &&
             (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, date, name, image);
+  int get hashCode =>
+      Object.hash(runtimeType, id, dateAdded, name, number, image);
 
   @JsonKey(ignore: true)
   @override
@@ -306,17 +381,36 @@ class _$SimpleIssue extends SimpleIssue {
             int id,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
-            DateTime date,
+            DateTime dateAdded,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)
+        reduced,
+    required TResult Function(
+            @JsonKey(required: true, disallowNullValue: true) int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'cover_date')
+            DateTime coverDate,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'date_added')
+            DateTime dateAdded,
             @JsonKey(
                 required: true,
                 disallowNullValue: true,
-                name: 'issue_number',
-                readValue: _concatName)
-            String name,
-            @JsonKey(required: true, disallowNullValue: true) ComicImage image)
-        reduced,
+                name: 'date_last_updated')
+            DateTime dateLastUpdated,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(defaultValue: [], name: 'character_credits')
+            List<SimpleComicCharacter> character,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number)
+        details,
   }) {
-    return reduced(id, date, name, image);
+    return reduced(id, dateAdded, name, number, image);
   }
 
   @override
@@ -327,17 +421,36 @@ class _$SimpleIssue extends SimpleIssue {
             int id,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
-            DateTime date,
+            DateTime dateAdded,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
+        reduced,
+    TResult? Function(
+            @JsonKey(required: true, disallowNullValue: true) int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'cover_date')
+            DateTime coverDate,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'date_added')
+            DateTime dateAdded,
             @JsonKey(
                 required: true,
                 disallowNullValue: true,
-                name: 'issue_number',
-                readValue: _concatName)
-            String name,
-            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
-        reduced,
+                name: 'date_last_updated')
+            DateTime dateLastUpdated,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(defaultValue: [], name: 'character_credits')
+            List<SimpleComicCharacter> character,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number)?
+        details,
   }) {
-    return reduced?.call(id, date, name, image);
+    return reduced?.call(id, dateAdded, name, number, image);
   }
 
   @override
@@ -348,19 +461,38 @@ class _$SimpleIssue extends SimpleIssue {
             int id,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
-            DateTime date,
+            DateTime dateAdded,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
+        reduced,
+    TResult Function(
+            @JsonKey(required: true, disallowNullValue: true) int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'cover_date')
+            DateTime coverDate,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'date_added')
+            DateTime dateAdded,
             @JsonKey(
                 required: true,
                 disallowNullValue: true,
-                name: 'issue_number',
-                readValue: _concatName)
-            String name,
-            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
-        reduced,
+                name: 'date_last_updated')
+            DateTime dateLastUpdated,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(defaultValue: [], name: 'character_credits')
+            List<SimpleComicCharacter> character,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number)?
+        details,
     required TResult orElse(),
   }) {
     if (reduced != null) {
-      return reduced(id, date, name, image);
+      return reduced(id, dateAdded, name, number, image);
     }
     return orElse();
   }
@@ -369,6 +501,7 @@ class _$SimpleIssue extends SimpleIssue {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SimpleIssue value) reduced,
+    required TResult Function(DetailedIssue value) details,
   }) {
     return reduced(this);
   }
@@ -377,6 +510,7 @@ class _$SimpleIssue extends SimpleIssue {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SimpleIssue value)? reduced,
+    TResult? Function(DetailedIssue value)? details,
   }) {
     return reduced?.call(this);
   }
@@ -385,6 +519,7 @@ class _$SimpleIssue extends SimpleIssue {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SimpleIssue value)? reduced,
+    TResult Function(DetailedIssue value)? details,
     required TResult orElse(),
   }) {
     if (reduced != null) {
@@ -406,13 +541,10 @@ abstract class SimpleIssue extends Issue {
       {@JsonKey(required: true, disallowNullValue: true, name: 'id')
       required final int id,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
-      required final DateTime date,
-      @JsonKey(
-          required: true,
-          disallowNullValue: true,
-          name: 'issue_number',
-          readValue: _concatName)
-      required final String name,
+      required final DateTime dateAdded,
+      @JsonKey(name: 'name') final String? name,
+      @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
+      required final String number,
       @JsonKey(required: true, disallowNullValue: true)
       required final ComicImage image}) = _$SimpleIssue;
   const SimpleIssue._() : super._();
@@ -425,19 +557,420 @@ abstract class SimpleIssue extends Issue {
   int get id;
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
-  DateTime get date;
+  DateTime get dateAdded;
   @override
-  @JsonKey(
-      required: true,
-      disallowNullValue: true,
-      name: 'issue_number',
-      readValue: _concatName)
-  String get name;
+  @JsonKey(name: 'name')
+  String? get name;
+  @override
+  @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
+  String get number;
   @override
   @JsonKey(required: true, disallowNullValue: true)
   ComicImage get image;
   @override
   @JsonKey(ignore: true)
   _$$SimpleIssueCopyWith<_$SimpleIssue> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DetailedIssueCopyWith<$Res> implements $IssueCopyWith<$Res> {
+  factory _$$DetailedIssueCopyWith(
+          _$DetailedIssue value, $Res Function(_$DetailedIssue) then) =
+      __$$DetailedIssueCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(required: true, disallowNullValue: true) int id,
+      @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
+      DateTime coverDate,
+      @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
+      DateTime dateAdded,
+      @JsonKey(
+          required: true, disallowNullValue: true, name: 'date_last_updated')
+      DateTime dateLastUpdated,
+      @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+      @JsonKey(defaultValue: [], name: 'character_credits')
+      List<SimpleComicCharacter> character,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
+      String number});
+
+  @override
+  $ComicImageCopyWith<$Res> get image;
+}
+
+/// @nodoc
+class __$$DetailedIssueCopyWithImpl<$Res>
+    extends _$IssueCopyWithImpl<$Res, _$DetailedIssue>
+    implements _$$DetailedIssueCopyWith<$Res> {
+  __$$DetailedIssueCopyWithImpl(
+      _$DetailedIssue _value, $Res Function(_$DetailedIssue) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? coverDate = null,
+    Object? dateAdded = null,
+    Object? dateLastUpdated = null,
+    Object? image = null,
+    Object? character = null,
+    Object? name = freezed,
+    Object? number = null,
+  }) {
+    return _then(_$DetailedIssue(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      coverDate: null == coverDate
+          ? _value.coverDate
+          : coverDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      dateAdded: null == dateAdded
+          ? _value.dateAdded
+          : dateAdded // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      dateLastUpdated: null == dateLastUpdated
+          ? _value.dateLastUpdated
+          : dateLastUpdated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as ComicImage,
+      character: null == character
+          ? _value._character
+          : character // ignore: cast_nullable_to_non_nullable
+              as List<SimpleComicCharacter>,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      number: null == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$DetailedIssue extends DetailedIssue {
+  const _$DetailedIssue(
+      {@JsonKey(required: true, disallowNullValue: true) required this.id,
+      @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
+      required this.coverDate,
+      @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
+      required this.dateAdded,
+      @JsonKey(
+          required: true, disallowNullValue: true, name: 'date_last_updated')
+      required this.dateLastUpdated,
+      @JsonKey(required: true, disallowNullValue: true) required this.image,
+      @JsonKey(defaultValue: [], name: 'character_credits')
+      required final List<SimpleComicCharacter> character,
+      @JsonKey(name: 'name') this.name,
+      @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
+      required this.number,
+      final String? $type})
+      : _character = character,
+        $type = $type ?? 'details',
+        super._();
+
+  factory _$DetailedIssue.fromJson(Map<String, dynamic> json) =>
+      _$$DetailedIssueFromJson(json);
+
+  @override
+  @JsonKey(required: true, disallowNullValue: true)
+  final int id;
+  @override
+  @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
+  final DateTime coverDate;
+  @override
+  @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
+  final DateTime dateAdded;
+  @override
+  @JsonKey(required: true, disallowNullValue: true, name: 'date_last_updated')
+  final DateTime dateLastUpdated;
+  @override
+  @JsonKey(required: true, disallowNullValue: true)
+  final ComicImage image;
+  final List<SimpleComicCharacter> _character;
+  @override
+  @JsonKey(defaultValue: [], name: 'character_credits')
+  List<SimpleComicCharacter> get character {
+    if (_character is EqualUnmodifiableListView) return _character;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_character);
+  }
+
+  @override
+  @JsonKey(name: 'name')
+  final String? name;
+  @override
+  @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
+  final String number;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'Issue.details(id: $id, coverDate: $coverDate, dateAdded: $dateAdded, dateLastUpdated: $dateLastUpdated, image: $image, character: $character, name: $name, number: $number)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DetailedIssue &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.coverDate, coverDate) ||
+                other.coverDate == coverDate) &&
+            (identical(other.dateAdded, dateAdded) ||
+                other.dateAdded == dateAdded) &&
+            (identical(other.dateLastUpdated, dateLastUpdated) ||
+                other.dateLastUpdated == dateLastUpdated) &&
+            (identical(other.image, image) || other.image == image) &&
+            const DeepCollectionEquality()
+                .equals(other._character, _character) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.number, number) || other.number == number));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      coverDate,
+      dateAdded,
+      dateLastUpdated,
+      image,
+      const DeepCollectionEquality().hash(_character),
+      name,
+      number);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DetailedIssueCopyWith<_$DetailedIssue> get copyWith =>
+      __$$DetailedIssueCopyWithImpl<_$DetailedIssue>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            @JsonKey(required: true, disallowNullValue: true, name: 'id')
+            int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'date_added')
+            DateTime dateAdded,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)
+        reduced,
+    required TResult Function(
+            @JsonKey(required: true, disallowNullValue: true) int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'cover_date')
+            DateTime coverDate,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'date_added')
+            DateTime dateAdded,
+            @JsonKey(
+                required: true,
+                disallowNullValue: true,
+                name: 'date_last_updated')
+            DateTime dateLastUpdated,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(defaultValue: [], name: 'character_credits')
+            List<SimpleComicCharacter> character,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number)
+        details,
+  }) {
+    return details(id, coverDate, dateAdded, dateLastUpdated, image, character,
+        name, number);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            @JsonKey(required: true, disallowNullValue: true, name: 'id')
+            int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'date_added')
+            DateTime dateAdded,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
+        reduced,
+    TResult? Function(
+            @JsonKey(required: true, disallowNullValue: true) int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'cover_date')
+            DateTime coverDate,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'date_added')
+            DateTime dateAdded,
+            @JsonKey(
+                required: true,
+                disallowNullValue: true,
+                name: 'date_last_updated')
+            DateTime dateLastUpdated,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(defaultValue: [], name: 'character_credits')
+            List<SimpleComicCharacter> character,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number)?
+        details,
+  }) {
+    return details?.call(id, coverDate, dateAdded, dateLastUpdated, image,
+        character, name, number);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            @JsonKey(required: true, disallowNullValue: true, name: 'id')
+            int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'date_added')
+            DateTime dateAdded,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image)?
+        reduced,
+    TResult Function(
+            @JsonKey(required: true, disallowNullValue: true) int id,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'cover_date')
+            DateTime coverDate,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'date_added')
+            DateTime dateAdded,
+            @JsonKey(
+                required: true,
+                disallowNullValue: true,
+                name: 'date_last_updated')
+            DateTime dateLastUpdated,
+            @JsonKey(required: true, disallowNullValue: true) ComicImage image,
+            @JsonKey(defaultValue: [], name: 'character_credits')
+            List<SimpleComicCharacter> character,
+            @JsonKey(name: 'name') String? name,
+            @JsonKey(
+                required: true, disallowNullValue: true, name: 'issue_number')
+            String number)?
+        details,
+    required TResult orElse(),
+  }) {
+    if (details != null) {
+      return details(id, coverDate, dateAdded, dateLastUpdated, image,
+          character, name, number);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SimpleIssue value) reduced,
+    required TResult Function(DetailedIssue value) details,
+  }) {
+    return details(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SimpleIssue value)? reduced,
+    TResult? Function(DetailedIssue value)? details,
+  }) {
+    return details?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SimpleIssue value)? reduced,
+    TResult Function(DetailedIssue value)? details,
+    required TResult orElse(),
+  }) {
+    if (details != null) {
+      return details(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DetailedIssueToJson(
+      this,
+    );
+  }
+}
+
+abstract class DetailedIssue extends Issue {
+  const factory DetailedIssue(
+      {@JsonKey(required: true, disallowNullValue: true) required final int id,
+      @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
+      required final DateTime coverDate,
+      @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
+      required final DateTime dateAdded,
+      @JsonKey(
+          required: true, disallowNullValue: true, name: 'date_last_updated')
+      required final DateTime dateLastUpdated,
+      @JsonKey(required: true, disallowNullValue: true)
+      required final ComicImage image,
+      @JsonKey(defaultValue: [], name: 'character_credits')
+      required final List<SimpleComicCharacter> character,
+      @JsonKey(name: 'name') final String? name,
+      @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
+      required final String number}) = _$DetailedIssue;
+  const DetailedIssue._() : super._();
+
+  factory DetailedIssue.fromJson(Map<String, dynamic> json) =
+      _$DetailedIssue.fromJson;
+
+  @override
+  @JsonKey(required: true, disallowNullValue: true)
+  int get id;
+  @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
+  DateTime get coverDate;
+  @override
+  @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
+  DateTime get dateAdded;
+  @JsonKey(required: true, disallowNullValue: true, name: 'date_last_updated')
+  DateTime get dateLastUpdated;
+  @override
+  @JsonKey(required: true, disallowNullValue: true)
+  ComicImage get image;
+  @JsonKey(defaultValue: [], name: 'character_credits')
+  List<SimpleComicCharacter> get character;
+  @override
+  @JsonKey(name: 'name')
+  String? get name;
+  @override
+  @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
+  String get number;
+  @override
+  @JsonKey(ignore: true)
+  _$$DetailedIssueCopyWith<_$DetailedIssue> get copyWith =>
       throw _privateConstructorUsedError;
 }

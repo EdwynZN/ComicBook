@@ -29,7 +29,7 @@ class SingleGridIssue extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: TitleIssue(name: issue.name, date: issue.date),
+            child: TitleIssue(name: issue.completeName, date: issue.dateAdded),
           ),
         ),
       ],

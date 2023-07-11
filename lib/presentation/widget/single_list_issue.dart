@@ -35,7 +35,10 @@ class SingleListIssue extends StatelessWidget {
                   flex: 2,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: TitleIssue(name: issue.name, date: issue.date),
+                    child: TitleIssue(
+                      name: issue.completeName,
+                      date: issue.dateAdded,
+                    ),
                   ),
                 ),
               ],

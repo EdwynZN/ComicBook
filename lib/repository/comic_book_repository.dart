@@ -1,4 +1,3 @@
-import 'package:comic_book/model/details_issue.dart';
 import 'package:comic_book/model/issue.dart';
 import 'package:dio/dio.dart';
 
@@ -23,16 +22,16 @@ interface class ComicBookRepository {
     return issues;
   }
 
-  Future<DetailsIssue> issueDetails({
+  Future<DetailedIssue> issueDetails({
     required final String id,
   }) async {
     final result = await _dio.get('issue/4000-$id/');
     final data = result.data as Map<String, dynamic>;
-    final issue = DetailsIssue.fromJson(data);
+    final issue = DetailedIssue.fromJson(data);
     return issue;
   }
 
-  Future<DetailsIssue> issueDetailsFromDetailsUrl({
+  Future<DetailedIssue> issueDetailsFromUrl({
     required final String url,
   }) async {
     final uri = Uri.parse(url);
@@ -43,7 +42,7 @@ interface class ComicBookRepository {
       ),
     );
     final data = result.data as Map<String, dynamic>;
-    final issue = DetailsIssue.fromJson(data);
+    final issue = DetailedIssue.fromJson(data);
     return issue;
   }
 }
