@@ -2,6 +2,7 @@ import 'package:comic_book/bloc/details/events/details_event.dart';
 import 'package:comic_book/model/issue.dart';
 import 'package:comic_book/model/state.dart';
 import 'package:comic_book/repository/comic_book_repository.dart';
+import 'package:comic_book/utils/failure_converter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailsIssuesBloc extends Bloc<DetailsIssueEvent, BState<DetailedIssue>> {
@@ -20,7 +21,8 @@ class DetailsIssuesBloc extends Bloc<DetailsIssueEvent, BState<DetailedIssue>> {
         final result = await _loadIssue();
         emit(DataState<DetailedIssue>(result));
       } catch (e) {
-        emit(ErrorState<DetailedIssue>(error: e, value: data));
+        final failure = failureConverter(e);
+        emit(ErrorState<DetailedIssue>(failure: failure, value: data));
       }
     });
 
@@ -38,4 +40,6 @@ class DetailsIssuesBloc extends Bloc<DetailsIssueEvent, BState<DetailedIssue>> {
     final issue = await repository.issueDetailsFromUrl(url: url);
     return issue;
   }
+
+  void retry() => add(const FetchIssueEvent());
 }

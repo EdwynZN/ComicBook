@@ -1,3 +1,5 @@
+import 'package:comic_book/model/failure.dart';
+
 sealed class BState<T> {
   const BState();
 }
@@ -38,7 +40,7 @@ class NoMoreDataState<T> extends BState<T> implements DataValue<T> {
 }
 
 class ErrorState<T> extends BState<T> implements DataValue<T> {
-  final Object error;
+  final Failure failure;
 
   /// Keeps previous value (if any),
   /// useful when trying to show a message but keep the UI
@@ -46,7 +48,7 @@ class ErrorState<T> extends BState<T> implements DataValue<T> {
   final T? value;
 
   const ErrorState({
-    required this.error,
+    required this.failure,
     this.value,
   });
 }

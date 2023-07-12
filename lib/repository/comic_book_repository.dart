@@ -45,6 +45,7 @@ interface class ComicBookRepository {
         'offset': offset,
         'limit': pageSize,
         'field_list': _issuesFields,
+        'sort' : 'date_added:desc',
       },
     );
     final data = (result.data as List<dynamic>).cast<Map<String, dynamic>>();

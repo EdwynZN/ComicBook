@@ -63,9 +63,7 @@ mixin _$Issue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
-            @JsonKey(
-                required: true, disallowNullValue: true, name: 'cover_date')
-            DateTime coverDate,
+            @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
@@ -119,9 +117,7 @@ mixin _$Issue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
-            @JsonKey(
-                required: true, disallowNullValue: true, name: 'cover_date')
-            DateTime coverDate,
+            @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
@@ -175,9 +171,7 @@ mixin _$Issue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
-            @JsonKey(
-                required: true, disallowNullValue: true, name: 'cover_date')
-            DateTime coverDate,
+            @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
@@ -476,9 +470,7 @@ class _$SimpleIssue extends SimpleIssue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
-            @JsonKey(
-                required: true, disallowNullValue: true, name: 'cover_date')
-            DateTime coverDate,
+            @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
@@ -535,9 +527,7 @@ class _$SimpleIssue extends SimpleIssue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
-            @JsonKey(
-                required: true, disallowNullValue: true, name: 'cover_date')
-            DateTime coverDate,
+            @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
@@ -594,9 +584,7 @@ class _$SimpleIssue extends SimpleIssue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
-            @JsonKey(
-                required: true, disallowNullValue: true, name: 'cover_date')
-            DateTime coverDate,
+            @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
@@ -726,8 +714,7 @@ abstract class _$$DetailedIssueCopyWith<$Res> implements $IssueCopyWith<$Res> {
       {@JsonKey(required: true, disallowNullValue: true) int id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       String detailUrl,
-      @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
-      DateTime coverDate,
+      @JsonKey(name: 'cover_date') DateTime? coverDate,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
       DateTime dateAdded,
       @JsonKey(
@@ -770,7 +757,7 @@ class __$$DetailedIssueCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? detailUrl = null,
-    Object? coverDate = null,
+    Object? coverDate = freezed,
     Object? dateAdded = null,
     Object? dateLastUpdated = null,
     Object? storeDate = freezed,
@@ -795,10 +782,10 @@ class __$$DetailedIssueCopyWithImpl<$Res>
           ? _value.detailUrl
           : detailUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      coverDate: null == coverDate
+      coverDate: freezed == coverDate
           ? _value.coverDate
           : coverDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       dateAdded: null == dateAdded
           ? _value.dateAdded
           : dateAdded // ignore: cast_nullable_to_non_nullable
@@ -874,8 +861,7 @@ class _$DetailedIssue extends DetailedIssue {
       {@JsonKey(required: true, disallowNullValue: true) required this.id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required this.detailUrl,
-      @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
-      required this.coverDate,
+      @JsonKey(name: 'cover_date') this.coverDate,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
       required this.dateAdded,
       @JsonKey(
@@ -922,8 +908,8 @@ class _$DetailedIssue extends DetailedIssue {
   @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
   final String detailUrl;
   @override
-  @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
-  final DateTime coverDate;
+  @JsonKey(name: 'cover_date')
+  final DateTime? coverDate;
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
   final DateTime dateAdded;
@@ -1101,9 +1087,7 @@ class _$DetailedIssue extends DetailedIssue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
-            @JsonKey(
-                required: true, disallowNullValue: true, name: 'cover_date')
-            DateTime coverDate,
+            @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
@@ -1177,9 +1161,7 @@ class _$DetailedIssue extends DetailedIssue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
-            @JsonKey(
-                required: true, disallowNullValue: true, name: 'cover_date')
-            DateTime coverDate,
+            @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
@@ -1253,9 +1235,7 @@ class _$DetailedIssue extends DetailedIssue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
-            @JsonKey(
-                required: true, disallowNullValue: true, name: 'cover_date')
-            DateTime coverDate,
+            @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
             DateTime dateAdded,
@@ -1354,8 +1334,7 @@ abstract class DetailedIssue extends Issue {
       {@JsonKey(required: true, disallowNullValue: true) required final int id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required final String detailUrl,
-      @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
-      required final DateTime coverDate,
+      @JsonKey(name: 'cover_date') final DateTime? coverDate,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
       required final DateTime dateAdded,
       @JsonKey(
@@ -1394,8 +1373,8 @@ abstract class DetailedIssue extends Issue {
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
   String get detailUrl;
-  @JsonKey(required: true, disallowNullValue: true, name: 'cover_date')
-  DateTime get coverDate;
+  @JsonKey(name: 'cover_date')
+  DateTime? get coverDate;
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
   DateTime get dateAdded;

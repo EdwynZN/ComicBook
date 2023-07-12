@@ -5,6 +5,8 @@ import 'package:comic_book/bloc/view_style/state/view_style_event.dart';
 import 'package:comic_book/bloc/view_style/view_style_bloc.dart';
 import 'package:comic_book/model/issue.dart';
 import 'package:comic_book/model/state.dart';
+import 'package:comic_book/presentation/widget/error_button.dart';
+import 'package:comic_book/presentation/widget/error_snackbar.dart';
 import 'package:comic_book/presentation/widget/single_grid_issue.dart';
 import 'package:comic_book/presentation/widget/single_list_issue.dart';
 import 'package:flutter/material.dart';
@@ -69,9 +71,22 @@ class HomeScreen extends HookWidget {
           slivers: [
             BlocConsumer<IssuesBloc, BState<List<Issue>>>(
               listener: (context, state) {
-                if (controller.hasClients &&
+                if (state is ErrorState<List<Issue>> &&
+                    state.value != null &&
+                    context.mounted) {
+                  final bloc = context.read<IssuesBloc>();
+                  ScaffoldMessenger.of(context)
+                    ..clearSnackBars()
+                    ..showSnackBar(
+                      errorSnackBar(
+                        message: state.failure.message,
+                        onPressed: bloc.retry,
+                      ),
+                    );
+                } else if (state is DataState<List<Issue>> && 
+                    controller.hasClients &&
                     controller.position.extentAfter <
-                        (controller.position.viewportDimension *
+                      (controller.position.viewportDimension *
                             _kFactorViewport)) {
                   context
                       .read<IssuesBloc>()
@@ -79,7 +94,8 @@ class HomeScreen extends HookWidget {
                 }
               },
               listenWhen: (previous, current) =>
-                  current is DataState<List<Issue>>,
+                  current is DataState<List<Issue>> ||
+                  current is ErrorState<List<Issue>>,
               builder: (context, state) {
                 return SliverPadding(
                   padding: const EdgeInsets.all(16.0),
@@ -102,7 +118,12 @@ class HomeScreen extends HookWidget {
                       ),
                     ErrorState e => SliverToBoxAdapter(
                         child: Center(
-                          child: Text(e.toString()),
+                          child: ErrorButton(
+                            message: e.failure.message,
+                            onPressed: e.failure.canRetry
+                              ? () => context.read<IssuesBloc>().retry()
+                              : null,
+                          ),
                         ),
                       ),
                     _ => const SliverToBoxAdapter(),
@@ -276,21 +297,15 @@ class _PaginatedLoader extends HookWidget {
       child: BlocBuilder<IssuesBloc, BState<List<Issue>>>(
         builder: (context, state) {
           return switch (state) {
-            LoadingState s when s.value != null =>
-              const Center(
+            LoadingState s when s.value != null => const Center(
                 child: CircularProgressIndicator.adaptive(),
               ),
-            ErrorState e => TextButton(
-                onPressed: () {
-                  context
-                      .read<IssuesBloc>()
-                      .add(const IssuesPaginationIncrement());
-                },
-                child: Text(e.error.toString()),
+            ErrorState e when e.failure.canRetry && e.value != null =>
+              ErrorButton(
+                message: e.failure.message,
+                onPressed: () => context.read<IssuesBloc>().retry(),
               ),
-            NoMoreDataState() => const Center(
-                child: Text('No more data'),
-              ),
+            NoMoreDataState() => const Center(child: Text('No more data')),
             _ => const SizedBox(),
           };
         },

@@ -3,6 +3,7 @@ import 'package:comic_book/bloc/details/details_issue_bloc.dart';
 import 'package:comic_book/model/issue.dart';
 import 'package:comic_book/model/state.dart';
 import 'package:comic_book/presentation/widget/details_slivers.dart';
+import 'package:comic_book/presentation/widget/error_button.dart';
 import 'package:comic_book/presentation/widget/image_issue.dart';
 import 'package:comic_book/repository/comic_book_repository.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +74,10 @@ class IssueDetailsScreen extends StatelessWidget {
                   child: CircularProgressIndicator.adaptive(),
                 ),
               ErrorState e => Center(
-                  child: Text(e.toString()),
+                  child: ErrorButton(
+                    message: e.failure.message,
+                    onPressed: () => context.read<DetailsIssuesBloc>().retry(),
+                  ),
                 ),
               _ => const SizedBox(),
             };

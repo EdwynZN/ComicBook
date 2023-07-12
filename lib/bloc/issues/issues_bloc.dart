@@ -1,6 +1,7 @@
 import 'package:comic_book/model/issue.dart';
 import 'package:comic_book/model/state.dart';
 import 'package:comic_book/repository/comic_book_repository.dart';
+import 'package:comic_book/utils/failure_converter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'events/issue_events.dart';
@@ -21,7 +22,8 @@ class IssuesBloc extends Bloc<IssuesEvent, BState<List<SimpleIssue>>> {
           emit(DataState<List<SimpleIssue>>([...?data, ...result]));
         }
       } catch (e) {
-        emit(ErrorState<List<SimpleIssue>>(error: e, value: data));
+        final failure = failureConverter(e);
+        emit(ErrorState<List<SimpleIssue>>(failure: failure, value: data));
       }
     });
     on<IssuesRefresh>((event, emit) async {
@@ -35,7 +37,8 @@ class IssuesBloc extends Bloc<IssuesEvent, BState<List<SimpleIssue>>> {
           emit(DataState<List<SimpleIssue>>(result));
         }
       } catch (e) {
-        emit(ErrorState<List<SimpleIssue>>(error: e, value: data));
+        final failure = failureConverter(e);
+        emit(ErrorState<List<SimpleIssue>>(failure: failure, value: data));
       }
     });
 
@@ -44,13 +47,17 @@ class IssuesBloc extends Bloc<IssuesEvent, BState<List<SimpleIssue>>> {
   }
 
   /// Any State that has data (excludes Initial)
-  List<SimpleIssue>?  get _data => switch (state) {
-    DataValue<List<SimpleIssue>> s => s.value,
-    _ => null,
-  };
+  List<SimpleIssue>? get _data => switch (state) {
+        DataValue<List<SimpleIssue>> s => s.value,
+        _ => null,
+      };
 
   Future<List<SimpleIssue>> _loadPage(int offset) async {
     final issues = await repository.issues(offset: offset);
     return issues;
+  }
+
+  void retry() {
+    add(const IssuesPaginationIncrement());
   }
 }

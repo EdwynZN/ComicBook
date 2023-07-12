@@ -40,7 +40,10 @@ class DetailsSliver extends HookWidget {
         if (name != null) (data: name, title: 'Name'),
         (data: volume.name, title: 'Volume'),
         (data: number, title: 'Issue Number'),
-        (data: localizations.formatShortDate(coverDate), title: 'Cover Date'),
+        if (coverDate != null) (
+          data: localizations.formatShortDate(coverDate), 
+          title: 'Cover Date',
+        ),
         if (storeDate != null) (
           data: localizations.formatShortDate(storeDate),
           title: 'In Store Date',

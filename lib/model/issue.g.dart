@@ -61,7 +61,6 @@ _$DetailedIssue _$$DetailedIssueFromJson(Map<String, dynamic> json) {
     requiredKeys: const [
       'id',
       'api_detail_url',
-      'cover_date',
       'date_added',
       'date_last_updated',
       'image',
@@ -71,7 +70,6 @@ _$DetailedIssue _$$DetailedIssueFromJson(Map<String, dynamic> json) {
     disallowNullValues: const [
       'id',
       'api_detail_url',
-      'cover_date',
       'date_added',
       'date_last_updated',
       'image',
@@ -82,7 +80,9 @@ _$DetailedIssue _$$DetailedIssueFromJson(Map<String, dynamic> json) {
   return _$DetailedIssue(
     id: json['id'] as int,
     detailUrl: json['api_detail_url'] as String,
-    coverDate: DateTime.parse(json['cover_date'] as String),
+    coverDate: json['cover_date'] == null
+        ? null
+        : DateTime.parse(json['cover_date'] as String),
     dateAdded: DateTime.parse(json['date_added'] as String),
     dateLastUpdated: DateTime.parse(json['date_last_updated'] as String),
     storeDate: json['store_date'] == null
@@ -129,9 +129,6 @@ Map<String, dynamic> _$$DetailedIssueToJson(_$DetailedIssue instance) {
   final val = <String, dynamic>{
     'id': instance.id,
     'api_detail_url': instance.detailUrl,
-    'cover_date': instance.coverDate.toIso8601String(),
-    'date_added': instance.dateAdded.toIso8601String(),
-    'date_last_updated': instance.dateLastUpdated.toIso8601String(),
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -140,6 +137,9 @@ Map<String, dynamic> _$$DetailedIssueToJson(_$DetailedIssue instance) {
     }
   }
 
+  writeNotNull('cover_date', instance.coverDate?.toIso8601String());
+  val['date_added'] = instance.dateAdded.toIso8601String();
+  val['date_last_updated'] = instance.dateLastUpdated.toIso8601String();
   writeNotNull('store_date', instance.storeDate?.toIso8601String());
   val['image'] = instance.image.toJson();
   val['volume'] = instance.volume.toJson();
