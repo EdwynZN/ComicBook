@@ -254,7 +254,24 @@ class CreatorsSliver extends StatelessWidget {
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: creators.length,
         itemBuilder: (_, index) {
-          return Text(creators[index].name);
+          final creator = creators[index];
+          final name = creator.name;
+          final role = creator.role;
+          return Text.rich(
+            TextSpan(
+              text: '$name\n',
+              children: [
+                TextSpan(
+                  text: role,
+                  style: const TextStyle(
+                    color: Color(0xFF757575),
+                    fontSize: 11.0,
+                  ),
+                ),
+              ],
+            ),
+            overflow: TextOverflow.clip,
+          );
         },
       ),
     );

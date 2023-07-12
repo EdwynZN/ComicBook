@@ -12,6 +12,8 @@ class Person with _$Person {
     required String detailUrl,
     @JsonKey(required: true, disallowNullValue: true)
     required String name,
+    @JsonKey(required: true, disallowNullValue: true)
+    required String role,
   }) = _Person;
 	
   factory Person.fromJson(Map<String, dynamic> json) =>

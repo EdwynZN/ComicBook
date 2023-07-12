@@ -11,19 +11,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class IssueDetailsScreen extends StatelessWidget {
   final String url;
-  final String? initialTitle;
+  final String? name;
+  final String? issueNumber;
 
   const IssueDetailsScreen({
     super.key,
     required this.url,
-    this.initialTitle,
+    this.name,
+    this.issueNumber,
   });
 
   IssueDetailsScreen.fromIssue({
     super.key,
     required this.url,
     required SimpleIssue issue,
-  }) : initialTitle = issue.name;
+  })  : name = issue.name,
+        issueNumber = issue.number;
 
   @override
   Widget build(BuildContext context) {
@@ -48,23 +51,14 @@ class IssueDetailsScreen extends StatelessWidget {
           centerTitle: true,
           title: BlocBuilder<DetailsIssuesBloc, BState<DetailedIssue>>(
             builder: (context, state) {
-              final String? title = switch (state) {
-                DataValue<DetailedIssue> s when s.value != null =>
-                  s.value!.completeName,
-                _ => initialTitle,
-              };
-              if (title == null) return const SizedBox();
-              return Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.fade,
-                style: const TextStyle(
-                  fontSize: 28.0,
-                  letterSpacing: -1.25,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w300,
-                ),
-              );
+              if (state case DataValue<DetailedIssue> s when s.value != null) {
+                final value = s.value!;
+                return _Title(title: value.name, subtitle: value.number);
+              } else if (name != null || issueNumber != null) {
+                return _Title(title: name, subtitle: issueNumber);
+              } else {
+                return const SizedBox();
+              }
             },
           ),
         ),
@@ -85,6 +79,48 @@ class IssueDetailsScreen extends StatelessWidget {
             };
           },
         ),
+      ),
+    );
+  }
+}
+
+/// Assert that at least one is not null
+class _Title extends StatelessWidget {
+  final String? title;
+  final String? subtitle;
+
+  const _Title({
+    // ignore: unused_element
+    super.key,
+    required this.title,
+    this.subtitle,
+  }) : assert(title != null || subtitle != null);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text.rich(
+      TextSpan(
+        text: title ?? '#$subtitle',
+        children: [
+          if (title != null)
+            TextSpan(
+              text: ' #$subtitle',
+              style: const TextStyle(
+                fontSize: 16.0,
+                letterSpacing: -1.25,
+                color: Color(0xFF757575),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+        ],
+      ),
+      maxLines: 1,
+      overflow: TextOverflow.fade,
+      style: const TextStyle(
+        fontSize: 28.0,
+        letterSpacing: -1.25,
+        color: Colors.black,
+        fontWeight: FontWeight.w300,
       ),
     );
   }

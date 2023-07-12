@@ -43,7 +43,8 @@ GoRouter createRouter({
                   state.extra is SimpleIssue ? state.extra as SimpleIssue: null;
               return IssueDetailsScreen(
                 url: 'https://comicvine.gamespot.com/api/issue/4000-$id/',
-                initialTitle: issue?.completeName,
+                name: issue?.name,
+                issueNumber: issue?.number,
               );
             },
           ),

@@ -26,6 +26,8 @@ mixin _$Person {
   String get detailUrl => throw _privateConstructorUsedError;
   @JsonKey(required: true, disallowNullValue: true)
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(required: true, disallowNullValue: true)
+  String get role => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +43,8 @@ abstract class $PersonCopyWith<$Res> {
       {@JsonKey(required: true, disallowNullValue: true) int id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       String detailUrl,
-      @JsonKey(required: true, disallowNullValue: true) String name});
+      @JsonKey(required: true, disallowNullValue: true) String name,
+      @JsonKey(required: true, disallowNullValue: true) String role});
 }
 
 /// @nodoc
@@ -60,6 +63,7 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? id = null,
     Object? detailUrl = null,
     Object? name = null,
+    Object? role = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -73,6 +77,10 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -88,7 +96,8 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       {@JsonKey(required: true, disallowNullValue: true) int id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       String detailUrl,
-      @JsonKey(required: true, disallowNullValue: true) String name});
+      @JsonKey(required: true, disallowNullValue: true) String name,
+      @JsonKey(required: true, disallowNullValue: true) String role});
 }
 
 /// @nodoc
@@ -104,6 +113,7 @@ class __$$_PersonCopyWithImpl<$Res>
     Object? id = null,
     Object? detailUrl = null,
     Object? name = null,
+    Object? role = null,
   }) {
     return _then(_$_Person(
       id: null == id
@@ -118,6 +128,10 @@ class __$$_PersonCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -129,7 +143,8 @@ class _$_Person implements _Person {
       {@JsonKey(required: true, disallowNullValue: true) required this.id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required this.detailUrl,
-      @JsonKey(required: true, disallowNullValue: true) required this.name});
+      @JsonKey(required: true, disallowNullValue: true) required this.name,
+      @JsonKey(required: true, disallowNullValue: true) required this.role});
 
   factory _$_Person.fromJson(Map<String, dynamic> json) =>
       _$$_PersonFromJson(json);
@@ -143,10 +158,13 @@ class _$_Person implements _Person {
   @override
   @JsonKey(required: true, disallowNullValue: true)
   final String name;
+  @override
+  @JsonKey(required: true, disallowNullValue: true)
+  final String role;
 
   @override
   String toString() {
-    return 'Person(id: $id, detailUrl: $detailUrl, name: $name)';
+    return 'Person(id: $id, detailUrl: $detailUrl, name: $name, role: $role)';
   }
 
   @override
@@ -157,12 +175,13 @@ class _$_Person implements _Person {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.detailUrl, detailUrl) ||
                 other.detailUrl == detailUrl) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, detailUrl, name);
+  int get hashCode => Object.hash(runtimeType, id, detailUrl, name, role);
 
   @JsonKey(ignore: true)
   @override
@@ -184,7 +203,9 @@ abstract class _Person implements Person {
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required final String detailUrl,
       @JsonKey(required: true, disallowNullValue: true)
-      required final String name}) = _$_Person;
+      required final String name,
+      @JsonKey(required: true, disallowNullValue: true)
+      required final String role}) = _$_Person;
 
   factory _Person.fromJson(Map<String, dynamic> json) = _$_Person.fromJson;
 
@@ -197,6 +218,9 @@ abstract class _Person implements Person {
   @override
   @JsonKey(required: true, disallowNullValue: true)
   String get name;
+  @override
+  @JsonKey(required: true, disallowNullValue: true)
+  String get role;
   @override
   @JsonKey(ignore: true)
   _$$_PersonCopyWith<_$_Person> get copyWith =>
