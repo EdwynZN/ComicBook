@@ -189,7 +189,8 @@ class _DetailIssueBody extends StatelessWidget {
                   aspectRatio: 1 / 1.5,
                   child: CachedNetworkImage(
                     placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator.adaptive()),
+                      child: CircularProgressIndicator.adaptive(),
+                    ),
                     imageUrl: detailedIssue.imageUrl,
                   ),
                 ),
@@ -200,7 +201,9 @@ class _DetailIssueBody extends StatelessWidget {
       );
     }
 
-    /// Mobile version we insert the image at the beginning of the scroll
+    /// Mobile version.
+    /// 
+    /// We insert the image at the beginning of the scroll
     sliver.insert(
       0,
       SliverPadding(

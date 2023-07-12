@@ -68,14 +68,13 @@ class DetailsSliver extends HookWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
                   detail.data,
                   style: textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.normal,
                     color: Colors.black,
                   ),
-                  maxLines: 1,
                   textAlign: TextAlign.right,
                 ),
               ),
