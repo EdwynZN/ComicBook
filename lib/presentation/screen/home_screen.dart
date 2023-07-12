@@ -1,8 +1,10 @@
 import 'package:comic_book/bloc/issues/events/issue_events.dart';
 import 'package:comic_book/bloc/issues/issues_bloc.dart';
+import 'package:comic_book/bloc/sort_issues/sort_issues_bloc.dart';
 import 'package:comic_book/bloc/view_style/events/view_style_events.dart';
 import 'package:comic_book/bloc/view_style/state/view_style_event.dart';
 import 'package:comic_book/bloc/view_style/view_style_bloc.dart';
+import 'package:comic_book/model/filter.dart';
 import 'package:comic_book/model/issue.dart';
 import 'package:comic_book/model/state.dart';
 import 'package:comic_book/presentation/widget/error_button.dart';
@@ -83,10 +85,10 @@ class HomeScreen extends HookWidget {
                         onPressed: bloc.retry,
                       ),
                     );
-                } else if (state is DataState<List<Issue>> && 
+                } else if (state is DataState<List<Issue>> &&
                     controller.hasClients &&
                     controller.position.extentAfter <
-                      (controller.position.viewportDimension *
+                        (controller.position.viewportDimension *
                             _kFactorViewport)) {
                   context
                       .read<IssuesBloc>()
@@ -121,8 +123,8 @@ class HomeScreen extends HookWidget {
                           child: ErrorButton(
                             message: e.failure.message,
                             onPressed: e.failure.canRetry
-                              ? () => context.read<IssuesBloc>().retry()
-                              : null,
+                                ? () => context.read<IssuesBloc>().retry()
+                                : null,
                           ),
                         ),
                       ),
@@ -199,12 +201,19 @@ class _BottomFilter extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextButton(
+              TextButton.icon(
                 style: const ButtonStyle(
                   foregroundColor: MaterialStatePropertyAll(Colors.black),
                 ),
-                onPressed: () {},
-                child: const Text('Latest Issue'),
+                onPressed: () => context.read<SortBloc>().toggleSort(),
+                icon: const Icon(Icons.sort),
+                label: BlocSelector<SortBloc, Filter, String>(
+                  selector: (state) => switch (state.sort) {
+                    Sort.asc => 'Oldest Issues',
+                    Sort.desc => 'Latest Issues',
+                  },
+                  builder: (context, state) => Text(state),
+                ),
               ),
               const Spacer(),
               if (size.width > 600) ...[

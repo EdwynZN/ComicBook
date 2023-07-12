@@ -19,9 +19,9 @@ class LoadingState<T> extends BState<T> implements DataValue<T> {
       : value = null,
         isRefreshing = false;
 
-  const LoadingState.refresh(
+  const LoadingState.refresh({
     this.value,
-  ) : isRefreshing = true;
+  }) : isRefreshing = true;
 }
 
 class DataState<T> extends BState<T> implements DataValue<T> {

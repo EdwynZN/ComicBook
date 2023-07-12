@@ -1,5 +1,7 @@
 import 'package:comic_book/bloc/issues/issues_bloc.dart';
+import 'package:comic_book/bloc/sort_issues/sort_issues_bloc.dart';
 import 'package:comic_book/bloc/view_style/view_style_bloc.dart';
+import 'package:comic_book/model/filter.dart';
 import 'package:comic_book/presentation/route/router.dart';
 import 'package:comic_book/repository/comic_book_repository.dart';
 import 'package:comic_book/repository/preferences_repository.dart';
@@ -53,13 +55,18 @@ class ComicApp extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider<SortBloc>(create: (_) => SortBloc()),
           BlocProvider<IssuesBloc>(
             create: (context) {
+              final sBloc = BlocProvider.of<SortBloc>(context, listen: false);
               final repository = RepositoryProvider.of<ComicBookRepository>(
                 context,
                 listen: false,
               );
-              return IssuesBloc(repository: repository);
+              return IssuesBloc(
+                repository: repository,
+                initialFilter: sBloc.state,
+              );
             },
           ),
           BlocProvider<ViewStyleBloc>(
@@ -72,14 +79,20 @@ class ComicApp extends StatelessWidget {
             },
           ),
         ],
-        child: Builder(
-          builder: (context) {
-            final router = RepositoryProvider.of<GoRouter>(
-              context,
-              listen: false,
-            );
-            return MaterialApp.router(routerConfig: router);
+        child: BlocListener<SortBloc, Filter>(
+          listener: (context, state) {
+            BlocProvider.of<IssuesBloc>(context, listen: false)
+              .updateFilter(state);
           },
+          child: Builder(
+            builder: (context) {
+              final router = RepositoryProvider.of<GoRouter>(
+                context,
+                listen: false,
+              );
+              return MaterialApp.router(routerConfig: router);
+            },
+          ),
         ),
       ),
     );

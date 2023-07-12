@@ -1,5 +1,16 @@
+import 'package:comic_book/model/filter.dart';
 import 'package:comic_book/model/issue.dart';
 import 'package:dio/dio.dart';
+
+/// extension to convert filter to a String in the format of the API
+/// filter=field:value:order
+extension _FilterQuery on Filter {
+  String get queryParameter {
+    final value = this.value;
+    final sort = this.sort.name;
+    return '$value:$sort';
+  }
+}
 
 interface class ComicBookRepository {
   final Dio _dio;
@@ -38,6 +49,7 @@ interface class ComicBookRepository {
   Future<List<SimpleIssue>> issues({
     required final int offset,
     final int pageSize = 100,
+    Filter filter = const Filter(value: 'cover_date'),
   }) async {
     final result = await _dio.get(
       'issues/',
@@ -45,7 +57,7 @@ interface class ComicBookRepository {
         'offset': offset,
         'limit': pageSize,
         'field_list': _issuesFields,
-        'sort' : 'date_added:desc',
+        'sort': filter.queryParameter,
       },
     );
     final data = (result.data as List<dynamic>).cast<Map<String, dynamic>>();

@@ -17,7 +17,7 @@ class DetailsIssuesBloc extends Bloc<DetailsIssueEvent, BState<DetailedIssue>> {
       if (state is LoadingState<DetailedIssue>) return;
       final DetailedIssue? data = _data;
       try {
-        emit(LoadingState<DetailedIssue>.refresh(data));
+        emit(LoadingState<DetailedIssue>.refresh(value: data));
         final result = await _loadIssue();
         emit(DataState<DetailedIssue>(result));
       } catch (e) {
