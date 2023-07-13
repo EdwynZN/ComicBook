@@ -4,7 +4,7 @@ import 'package:comic_book/model/state.dart';
 import 'package:comic_book/repository/comic_book_repository.dart';
 import 'package:comic_book/utils/failure_converter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'events/issue_events.dart';
 
 class IssuesBloc extends Bloc<IssuesEvent, BState<List<SimpleIssue>>> {
@@ -31,7 +31,9 @@ class IssuesBloc extends Bloc<IssuesEvent, BState<List<SimpleIssue>>> {
         final failure = failureConverter(e);
         emit(ErrorState<List<SimpleIssue>>(failure: failure, value: data));
       }
-    });
+    },
+    transformer: restartable(),
+    );
     on<IssuesRefresh>((event, emit) async {
       final List<SimpleIssue>? data = _data;
       try {
@@ -46,7 +48,9 @@ class IssuesBloc extends Bloc<IssuesEvent, BState<List<SimpleIssue>>> {
         final failure = failureConverter(e);
         emit(ErrorState<List<SimpleIssue>>(failure: failure, value: data));
       }
-    });
+    },
+    transformer: restartable(),
+    );
     on<IssuesRefreshFilter>((event, emit) async {
       final List<SimpleIssue>? data = _data;
       try {
@@ -61,7 +65,9 @@ class IssuesBloc extends Bloc<IssuesEvent, BState<List<SimpleIssue>>> {
         final failure = failureConverter(e);
         emit(ErrorState<List<SimpleIssue>>(failure: failure, value: data));
       }
-    });
+    },
+    transformer: restartable(),
+    );
 
     /// Initializes first page
     add(const IssuesPaginationIncrement());

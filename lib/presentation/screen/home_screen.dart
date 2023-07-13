@@ -201,19 +201,53 @@ class _BottomFilter extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextButton.icon(
-                style: const ButtonStyle(
-                  foregroundColor: MaterialStatePropertyAll(Colors.black),
-                ),
-                onPressed: () => context.read<SortBloc>().toggleSort(),
-                icon: const Icon(Icons.sort),
-                label: BlocSelector<SortBloc, Filter, String>(
-                  selector: (state) => switch (state.sort) {
-                    Sort.asc => 'Oldest Issues',
-                    Sort.desc => 'Latest Issues',
-                  },
-                  builder: (context, state) => Text(state),
-                ),
+              Builder(
+                builder: (context) {
+                  return TextButton.icon(
+                    style: const ButtonStyle(
+                      foregroundColor: MaterialStatePropertyAll(Colors.black),
+                    ),
+                    onPressed: () async {
+                      final sortBloc = context.read<SortBloc>();
+                      final size = context.size!;
+                      final Offset offset = (context.findRenderObject() as RenderBox)
+                        .localToGlobal(Offset.zero);
+                      final querySize = MediaQuery.sizeOf(context);
+                      final isAsc = sortBloc.state.sort == Sort.asc;
+                      final result = await showMenu<Sort>(
+                        context: context,
+                        position: RelativeRect.fromLTRB(
+                          offset.dx,
+                          offset.dy + size.height,
+                          querySize.width - offset.dx - size.width,
+                          querySize.height - offset.dy,
+                        ),
+                        items: [
+                          PopupMenuItem(
+                            value: Sort.asc,
+                            enabled: !isAsc,
+                            child: const Text('Oldest Issues'),
+                          ),
+                          PopupMenuItem(
+                            value: Sort.desc,
+                            enabled: isAsc,
+                            child: const Text('Latest Issues'),
+                          ),
+                        ],
+                      );
+                      if (result == null) return;
+                      sortBloc.updateSort(result);
+                    },
+                    icon: const Icon(Icons.sort),
+                    label: BlocSelector<SortBloc, Filter, String>(
+                      selector: (state) => switch (state.sort) {
+                        Sort.asc => 'Oldest Issues',
+                        Sort.desc => 'Latest Issues',
+                      },
+                      builder: (context, state) => Text(state),
+                    ),
+                  );
+                },
               ),
               const Spacer(),
               if (size.width > 600) ...[
