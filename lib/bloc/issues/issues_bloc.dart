@@ -37,24 +37,7 @@ class IssuesBloc extends Bloc<IssuesEvent, BState<List<SimpleIssue>>> {
     on<IssuesRefresh>((event, emit) async {
       final List<SimpleIssue>? data = _data;
       try {
-        emit(LoadingState<List<SimpleIssue>>.refresh(value: data));
-        final result = await _loadPage(0);
-        if (result.isEmpty) {
-          emit(NoMoreDataState<List<SimpleIssue>>(result));
-        } else {
-          emit(DataState<List<SimpleIssue>>(result));
-        }
-      } catch (e) {
-        final failure = failureConverter(e);
-        emit(ErrorState<List<SimpleIssue>>(failure: failure, value: data));
-      }
-    },
-    transformer: restartable(),
-    );
-    on<IssuesRefreshFilter>((event, emit) async {
-      final List<SimpleIssue>? data = _data;
-      try {
-        emit(const LoadingState<List<SimpleIssue>>());
+        emit(const LoadingState<List<SimpleIssue>>.refresh());
         final result = await _loadPage(0);
         if (result.isEmpty) {
           emit(NoMoreDataState<List<SimpleIssue>>(result));
@@ -91,6 +74,6 @@ class IssuesBloc extends Bloc<IssuesEvent, BState<List<SimpleIssue>>> {
   void updateFilter(Filter filter) {
     if (filter == _filter) return;
     _filter = filter;
-    add(IssuesRefreshFilter(filter));
+    add(const IssuesRefresh());
   }
 }

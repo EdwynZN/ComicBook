@@ -1,5 +1,3 @@
-import 'package:comic_book/model/filter.dart';
-
 sealed class IssuesEvent {
   const IssuesEvent();
 }
@@ -14,11 +12,4 @@ class IssuesPaginationIncrement extends IssuesEvent {
 /// Event to refresh from the first page
 class IssuesRefresh extends IssuesEvent {
   const IssuesRefresh();
-}
-
-/// Event to refresh from the first page
-class IssuesRefreshFilter extends IssuesEvent {
-  final Filter filter;
-
-  const IssuesRefreshFilter(this.filter);
 }
