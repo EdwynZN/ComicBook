@@ -104,7 +104,7 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text.rich(
       TextSpan(
-        text: title ?? '#$subtitle',
+        text: title ?? 'ComicBook',
         children: [
           if (title != null)
             TextSpan(

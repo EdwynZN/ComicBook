@@ -40,14 +40,16 @@ class DetailsSliver extends HookWidget {
         if (name != null) (data: name, title: 'Name'),
         (data: volume.name, title: 'Volume'),
         (data: number, title: 'Issue Number'),
-        if (coverDate != null) (
-          data: localizations.formatShortDate(coverDate), 
-          title: 'Cover Date',
-        ),
-        if (storeDate != null) (
-          data: localizations.formatShortDate(storeDate),
-          title: 'In Store Date',
-        ),
+        if (coverDate != null)
+          (
+            data: localizations.formatShortDate(coverDate),
+            title: 'Cover Date',
+          ),
+        if (storeDate != null)
+          (
+            data: localizations.formatShortDate(storeDate),
+            title: 'In Store Date',
+          ),
       ];
       return List<TableRow>.generate(
         list.length,
@@ -62,11 +64,10 @@ class DetailsSliver extends HookWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   detail.title,
-                  style: textTheme.bodySmall
-                    ?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                  style: textTheme.bodySmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                   maxLines: 1,
                 ),
               ),
@@ -150,15 +151,25 @@ class LocationSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _BlockSliver(
-      title: 'Locations',
-      sliver: SliverGrid.builder(
+    final Widget sliver;
+    if (locations.isEmpty) {
+      sliver = const SliverToBoxAdapter(
+        child: Center(
+          child: Text('No locations recorded'),
+        ),
+      );
+    } else {
+      sliver = SliverGrid.builder(
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: locations.length,
         itemBuilder: (_, index) {
           return Text(locations[index].name);
         },
-      ),
+      );
+    }
+    return _BlockSliver(
+      title: 'Locations',
+      sliver: sliver,
     );
   }
 }
@@ -170,16 +181,23 @@ class StoryArcSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _BlockSliver(
-      title: 'Story Arcs',
-      sliver: SliverGrid.builder(
+    final Widget sliver;
+    if (arcs.isEmpty) {
+      sliver = const SliverToBoxAdapter(
+        child: Center(
+          child: Text('No story arcs recorded'),
+        ),
+      );
+    } else {
+      sliver = SliverGrid.builder(
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: arcs.length,
         itemBuilder: (_, index) {
           return Text(arcs[index].name);
         },
-      ),
-    );
+      );
+    }
+    return _BlockSliver(title: 'Story Arcs', sliver: sliver);
   }
 }
 
@@ -190,16 +208,23 @@ class ConceptSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _BlockSliver(
-      title: 'Concepts',
-      sliver: SliverGrid.builder(
+    final Widget sliver;
+    if (concepts.isEmpty) {
+      sliver = const SliverToBoxAdapter(
+        child: Center(
+          child: Text('No concepts recorded'),
+        ),
+      );
+    } else {
+      sliver = SliverGrid.builder(
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: concepts.length,
         itemBuilder: (_, index) {
           return Text(concepts[index].name);
         },
-      ),
-    );
+      );
+    }
+    return _BlockSliver(title: 'Concepts', sliver: sliver);
   }
 }
 
@@ -210,16 +235,23 @@ class ComicObjectSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _BlockSliver(
-      title: 'Objects',
-      sliver: SliverGrid.builder(
+    final Widget sliver;
+    if (comicObjects.isEmpty) {
+      sliver = const SliverToBoxAdapter(
+        child: Center(
+          child: Text('No objects recorded'),
+        ),
+      );
+    } else {
+      sliver = SliverGrid.builder(
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: comicObjects.length,
         itemBuilder: (_, index) {
           return Text(comicObjects[index].name);
         },
-      ),
-    );
+      );
+    }
+    return _BlockSliver(title: 'Objects', sliver: sliver);
   }
 }
 
@@ -230,16 +262,23 @@ class TeamsSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _BlockSliver(
-      title: 'Teams',
-      sliver: SliverGrid.builder(
+    final Widget sliver;
+    if (teams.isEmpty) {
+      sliver = const SliverToBoxAdapter(
+        child: Center(
+          child: Text('No teams recorded'),
+        ),
+      );
+    } else {
+      sliver = SliverGrid.builder(
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: teams.length,
         itemBuilder: (_, index) {
           return Text(teams[index].name);
         },
-      ),
-    );
+      );
+    }
+    return _BlockSliver(title: 'Teams', sliver: sliver);
   }
 }
 
@@ -250,9 +289,15 @@ class CreatorsSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _BlockSliver(
-      title: 'Creators',
-      sliver: SliverGrid.builder(
+    final Widget sliver;
+    if (creators.isEmpty) {
+      sliver = const SliverToBoxAdapter(
+        child: Center(
+          child: Text('No creators recorded'),
+        ),
+      );
+    } else {
+      sliver = SliverGrid.builder(
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: creators.length,
         itemBuilder: (_, index) {
@@ -275,8 +320,9 @@ class CreatorsSliver extends StatelessWidget {
             overflow: TextOverflow.clip,
           );
         },
-      ),
-    );
+      );
+    }
+    return _BlockSliver(title: 'Creators', sliver: sliver);
   }
 }
 
@@ -287,16 +333,23 @@ class CharactersSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _BlockSliver(
-      title: 'Characters',
-      sliver: SliverGrid.builder(
+    final Widget sliver;
+    if (characters.isEmpty) {
+      sliver = const SliverToBoxAdapter(
+        child: Center(
+          child: Text('No characters recorded'),
+        ),
+      );
+    } else {
+      sliver = SliverGrid.builder(
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: characters.length,
         itemBuilder: (_, index) {
           return Text(characters[index].name);
         },
-      ),
-    );
+      );
+    }
+    return _BlockSliver(title: 'Characters', sliver: sliver);
   }
 }
 
