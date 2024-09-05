@@ -1,7 +1,7 @@
 import 'package:comic_book/feature/comics/domain/model/issue.dart';
-import 'package:comic_book/feature/comics/presentation/widget/title_issue.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:comic_book/shared/utils/space_gaps.dart';
 import 'package:comic_book/feature/comics/presentation/widget/image_issue.dart';
 
 class SingleListIssue extends StatelessWidget {
@@ -11,42 +11,48 @@ class SingleListIssue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 170.0,
-      child: Column(
-        children: [
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
-                      context.pushNamed('issue_details',
-                        pathParameters: {'issueId': issue.id.toString()},
-                        extra: issue,
-                      );
-                    },
-                    child: IssueImage(url: issue.imageUrl),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: TitleIssue(
-                      name: issue.completeName,
-                      date: issue.dateAdded,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Divider(height: 24.0, thickness: 1.0, color: Colors.black12),
-        ],
+    final localizations = MaterialLocalizations.of(context);
+    final locDate = localizations.formatShortDate(issue.dateAdded);
+    final title = Text(
+      issue.completeName,
+      style: const TextStyle(
+        fontSize: 18.0,
+        fontWeight: FontWeight.w700,
+        height: 1.25,
       ),
+      textAlign: TextAlign.center,
+    );
+    final date = Text(
+      locDate,
+      style: const TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.normal,
+        height: 1.25,
+      ),
+      textAlign: TextAlign.center,
+    );
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        GestureDetector(
+          onTap: () {
+            context.pushNamed(
+              'issue_details',
+              pathParameters: {'issueId': issue.id.toString()},
+              extra: issue,
+            );
+          },
+          child: AspectRatio(
+            aspectRatio: 11 / 16,
+            child: IssueImage(url: issue.imageUrl),
+          ),
+        ),
+        gap16,
+        title,
+        gap8,
+        date,
+        const Divider(height: Space(3)),
+      ],
     );
   }
 }

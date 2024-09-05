@@ -6,6 +6,7 @@ import 'package:comic_book/feature/view_style/domain/view_style_type.dart';
 import 'package:comic_book/feature/view_style/presentation/bloc/view_style_bloc.dart';
 import 'package:comic_book/feature/comics/domain/model/filter.dart';
 import 'package:comic_book/feature/comics/domain/model/issue.dart';
+import 'package:comic_book/shared/utils/space_gaps.dart';
 import 'package:comic_book/shared/utils/state.dart';
 import 'package:comic_book/feature/comics/presentation/widget/error_button.dart';
 import 'package:comic_book/feature/comics/presentation/widget/error_snackbar.dart';
@@ -174,7 +175,7 @@ class _ListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      padding: const EdgeInsets.symmetric(horizontal: Space(1)),
       sliver: SliverCrossAxisConstrained(
         maxCrossAxisExtent: 400,
         child: SliverList.builder(
