@@ -1,13 +1,13 @@
-import 'package:comic_book/bloc/issues/issues_bloc.dart';
-import 'package:comic_book/bloc/sort_issues/sort_issues_bloc.dart';
-import 'package:comic_book/bloc/view_style/view_style_bloc.dart';
-import 'package:comic_book/model/filter.dart';
-import 'package:comic_book/presentation/route/router.dart';
-import 'package:comic_book/repository/comic_book_repository.dart';
-import 'package:comic_book/repository/preferences_repository.dart';
-import 'package:comic_book/utils/api_key.dart';
-import 'package:comic_book/utils/request_interceptor.dart';
-import 'package:comic_book/utils/response_interceptor.dart';
+import 'package:comic_book/feature/comics/presentation/bloc/issues/issues_bloc.dart';
+import 'package:comic_book/feature/comics/presentation/bloc/sort_issues/sort_issues_bloc.dart';
+import 'package:comic_book/feature/view_style/domain/repository/preferences_repository.dart';
+import 'package:comic_book/feature/view_style/presentation/bloc/view_style_bloc.dart';
+import 'package:comic_book/feature/comics/domain/model/filter.dart';
+import 'package:comic_book/route/router.dart';
+import 'package:comic_book/feature/comics/domain/repository/comic_book_repository.dart';
+import 'package:comic_book/shared/utils/api_key.dart';
+import 'package:comic_book/shared/utils/request_interceptor.dart';
+import 'package:comic_book/shared/utils/response_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,8 +30,8 @@ class ComicApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<SharedPreferences>.value(value: preferences),
-        RepositoryProvider<Preferences>(
-            create: (_) => Preferences(preferences)),
+        RepositoryProvider<ViewStyleRepository>(
+            create: (_) => ViewStyleRepository(preferences)),
         RepositoryProvider<GoRouter>(
           create: (_) => createRouter(),
         ),
@@ -71,7 +71,7 @@ class ComicApp extends StatelessWidget {
           ),
           BlocProvider<ViewStyleBloc>(
             create: (context) {
-              final repository = RepositoryProvider.of<Preferences>(
+              final repository = RepositoryProvider.of<ViewStyleRepository>(
                 context,
                 listen: false,
               );
@@ -82,7 +82,7 @@ class ComicApp extends StatelessWidget {
         child: BlocListener<SortBloc, Filter>(
           listener: (context, state) {
             BlocProvider.of<IssuesBloc>(context, listen: false)
-              .updateFilter(state);
+                .updateFilter(state);
           },
           child: Builder(
             builder: (context) {
