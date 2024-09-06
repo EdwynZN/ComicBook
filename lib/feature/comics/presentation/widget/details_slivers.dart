@@ -163,7 +163,7 @@ class LocationSliver extends StatelessWidget {
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: locations.length,
         itemBuilder: (_, index) {
-          return Text(locations[index].name);
+          return _TitleText(locations[index].name);
         },
       );
     }
@@ -193,7 +193,7 @@ class StoryArcSliver extends StatelessWidget {
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: arcs.length,
         itemBuilder: (_, index) {
-          return Text(arcs[index].name);
+          return _TitleText(arcs[index].name);
         },
       );
     }
@@ -220,7 +220,7 @@ class ConceptSliver extends StatelessWidget {
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: concepts.length,
         itemBuilder: (_, index) {
-          return Text(concepts[index].name);
+          return _TitleText(concepts[index].name);
         },
       );
     }
@@ -247,7 +247,7 @@ class ComicObjectSliver extends StatelessWidget {
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: comicObjects.length,
         itemBuilder: (_, index) {
-          return Text(comicObjects[index].name);
+          return _TitleText(comicObjects[index].name);
         },
       );
     }
@@ -274,7 +274,11 @@ class TeamsSliver extends StatelessWidget {
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: teams.length,
         itemBuilder: (_, index) {
-          return Text(teams[index].name);
+          return _TitleText(
+            teams[index].name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          );
         },
       );
     }
@@ -313,11 +317,17 @@ class CreatorsSliver extends StatelessWidget {
                   style: const TextStyle(
                     color: Color(0xFF757575),
                     fontSize: 11.0,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ],
             ),
             overflow: TextOverflow.clip,
+            style: const TextStyle(
+              color: Color(0xFF057712),
+              fontSize: 14.0,
+              fontWeight: FontWeight.w600,
+            ),
           );
         },
       );
@@ -345,7 +355,7 @@ class CharactersSliver extends StatelessWidget {
         gridDelegate: _kDefaultCrossAxisCount,
         itemCount: characters.length,
         itemBuilder: (_, index) {
-          return Text(characters[index].name);
+          return _TitleText(characters[index].name);
         },
       );
     }
@@ -388,4 +398,19 @@ class _BlockSliver extends StatelessWidget {
       ],
     );
   }
+}
+
+class _TitleText extends Text {
+
+  const _TitleText(
+    super.data, {
+    super.maxLines,
+    super.overflow,
+  }) : super(
+    style: const TextStyle(
+      color: Color(0xFF057712),
+      fontSize: 14.0,
+      fontWeight: FontWeight.w600,
+    ),
+  );
 }

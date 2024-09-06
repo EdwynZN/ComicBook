@@ -8,13 +8,13 @@ class SliverDivider extends StatelessWidget {
   final double? endIndent;
 
   const SliverDivider({
-    Key? key,
+    super.key,
     this.height,
     this.thickness,
     this.color,
     this.indent,
     this.endIndent,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

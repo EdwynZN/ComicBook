@@ -206,13 +206,14 @@ class _BottomFilter extends StatelessWidget {
                 builder: (context) {
                   return TextButton.icon(
                     style: const ButtonStyle(
-                      foregroundColor: MaterialStatePropertyAll(Colors.black),
+                      foregroundColor: WidgetStatePropertyAll(Colors.black),
                     ),
                     onPressed: () async {
                       final sortBloc = context.read<SortBloc>();
                       final size = context.size!;
-                      final Offset offset = (context.findRenderObject() as RenderBox)
-                        .localToGlobal(Offset.zero);
+                      final Offset offset =
+                          (context.findRenderObject() as RenderBox)
+                              .localToGlobal(Offset.zero);
                       final querySize = MediaQuery.sizeOf(context);
                       final isAsc = sortBloc.state.sort == Sort.asc;
                       final result = await showMenu<Sort>(
@@ -257,8 +258,8 @@ class _BottomFilter extends StatelessWidget {
                     return TextButton.icon(
                       style: ButtonStyle(
                         foregroundColor:
-                            MaterialStateProperty.resolveWith((states) {
-                          if (states.contains(MaterialState.disabled)) {
+                            WidgetStateProperty.resolveWith((states) {
+                          if (states.contains(WidgetState.disabled)) {
                             return null;
                           } else if (state == ViewStyle.list) {
                             return Colors.green.shade700;
@@ -282,8 +283,8 @@ class _BottomFilter extends StatelessWidget {
                     return TextButton.icon(
                       style: ButtonStyle(
                         foregroundColor:
-                            MaterialStateProperty.resolveWith((states) {
-                          if (states.contains(MaterialState.disabled)) {
+                            WidgetStateProperty.resolveWith((states) {
+                          if (states.contains(WidgetState.disabled)) {
                             return null;
                           } else if (state == ViewStyle.grid) {
                             return Colors.green.shade700;
@@ -304,7 +305,7 @@ class _BottomFilter extends StatelessWidget {
               ] else
                 TextButton.icon(
                   style: const ButtonStyle(
-                    foregroundColor: MaterialStatePropertyAll(Colors.black),
+                    foregroundColor: WidgetStatePropertyAll(Colors.black),
                   ),
                   onPressed: () {
                     context

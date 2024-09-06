@@ -41,47 +41,9 @@ class IssueDetailsScreen extends StatelessWidget {
         return DetailsIssuesBloc(repository: repository, url: url);
       },
       child: Scaffold(
-        appBar: AppBar(
-          leading: const BackButton(color: Colors.black),
-          forceMaterialTransparency: true,
-          systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: Colors.transparent,
-            statusBarBrightness: Brightness.dark,
-            statusBarIconBrightness: Brightness.dark,
-          ),
-          centerTitle: true,
-          title: BlocBuilder<DetailsIssuesBloc, BState<DetailedIssue>>(
-            builder: (context, state) {
-              if (state case DataValue<DetailedIssue> s when s.value != null) {
-                final value = s.value!;
-                return _Title(title: value.name, subtitle: value.number);
-              } else if (name != null || issueNumber != null) {
-                return _Title(title: name, subtitle: issueNumber);
-              } else {
-                return const SizedBox();
-              }
-            },
-          ),
-        ),
-        body: BlocBuilder<DetailsIssuesBloc, BState<DetailedIssue>>(
-          builder: (context, state) {
-            return switch (state) {
-              DataValue<DetailedIssue> s when s.value != null =>
-                _DetailIssueBody(
-                  detailedIssue: s.value!,
-                ),
-              LoadingState _ => const Center(
-                  child: CircularProgressIndicator.adaptive(),
-                ),
-              ErrorState e => Center(
-                  child: ErrorButton(
-                    message: e.failure.message,
-                    onPressed: () => context.read<DetailsIssuesBloc>().retry(),
-                  ),
-                ),
-              _ => const SizedBox(),
-            };
-          },
+        body: _DetailIssueBody(
+          issueNumber: issueNumber,
+          name: name,
         ),
       ),
     );
@@ -108,22 +70,21 @@ class _Title extends StatelessWidget {
         children: [
           if (title != null)
             TextSpan(
-              text: ' #$subtitle',
+              text: '   #$subtitle',
               style: const TextStyle(
                 fontSize: 16.0,
                 letterSpacing: -1.25,
-                color: Color(0xFF757575),
+                color: Color(0xFFBEBCBC),
                 fontWeight: FontWeight.w600,
               ),
             ),
         ],
       ),
-      maxLines: 1,
-      overflow: TextOverflow.fade,
+      maxLines: 2,
+      overflow: TextOverflow.clip,
       style: const TextStyle(
         fontSize: 28.0,
         letterSpacing: -1.25,
-        color: Colors.black,
         fontWeight: FontWeight.w300,
       ),
     );
@@ -131,15 +92,75 @@ class _Title extends StatelessWidget {
 }
 
 class _DetailIssueBody extends StatelessWidget {
-  final DetailedIssue detailedIssue;
+  final String? name;
+  final String? issueNumber;
 
-  // ignore: unused_element
-  const _DetailIssueBody({super.key, required this.detailedIssue});
+  const _DetailIssueBody({
+    // ignore: unused_element
+    super.key,
+    this.name,
+    this.issueNumber,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<DetailsIssuesBloc>().state;
     final size = MediaQuery.sizeOf(context);
     final List<Widget> sliver = [
+      SliverAppBar.large(
+        leading: const BackButton(),
+        backgroundColor: const Color(0xFF232628),
+        foregroundColor: Colors.white,
+        titleTextStyle: const TextStyle(color: Colors.white),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+        title: BlocBuilder<DetailsIssuesBloc, BState<DetailedIssue>>(
+          builder: (context, state) {
+            if (state case DataValue<DetailedIssue> s when s.value != null) {
+              final value = s.value!;
+              return _Title(
+                title: value.name ?? value.volume.name,
+                subtitle: value.number,
+              );
+            } else if (name != null || issueNumber != null) {
+              return _Title(title: name, subtitle: issueNumber);
+            } else {
+              return const SizedBox();
+            }
+          },
+        ),
+      ),
+    ];
+    final DetailedIssue detailedIssue;
+    if (state case LoadingState()) {
+      sliver.add(
+        const SliverFillRemaining(
+          hasScrollBody: false,
+          child: Center(child: CircularProgressIndicator.adaptive()),
+        ),
+      );
+    } else if (state case ErrorState()) {
+      sliver.add(
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: Center(
+            child: ErrorButton(
+              message: state.failure.message,
+              onPressed: () => context.read<DetailsIssuesBloc>().retry(),
+            ),
+          ),
+        ),
+      );
+    }
+    if (state case DataValue<DetailedIssue>(: final value) when value != null) {
+      detailedIssue = value;
+    } else {
+      return CustomScrollView(slivers: sliver);
+    }
+    sliver.addAll([
       DetailsSliver(detailedIssue: detailedIssue),
       SliverPadding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -165,11 +186,14 @@ class _DetailIssueBody extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         sliver: ComicObjectSliver(comicObjects: detailedIssue.comicObjects),
       ),
-      SliverPadding(
-        padding: const EdgeInsets.all(16.0),
-        sliver: StoryArcSliver(arcs: detailedIssue.storyArcs),
+      SliverSafeArea(
+        top: false,
+        sliver: SliverPadding(
+          padding: const EdgeInsets.all(16.0),
+          sliver: StoryArcSliver(arcs: detailedIssue.storyArcs),
+        ),
       ),
-    ];
+    ]);
 
     /// For larger screens
     if (size.width > 600) {
@@ -206,19 +230,29 @@ class _DetailIssueBody extends StatelessWidget {
     }
 
     /// Mobile version.
-    /// 
+    ///
     /// We insert the image at the beginning of the scroll
     sliver.insert(
-      0,
-      SliverPadding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        sliver: SliverToBoxAdapter(
+      1,
+      SliverToBoxAdapter(
+        child: Container(
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(color: Colors.grey.shade700),
           child: Container(
-            alignment: Alignment.center,
-            child: IssueImage(
-              height: 250.0,
-              width: 170.0,
-              url: detailedIssue.imageUrl,
+            margin: const EdgeInsets.only(top: 24.0),
+            decoration: ShapeDecoration(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(8.0)),
+              ),
+              color: Theme.of(context).scaffoldBackgroundColor,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: IssueImage(
+                height: 180.0,
+                width: 120.0,
+                url: detailedIssue.imageUrl,
+              ),
             ),
           ),
         ),

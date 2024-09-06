@@ -14,7 +14,7 @@ class ErrorButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton.icon(
       style: const ButtonStyle(
-        textStyle: MaterialStatePropertyAll(
+        textStyle: WidgetStatePropertyAll(
           TextStyle(decoration: TextDecoration.underline),
         ),
       ),
