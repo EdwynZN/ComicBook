@@ -12,7 +12,7 @@ part of 'comic_object.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ComicObject _$ComicObjectFromJson(Map<String, dynamic> json) {
   return _ComicObject.fromJson(json);
@@ -27,8 +27,12 @@ mixin _$ComicObject {
   @JsonKey(required: true, disallowNullValue: true)
   String get name => throw _privateConstructorUsedError;
 
+  /// Serializes this ComicObject to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ComicObject
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ComicObjectCopyWith<ComicObject> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$ComicObjectCopyWithImpl<$Res, $Val extends ComicObject>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ComicObject
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,11 +87,11 @@ class _$ComicObjectCopyWithImpl<$Res, $Val extends ComicObject>
 }
 
 /// @nodoc
-abstract class _$$_ComicObjectCopyWith<$Res>
+abstract class _$$ComicObjectImplCopyWith<$Res>
     implements $ComicObjectCopyWith<$Res> {
-  factory _$$_ComicObjectCopyWith(
-          _$_ComicObject value, $Res Function(_$_ComicObject) then) =
-      __$$_ComicObjectCopyWithImpl<$Res>;
+  factory _$$ComicObjectImplCopyWith(
+          _$ComicObjectImpl value, $Res Function(_$ComicObjectImpl) then) =
+      __$$ComicObjectImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -96,13 +102,15 @@ abstract class _$$_ComicObjectCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComicObjectCopyWithImpl<$Res>
-    extends _$ComicObjectCopyWithImpl<$Res, _$_ComicObject>
-    implements _$$_ComicObjectCopyWith<$Res> {
-  __$$_ComicObjectCopyWithImpl(
-      _$_ComicObject _value, $Res Function(_$_ComicObject) _then)
+class __$$ComicObjectImplCopyWithImpl<$Res>
+    extends _$ComicObjectCopyWithImpl<$Res, _$ComicObjectImpl>
+    implements _$$ComicObjectImplCopyWith<$Res> {
+  __$$ComicObjectImplCopyWithImpl(
+      _$ComicObjectImpl _value, $Res Function(_$ComicObjectImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ComicObject
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -110,7 +118,7 @@ class __$$_ComicObjectCopyWithImpl<$Res>
     Object? detailUrl = null,
     Object? name = null,
   }) {
-    return _then(_$_ComicObject(
+    return _then(_$ComicObjectImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -129,15 +137,15 @@ class __$$_ComicObjectCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ComicObject implements _ComicObject {
-  const _$_ComicObject(
+class _$ComicObjectImpl implements _ComicObject {
+  const _$ComicObjectImpl(
       {@JsonKey(required: true, disallowNullValue: true) required this.id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required this.detailUrl,
       @JsonKey(required: true, disallowNullValue: true) required this.name});
 
-  factory _$_ComicObject.fromJson(Map<String, dynamic> json) =>
-      _$$_ComicObjectFromJson(json);
+  factory _$ComicObjectImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ComicObjectImplFromJson(json);
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -155,29 +163,31 @@ class _$_ComicObject implements _ComicObject {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComicObject &&
+            other is _$ComicObjectImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.detailUrl, detailUrl) ||
                 other.detailUrl == detailUrl) &&
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, detailUrl, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ComicObject
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComicObjectCopyWith<_$_ComicObject> get copyWith =>
-      __$$_ComicObjectCopyWithImpl<_$_ComicObject>(this, _$identity);
+  _$$ComicObjectImplCopyWith<_$ComicObjectImpl> get copyWith =>
+      __$$ComicObjectImplCopyWithImpl<_$ComicObjectImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ComicObjectToJson(
+    return _$$ComicObjectImplToJson(
       this,
     );
   }
@@ -189,10 +199,10 @@ abstract class _ComicObject implements ComicObject {
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required final String detailUrl,
       @JsonKey(required: true, disallowNullValue: true)
-      required final String name}) = _$_ComicObject;
+      required final String name}) = _$ComicObjectImpl;
 
   factory _ComicObject.fromJson(Map<String, dynamic> json) =
-      _$_ComicObject.fromJson;
+      _$ComicObjectImpl.fromJson;
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -203,8 +213,11 @@ abstract class _ComicObject implements ComicObject {
   @override
   @JsonKey(required: true, disallowNullValue: true)
   String get name;
+
+  /// Create a copy of ComicObject
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_ComicObjectCopyWith<_$_ComicObject> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ComicObjectImplCopyWith<_$ComicObjectImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'person.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Person _$PersonFromJson(Map<String, dynamic> json) {
   return _Person.fromJson(json);
@@ -29,8 +29,12 @@ mixin _$Person {
   @JsonKey(required: true, disallowNullValue: true)
   String get role => throw _privateConstructorUsedError;
 
+  /// Serializes this Person to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PersonCopyWith<Person> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -57,6 +61,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,9 +93,10 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
 }
 
 /// @nodoc
-abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
-  factory _$$_PersonCopyWith(_$_Person value, $Res Function(_$_Person) then) =
-      __$$_PersonCopyWithImpl<$Res>;
+abstract class _$$PersonImplCopyWith<$Res> implements $PersonCopyWith<$Res> {
+  factory _$$PersonImplCopyWith(
+          _$PersonImpl value, $Res Function(_$PersonImpl) then) =
+      __$$PersonImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -101,12 +108,15 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PersonCopyWithImpl<$Res>
-    extends _$PersonCopyWithImpl<$Res, _$_Person>
-    implements _$$_PersonCopyWith<$Res> {
-  __$$_PersonCopyWithImpl(_$_Person _value, $Res Function(_$_Person) _then)
+class __$$PersonImplCopyWithImpl<$Res>
+    extends _$PersonCopyWithImpl<$Res, _$PersonImpl>
+    implements _$$PersonImplCopyWith<$Res> {
+  __$$PersonImplCopyWithImpl(
+      _$PersonImpl _value, $Res Function(_$PersonImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -115,7 +125,7 @@ class __$$_PersonCopyWithImpl<$Res>
     Object? name = null,
     Object? role = null,
   }) {
-    return _then(_$_Person(
+    return _then(_$PersonImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -138,16 +148,16 @@ class __$$_PersonCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Person implements _Person {
-  const _$_Person(
+class _$PersonImpl implements _Person {
+  const _$PersonImpl(
       {@JsonKey(required: true, disallowNullValue: true) required this.id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required this.detailUrl,
       @JsonKey(required: true, disallowNullValue: true) required this.name,
       @JsonKey(required: true, disallowNullValue: true) required this.role});
 
-  factory _$_Person.fromJson(Map<String, dynamic> json) =>
-      _$$_PersonFromJson(json);
+  factory _$PersonImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PersonImplFromJson(json);
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -168,10 +178,10 @@ class _$_Person implements _Person {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Person &&
+            other is _$PersonImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.detailUrl, detailUrl) ||
                 other.detailUrl == detailUrl) &&
@@ -179,19 +189,21 @@ class _$_Person implements _Person {
             (identical(other.role, role) || other.role == role));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, detailUrl, name, role);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PersonCopyWith<_$_Person> get copyWith =>
-      __$$_PersonCopyWithImpl<_$_Person>(this, _$identity);
+  _$$PersonImplCopyWith<_$PersonImpl> get copyWith =>
+      __$$PersonImplCopyWithImpl<_$PersonImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PersonToJson(
+    return _$$PersonImplToJson(
       this,
     );
   }
@@ -205,9 +217,9 @@ abstract class _Person implements Person {
       @JsonKey(required: true, disallowNullValue: true)
       required final String name,
       @JsonKey(required: true, disallowNullValue: true)
-      required final String role}) = _$_Person;
+      required final String role}) = _$PersonImpl;
 
-  factory _Person.fromJson(Map<String, dynamic> json) = _$_Person.fromJson;
+  factory _Person.fromJson(Map<String, dynamic> json) = _$PersonImpl.fromJson;
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -221,8 +233,11 @@ abstract class _Person implements Person {
   @override
   @JsonKey(required: true, disallowNullValue: true)
   String get role;
+
+  /// Create a copy of Person
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_PersonCopyWith<_$_Person> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PersonImplCopyWith<_$PersonImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'comic_image.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ComicImage _$ComicImageFromJson(Map<String, dynamic> json) {
   return _ComicImage.fromJson(json);
@@ -41,8 +41,12 @@ mixin _$ComicImage {
   @JsonKey(required: true, disallowNullValue: true, name: 'image_tags')
   String get imageTags => throw _privateConstructorUsedError;
 
+  /// Serializes this ComicImage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ComicImage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ComicImageCopyWith<ComicImage> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -87,6 +91,8 @@ class _$ComicImageCopyWithImpl<$Res, $Val extends ComicImage>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ComicImage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -147,11 +153,11 @@ class _$ComicImageCopyWithImpl<$Res, $Val extends ComicImage>
 }
 
 /// @nodoc
-abstract class _$$_ComicImageCopyWith<$Res>
+abstract class _$$ComicImageImplCopyWith<$Res>
     implements $ComicImageCopyWith<$Res> {
-  factory _$$_ComicImageCopyWith(
-          _$_ComicImage value, $Res Function(_$_ComicImage) then) =
-      __$$_ComicImageCopyWithImpl<$Res>;
+  factory _$$ComicImageImplCopyWith(
+          _$ComicImageImpl value, $Res Function(_$ComicImageImpl) then) =
+      __$$ComicImageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -179,13 +185,15 @@ abstract class _$$_ComicImageCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComicImageCopyWithImpl<$Res>
-    extends _$ComicImageCopyWithImpl<$Res, _$_ComicImage>
-    implements _$$_ComicImageCopyWith<$Res> {
-  __$$_ComicImageCopyWithImpl(
-      _$_ComicImage _value, $Res Function(_$_ComicImage) _then)
+class __$$ComicImageImplCopyWithImpl<$Res>
+    extends _$ComicImageCopyWithImpl<$Res, _$ComicImageImpl>
+    implements _$$ComicImageImplCopyWith<$Res> {
+  __$$ComicImageImplCopyWithImpl(
+      _$ComicImageImpl _value, $Res Function(_$ComicImageImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ComicImage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -200,7 +208,7 @@ class __$$_ComicImageCopyWithImpl<$Res>
     Object? originalUrl = null,
     Object? imageTags = null,
   }) {
-    return _then(_$_ComicImage(
+    return _then(_$ComicImageImpl(
       iconUrl: null == iconUrl
           ? _value.iconUrl
           : iconUrl // ignore: cast_nullable_to_non_nullable
@@ -247,8 +255,8 @@ class __$$_ComicImageCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ComicImage implements _ComicImage {
-  const _$_ComicImage(
+class _$ComicImageImpl implements _ComicImage {
+  const _$ComicImageImpl(
       {@JsonKey(required: true, disallowNullValue: true, name: 'icon_url')
       required this.iconUrl,
       @JsonKey(required: true, disallowNullValue: true, name: 'medium_url')
@@ -271,8 +279,8 @@ class _$_ComicImage implements _ComicImage {
       @JsonKey(required: true, disallowNullValue: true, name: 'image_tags')
       required this.imageTags});
 
-  factory _$_ComicImage.fromJson(Map<String, dynamic> json) =>
-      _$$_ComicImageFromJson(json);
+  factory _$ComicImageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ComicImageImplFromJson(json);
 
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'icon_url')
@@ -311,10 +319,10 @@ class _$_ComicImage implements _ComicImage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComicImage &&
+            other is _$ComicImageImpl &&
             (identical(other.iconUrl, iconUrl) || other.iconUrl == iconUrl) &&
             (identical(other.mediumUrl, mediumUrl) ||
                 other.mediumUrl == mediumUrl) &&
@@ -335,7 +343,7 @@ class _$_ComicImage implements _ComicImage {
                 other.imageTags == imageTags));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -350,15 +358,17 @@ class _$_ComicImage implements _ComicImage {
       originalUrl,
       imageTags);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ComicImage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComicImageCopyWith<_$_ComicImage> get copyWith =>
-      __$$_ComicImageCopyWithImpl<_$_ComicImage>(this, _$identity);
+  _$$ComicImageImplCopyWith<_$ComicImageImpl> get copyWith =>
+      __$$ComicImageImplCopyWithImpl<_$ComicImageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ComicImageToJson(
+    return _$$ComicImageImplToJson(
       this,
     );
   }
@@ -386,10 +396,10 @@ abstract class _ComicImage implements ComicImage {
       @JsonKey(required: true, disallowNullValue: true, name: 'original_url')
       required final String originalUrl,
       @JsonKey(required: true, disallowNullValue: true, name: 'image_tags')
-      required final String imageTags}) = _$_ComicImage;
+      required final String imageTags}) = _$ComicImageImpl;
 
   factory _ComicImage.fromJson(Map<String, dynamic> json) =
-      _$_ComicImage.fromJson;
+      _$ComicImageImpl.fromJson;
 
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'icon_url')
@@ -421,8 +431,11 @@ abstract class _ComicImage implements ComicImage {
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'image_tags')
   String get imageTags;
+
+  /// Create a copy of ComicImage
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_ComicImageCopyWith<_$_ComicImage> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ComicImageImplCopyWith<_$ComicImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

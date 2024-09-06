@@ -6,20 +6,20 @@ part of 'story_arc.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_StoryArc _$$_StoryArcFromJson(Map<String, dynamic> json) {
+_$StoryArcImpl _$$StoryArcImplFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
     requiredKeys: const ['id', 'api_detail_url', 'name'],
     disallowNullValues: const ['id', 'api_detail_url', 'name'],
   );
-  return _$_StoryArc(
-    id: json['id'] as int,
+  return _$StoryArcImpl(
+    id: (json['id'] as num).toInt(),
     detailUrl: json['api_detail_url'] as String,
     name: json['name'] as String,
   );
 }
 
-Map<String, dynamic> _$$_StoryArcToJson(_$_StoryArc instance) =>
+Map<String, dynamic> _$$StoryArcImplToJson(_$StoryArcImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'api_detail_url': instance.detailUrl,

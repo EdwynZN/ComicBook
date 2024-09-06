@@ -27,6 +27,7 @@ interface class ComicBookRepository {
   final List<String> _issueDetailFields = const [
     'api_detail_url',
     'cover_date',
+    'description',
     'date_added',
     'date_last_updated',
     'store_date',

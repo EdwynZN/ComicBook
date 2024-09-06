@@ -12,7 +12,7 @@ part of 'issue.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Issue _$IssueFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
@@ -63,6 +63,7 @@ mixin _$Issue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
+            @JsonKey(required: true) String? description,
             @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
@@ -117,6 +118,7 @@ mixin _$Issue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
+            @JsonKey(required: true) String? description,
             @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
@@ -171,6 +173,7 @@ mixin _$Issue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
+            @JsonKey(required: true) String? description,
             @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
@@ -223,8 +226,13 @@ mixin _$Issue {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this Issue to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Issue
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $IssueCopyWith<Issue> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -257,6 +265,8 @@ class _$IssueCopyWithImpl<$Res, $Val extends Issue>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Issue
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -295,6 +305,8 @@ class _$IssueCopyWithImpl<$Res, $Val extends Issue>
     ) as $Val);
   }
 
+  /// Create a copy of Issue
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ComicImageCopyWith<$Res> get image {
@@ -305,10 +317,11 @@ class _$IssueCopyWithImpl<$Res, $Val extends Issue>
 }
 
 /// @nodoc
-abstract class _$$SimpleIssueCopyWith<$Res> implements $IssueCopyWith<$Res> {
-  factory _$$SimpleIssueCopyWith(
-          _$SimpleIssue value, $Res Function(_$SimpleIssue) then) =
-      __$$SimpleIssueCopyWithImpl<$Res>;
+abstract class _$$SimpleIssueImplCopyWith<$Res>
+    implements $IssueCopyWith<$Res> {
+  factory _$$SimpleIssueImplCopyWith(
+          _$SimpleIssueImpl value, $Res Function(_$SimpleIssueImpl) then) =
+      __$$SimpleIssueImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -327,13 +340,15 @@ abstract class _$$SimpleIssueCopyWith<$Res> implements $IssueCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$SimpleIssueCopyWithImpl<$Res>
-    extends _$IssueCopyWithImpl<$Res, _$SimpleIssue>
-    implements _$$SimpleIssueCopyWith<$Res> {
-  __$$SimpleIssueCopyWithImpl(
-      _$SimpleIssue _value, $Res Function(_$SimpleIssue) _then)
+class __$$SimpleIssueImplCopyWithImpl<$Res>
+    extends _$IssueCopyWithImpl<$Res, _$SimpleIssueImpl>
+    implements _$$SimpleIssueImplCopyWith<$Res> {
+  __$$SimpleIssueImplCopyWithImpl(
+      _$SimpleIssueImpl _value, $Res Function(_$SimpleIssueImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Issue
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -344,7 +359,7 @@ class __$$SimpleIssueCopyWithImpl<$Res>
     Object? number = null,
     Object? image = null,
   }) {
-    return _then(_$SimpleIssue(
+    return _then(_$SimpleIssueImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -375,8 +390,8 @@ class __$$SimpleIssueCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SimpleIssue extends SimpleIssue {
-  const _$SimpleIssue(
+class _$SimpleIssueImpl extends SimpleIssue {
+  const _$SimpleIssueImpl(
       {@JsonKey(required: true, disallowNullValue: true, name: 'id')
       required this.id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
@@ -391,8 +406,8 @@ class _$SimpleIssue extends SimpleIssue {
       : $type = $type ?? 'reduced',
         super._();
 
-  factory _$SimpleIssue.fromJson(Map<String, dynamic> json) =>
-      _$$SimpleIssueFromJson(json);
+  factory _$SimpleIssueImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SimpleIssueImplFromJson(json);
 
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'id')
@@ -422,10 +437,10 @@ class _$SimpleIssue extends SimpleIssue {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SimpleIssue &&
+            other is _$SimpleIssueImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.detailUrl, detailUrl) ||
                 other.detailUrl == detailUrl) &&
@@ -436,16 +451,18 @@ class _$SimpleIssue extends SimpleIssue {
             (identical(other.image, image) || other.image == image));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, detailUrl, dateAdded, name, number, image);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Issue
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SimpleIssueCopyWith<_$SimpleIssue> get copyWith =>
-      __$$SimpleIssueCopyWithImpl<_$SimpleIssue>(this, _$identity);
+  _$$SimpleIssueImplCopyWith<_$SimpleIssueImpl> get copyWith =>
+      __$$SimpleIssueImplCopyWithImpl<_$SimpleIssueImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -470,6 +487,7 @@ class _$SimpleIssue extends SimpleIssue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
+            @JsonKey(required: true) String? description,
             @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
@@ -527,6 +545,7 @@ class _$SimpleIssue extends SimpleIssue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
+            @JsonKey(required: true) String? description,
             @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
@@ -584,6 +603,7 @@ class _$SimpleIssue extends SimpleIssue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
+            @JsonKey(required: true) String? description,
             @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
@@ -655,7 +675,7 @@ class _$SimpleIssue extends SimpleIssue {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SimpleIssueToJson(
+    return _$$SimpleIssueImplToJson(
       this,
     );
   }
@@ -673,11 +693,11 @@ abstract class SimpleIssue extends Issue {
       @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
       required final String number,
       @JsonKey(required: true, disallowNullValue: true)
-      required final ComicImage image}) = _$SimpleIssue;
+      required final ComicImage image}) = _$SimpleIssueImpl;
   const SimpleIssue._() : super._();
 
   factory SimpleIssue.fromJson(Map<String, dynamic> json) =
-      _$SimpleIssue.fromJson;
+      _$SimpleIssueImpl.fromJson;
 
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'id')
@@ -697,23 +717,28 @@ abstract class SimpleIssue extends Issue {
   @override
   @JsonKey(required: true, disallowNullValue: true)
   ComicImage get image;
+
+  /// Create a copy of Issue
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$SimpleIssueCopyWith<_$SimpleIssue> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SimpleIssueImplCopyWith<_$SimpleIssueImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DetailedIssueCopyWith<$Res> implements $IssueCopyWith<$Res> {
-  factory _$$DetailedIssueCopyWith(
-          _$DetailedIssue value, $Res Function(_$DetailedIssue) then) =
-      __$$DetailedIssueCopyWithImpl<$Res>;
+abstract class _$$DetailedIssueImplCopyWith<$Res>
+    implements $IssueCopyWith<$Res> {
+  factory _$$DetailedIssueImplCopyWith(
+          _$DetailedIssueImpl value, $Res Function(_$DetailedIssueImpl) then) =
+      __$$DetailedIssueImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(required: true, disallowNullValue: true) int id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       String detailUrl,
+      @JsonKey(required: true) String? description,
       @JsonKey(name: 'cover_date') DateTime? coverDate,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
       DateTime dateAdded,
@@ -745,18 +770,21 @@ abstract class _$$DetailedIssueCopyWith<$Res> implements $IssueCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$DetailedIssueCopyWithImpl<$Res>
-    extends _$IssueCopyWithImpl<$Res, _$DetailedIssue>
-    implements _$$DetailedIssueCopyWith<$Res> {
-  __$$DetailedIssueCopyWithImpl(
-      _$DetailedIssue _value, $Res Function(_$DetailedIssue) _then)
+class __$$DetailedIssueImplCopyWithImpl<$Res>
+    extends _$IssueCopyWithImpl<$Res, _$DetailedIssueImpl>
+    implements _$$DetailedIssueImplCopyWith<$Res> {
+  __$$DetailedIssueImplCopyWithImpl(
+      _$DetailedIssueImpl _value, $Res Function(_$DetailedIssueImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Issue
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? detailUrl = null,
+    Object? description = freezed,
     Object? coverDate = freezed,
     Object? dateAdded = null,
     Object? dateLastUpdated = null,
@@ -773,7 +801,7 @@ class __$$DetailedIssueCopyWithImpl<$Res>
     Object? name = freezed,
     Object? number = null,
   }) {
-    return _then(_$DetailedIssue(
+    return _then(_$DetailedIssueImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -782,6 +810,10 @@ class __$$DetailedIssueCopyWithImpl<$Res>
           ? _value.detailUrl
           : detailUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
       coverDate: freezed == coverDate
           ? _value.coverDate
           : coverDate // ignore: cast_nullable_to_non_nullable
@@ -845,6 +877,8 @@ class __$$DetailedIssueCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of Issue
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $VolumeCopyWith<$Res> get volume {
@@ -856,11 +890,12 @@ class __$$DetailedIssueCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$DetailedIssue extends DetailedIssue {
-  const _$DetailedIssue(
+class _$DetailedIssueImpl extends DetailedIssue {
+  const _$DetailedIssueImpl(
       {@JsonKey(required: true, disallowNullValue: true) required this.id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required this.detailUrl,
+      @JsonKey(required: true) required this.description,
       @JsonKey(name: 'cover_date') this.coverDate,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
       required this.dateAdded,
@@ -898,8 +933,8 @@ class _$DetailedIssue extends DetailedIssue {
         $type = $type ?? 'details',
         super._();
 
-  factory _$DetailedIssue.fromJson(Map<String, dynamic> json) =>
-      _$$DetailedIssueFromJson(json);
+  factory _$DetailedIssueImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DetailedIssueImplFromJson(json);
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -907,6 +942,9 @@ class _$DetailedIssue extends DetailedIssue {
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
   final String detailUrl;
+  @override
+  @JsonKey(required: true)
+  final String? description;
   @override
   @JsonKey(name: 'cover_date')
   final DateTime? coverDate;
@@ -1000,17 +1038,19 @@ class _$DetailedIssue extends DetailedIssue {
 
   @override
   String toString() {
-    return 'Issue.details(id: $id, detailUrl: $detailUrl, coverDate: $coverDate, dateAdded: $dateAdded, dateLastUpdated: $dateLastUpdated, storeDate: $storeDate, image: $image, volume: $volume, storyArcs: $storyArcs, characters: $characters, locations: $locations, teams: $teams, people: $people, comicObjects: $comicObjects, concepts: $concepts, name: $name, number: $number)';
+    return 'Issue.details(id: $id, detailUrl: $detailUrl, description: $description, coverDate: $coverDate, dateAdded: $dateAdded, dateLastUpdated: $dateLastUpdated, storeDate: $storeDate, image: $image, volume: $volume, storyArcs: $storyArcs, characters: $characters, locations: $locations, teams: $teams, people: $people, comicObjects: $comicObjects, concepts: $concepts, name: $name, number: $number)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DetailedIssue &&
+            other is _$DetailedIssueImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.detailUrl, detailUrl) ||
                 other.detailUrl == detailUrl) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.coverDate, coverDate) ||
                 other.coverDate == coverDate) &&
             (identical(other.dateAdded, dateAdded) ||
@@ -1036,12 +1076,13 @@ class _$DetailedIssue extends DetailedIssue {
             (identical(other.number, number) || other.number == number));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       id,
       detailUrl,
+      description,
       coverDate,
       dateAdded,
       dateLastUpdated,
@@ -1058,11 +1099,13 @@ class _$DetailedIssue extends DetailedIssue {
       name,
       number);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Issue
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DetailedIssueCopyWith<_$DetailedIssue> get copyWith =>
-      __$$DetailedIssueCopyWithImpl<_$DetailedIssue>(this, _$identity);
+  _$$DetailedIssueImplCopyWith<_$DetailedIssueImpl> get copyWith =>
+      __$$DetailedIssueImplCopyWithImpl<_$DetailedIssueImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1087,6 +1130,7 @@ class _$DetailedIssue extends DetailedIssue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
+            @JsonKey(required: true) String? description,
             @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
@@ -1121,6 +1165,7 @@ class _$DetailedIssue extends DetailedIssue {
     return details(
         id,
         detailUrl,
+        description,
         coverDate,
         dateAdded,
         dateLastUpdated,
@@ -1161,6 +1206,7 @@ class _$DetailedIssue extends DetailedIssue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
+            @JsonKey(required: true) String? description,
             @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
@@ -1195,6 +1241,7 @@ class _$DetailedIssue extends DetailedIssue {
     return details?.call(
         id,
         detailUrl,
+        description,
         coverDate,
         dateAdded,
         dateLastUpdated,
@@ -1235,6 +1282,7 @@ class _$DetailedIssue extends DetailedIssue {
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'api_detail_url')
             String detailUrl,
+            @JsonKey(required: true) String? description,
             @JsonKey(name: 'cover_date') DateTime? coverDate,
             @JsonKey(
                 required: true, disallowNullValue: true, name: 'date_added')
@@ -1271,6 +1319,7 @@ class _$DetailedIssue extends DetailedIssue {
       return details(
           id,
           detailUrl,
+          description,
           coverDate,
           dateAdded,
           dateLastUpdated,
@@ -1323,7 +1372,7 @@ class _$DetailedIssue extends DetailedIssue {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DetailedIssueToJson(
+    return _$$DetailedIssueImplToJson(
       this,
     );
   }
@@ -1334,6 +1383,7 @@ abstract class DetailedIssue extends Issue {
       {@JsonKey(required: true, disallowNullValue: true) required final int id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required final String detailUrl,
+      @JsonKey(required: true) required final String? description,
       @JsonKey(name: 'cover_date') final DateTime? coverDate,
       @JsonKey(required: true, disallowNullValue: true, name: 'date_added')
       required final DateTime dateAdded,
@@ -1361,11 +1411,11 @@ abstract class DetailedIssue extends Issue {
       required final List<Concept> concepts,
       @JsonKey(name: 'name') final String? name,
       @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
-      required final String number}) = _$DetailedIssue;
+      required final String number}) = _$DetailedIssueImpl;
   const DetailedIssue._() : super._();
 
   factory DetailedIssue.fromJson(Map<String, dynamic> json) =
-      _$DetailedIssue.fromJson;
+      _$DetailedIssueImpl.fromJson;
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -1373,6 +1423,8 @@ abstract class DetailedIssue extends Issue {
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
   String get detailUrl;
+  @JsonKey(required: true)
+  String? get description;
   @JsonKey(name: 'cover_date')
   DateTime? get coverDate;
   @override
@@ -1407,8 +1459,11 @@ abstract class DetailedIssue extends Issue {
   @override
   @JsonKey(required: true, disallowNullValue: true, name: 'issue_number')
   String get number;
+
+  /// Create a copy of Issue
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$DetailedIssueCopyWith<_$DetailedIssue> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DetailedIssueImplCopyWith<_$DetailedIssueImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

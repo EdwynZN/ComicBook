@@ -1,16 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:comic_book/feature/comics/domain/model/issue.dart';
+import 'package:comic_book/feature/comics/domain/repository/comic_book_repository.dart';
 import 'package:comic_book/feature/comics/presentation/bloc/details/details_event.dart';
 import 'package:comic_book/feature/comics/presentation/bloc/details/details_issue_bloc.dart';
-import 'package:comic_book/feature/comics/domain/model/issue.dart';
-import 'package:comic_book/shared/utils/state.dart';
 import 'package:comic_book/feature/comics/presentation/widget/details_slivers.dart';
 import 'package:comic_book/feature/comics/presentation/widget/error_button.dart';
 import 'package:comic_book/feature/comics/presentation/widget/image_issue.dart';
-import 'package:comic_book/feature/comics/domain/repository/comic_book_repository.dart';
+import 'package:comic_book/shared/utils/state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class IssueDetailsScreen extends StatelessWidget {
   final String url;
@@ -137,7 +138,7 @@ class _DetailIssueBody extends StatelessWidget {
       ),
     ];
     final DetailedIssue detailedIssue;
-    if (state case LoadingState(: final value) when value == null) {
+    if (state case LoadingState(:final value) when value == null) {
       sliver.add(
         const SliverFillRemaining(
           hasScrollBody: false,
@@ -190,6 +191,14 @@ class _DetailIssueBody extends StatelessWidget {
         },
       ),
       DetailsSliver(detailedIssue: detailedIssue),
+      if (detailedIssue.description != null &&
+          detailedIssue.description!.isNotEmpty)
+        SliverPadding(
+          padding: const EdgeInsets.all(16.0),
+          sliver: SliverToBoxAdapter(
+            child: HtmlWidget(detailedIssue.description!),
+          ),
+        ),
       SliverPadding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         sliver: CreatorsSliver(creators: detailedIssue.people),

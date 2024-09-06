@@ -12,7 +12,7 @@ part of 'comic_character.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ComicCharacter _$ComicCharacterFromJson(Map<String, dynamic> json) {
   return SimpleComicCharacter.fromJson(json);
@@ -27,8 +27,12 @@ mixin _$ComicCharacter {
   @JsonKey(required: true, disallowNullValue: true)
   String get name => throw _privateConstructorUsedError;
 
+  /// Serializes this ComicCharacter to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ComicCharacter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ComicCharacterCopyWith<ComicCharacter> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$ComicCharacterCopyWithImpl<$Res, $Val extends ComicCharacter>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ComicCharacter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,11 +87,11 @@ class _$ComicCharacterCopyWithImpl<$Res, $Val extends ComicCharacter>
 }
 
 /// @nodoc
-abstract class _$$SimpleComicCharacterCopyWith<$Res>
+abstract class _$$SimpleComicCharacterImplCopyWith<$Res>
     implements $ComicCharacterCopyWith<$Res> {
-  factory _$$SimpleComicCharacterCopyWith(_$SimpleComicCharacter value,
-          $Res Function(_$SimpleComicCharacter) then) =
-      __$$SimpleComicCharacterCopyWithImpl<$Res>;
+  factory _$$SimpleComicCharacterImplCopyWith(_$SimpleComicCharacterImpl value,
+          $Res Function(_$SimpleComicCharacterImpl) then) =
+      __$$SimpleComicCharacterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -96,13 +102,15 @@ abstract class _$$SimpleComicCharacterCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$SimpleComicCharacterCopyWithImpl<$Res>
-    extends _$ComicCharacterCopyWithImpl<$Res, _$SimpleComicCharacter>
-    implements _$$SimpleComicCharacterCopyWith<$Res> {
-  __$$SimpleComicCharacterCopyWithImpl(_$SimpleComicCharacter _value,
-      $Res Function(_$SimpleComicCharacter) _then)
+class __$$SimpleComicCharacterImplCopyWithImpl<$Res>
+    extends _$ComicCharacterCopyWithImpl<$Res, _$SimpleComicCharacterImpl>
+    implements _$$SimpleComicCharacterImplCopyWith<$Res> {
+  __$$SimpleComicCharacterImplCopyWithImpl(_$SimpleComicCharacterImpl _value,
+      $Res Function(_$SimpleComicCharacterImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ComicCharacter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -110,7 +118,7 @@ class __$$SimpleComicCharacterCopyWithImpl<$Res>
     Object? detailUrl = null,
     Object? name = null,
   }) {
-    return _then(_$SimpleComicCharacter(
+    return _then(_$SimpleComicCharacterImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -129,15 +137,15 @@ class __$$SimpleComicCharacterCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SimpleComicCharacter implements SimpleComicCharacter {
-  const _$SimpleComicCharacter(
+class _$SimpleComicCharacterImpl implements SimpleComicCharacter {
+  const _$SimpleComicCharacterImpl(
       {@JsonKey(required: true, disallowNullValue: true) required this.id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required this.detailUrl,
       @JsonKey(required: true, disallowNullValue: true) required this.name});
 
-  factory _$SimpleComicCharacter.fromJson(Map<String, dynamic> json) =>
-      _$$SimpleComicCharacterFromJson(json);
+  factory _$SimpleComicCharacterImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SimpleComicCharacterImplFromJson(json);
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -155,30 +163,33 @@ class _$SimpleComicCharacter implements SimpleComicCharacter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SimpleComicCharacter &&
+            other is _$SimpleComicCharacterImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.detailUrl, detailUrl) ||
                 other.detailUrl == detailUrl) &&
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, detailUrl, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ComicCharacter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SimpleComicCharacterCopyWith<_$SimpleComicCharacter> get copyWith =>
-      __$$SimpleComicCharacterCopyWithImpl<_$SimpleComicCharacter>(
-          this, _$identity);
+  _$$SimpleComicCharacterImplCopyWith<_$SimpleComicCharacterImpl>
+      get copyWith =>
+          __$$SimpleComicCharacterImplCopyWithImpl<_$SimpleComicCharacterImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SimpleComicCharacterToJson(
+    return _$$SimpleComicCharacterImplToJson(
       this,
     );
   }
@@ -190,10 +201,10 @@ abstract class SimpleComicCharacter implements ComicCharacter {
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required final String detailUrl,
       @JsonKey(required: true, disallowNullValue: true)
-      required final String name}) = _$SimpleComicCharacter;
+      required final String name}) = _$SimpleComicCharacterImpl;
 
   factory SimpleComicCharacter.fromJson(Map<String, dynamic> json) =
-      _$SimpleComicCharacter.fromJson;
+      _$SimpleComicCharacterImpl.fromJson;
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -204,8 +215,11 @@ abstract class SimpleComicCharacter implements ComicCharacter {
   @override
   @JsonKey(required: true, disallowNullValue: true)
   String get name;
+
+  /// Create a copy of ComicCharacter
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$SimpleComicCharacterCopyWith<_$SimpleComicCharacter> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SimpleComicCharacterImplCopyWith<_$SimpleComicCharacterImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

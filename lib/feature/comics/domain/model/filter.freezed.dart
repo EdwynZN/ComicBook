@@ -12,14 +12,16 @@ part of 'filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Filter {
   String get value => throw _privateConstructorUsedError;
   Sort get sort => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Filter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FilterCopyWith<Filter> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -41,6 +43,8 @@ class _$FilterCopyWithImpl<$Res, $Val extends Filter>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Filter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -61,28 +65,32 @@ class _$FilterCopyWithImpl<$Res, $Val extends Filter>
 }
 
 /// @nodoc
-abstract class _$$_FilterCopyWith<$Res> implements $FilterCopyWith<$Res> {
-  factory _$$_FilterCopyWith(_$_Filter value, $Res Function(_$_Filter) then) =
-      __$$_FilterCopyWithImpl<$Res>;
+abstract class _$$FilterImplCopyWith<$Res> implements $FilterCopyWith<$Res> {
+  factory _$$FilterImplCopyWith(
+          _$FilterImpl value, $Res Function(_$FilterImpl) then) =
+      __$$FilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String value, Sort sort});
 }
 
 /// @nodoc
-class __$$_FilterCopyWithImpl<$Res>
-    extends _$FilterCopyWithImpl<$Res, _$_Filter>
-    implements _$$_FilterCopyWith<$Res> {
-  __$$_FilterCopyWithImpl(_$_Filter _value, $Res Function(_$_Filter) _then)
+class __$$FilterImplCopyWithImpl<$Res>
+    extends _$FilterCopyWithImpl<$Res, _$FilterImpl>
+    implements _$$FilterImplCopyWith<$Res> {
+  __$$FilterImplCopyWithImpl(
+      _$FilterImpl _value, $Res Function(_$FilterImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Filter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? value = null,
     Object? sort = null,
   }) {
-    return _then(_$_Filter(
+    return _then(_$FilterImpl(
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -97,8 +105,8 @@ class __$$_FilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Filter implements _Filter {
-  const _$_Filter({required this.value, this.sort = Sort.desc});
+class _$FilterImpl implements _Filter {
+  const _$FilterImpl({required this.value, this.sort = Sort.desc});
 
   @override
   final String value;
@@ -112,10 +120,10 @@ class _$_Filter implements _Filter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Filter &&
+            other is _$FilterImpl &&
             (identical(other.value, value) || other.value == value) &&
             (identical(other.sort, sort) || other.sort == sort));
   }
@@ -123,23 +131,28 @@ class _$_Filter implements _Filter {
   @override
   int get hashCode => Object.hash(runtimeType, value, sort);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Filter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FilterCopyWith<_$_Filter> get copyWith =>
-      __$$_FilterCopyWithImpl<_$_Filter>(this, _$identity);
+  _$$FilterImplCopyWith<_$FilterImpl> get copyWith =>
+      __$$FilterImplCopyWithImpl<_$FilterImpl>(this, _$identity);
 }
 
 abstract class _Filter implements Filter {
   const factory _Filter({required final String value, final Sort sort}) =
-      _$_Filter;
+      _$FilterImpl;
 
   @override
   String get value;
   @override
   Sort get sort;
+
+  /// Create a copy of Filter
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_FilterCopyWith<_$_Filter> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FilterImplCopyWith<_$FilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

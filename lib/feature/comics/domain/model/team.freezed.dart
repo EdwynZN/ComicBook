@@ -12,7 +12,7 @@ part of 'team.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Team _$TeamFromJson(Map<String, dynamic> json) {
   return _Team.fromJson(json);
@@ -27,8 +27,12 @@ mixin _$Team {
   @JsonKey(required: true, disallowNullValue: true)
   String get name => throw _privateConstructorUsedError;
 
+  /// Serializes this Team to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Team
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TeamCopyWith<Team> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -54,6 +58,8 @@ class _$TeamCopyWithImpl<$Res, $Val extends Team>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Team
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -79,9 +85,10 @@ class _$TeamCopyWithImpl<$Res, $Val extends Team>
 }
 
 /// @nodoc
-abstract class _$$_TeamCopyWith<$Res> implements $TeamCopyWith<$Res> {
-  factory _$$_TeamCopyWith(_$_Team value, $Res Function(_$_Team) then) =
-      __$$_TeamCopyWithImpl<$Res>;
+abstract class _$$TeamImplCopyWith<$Res> implements $TeamCopyWith<$Res> {
+  factory _$$TeamImplCopyWith(
+          _$TeamImpl value, $Res Function(_$TeamImpl) then) =
+      __$$TeamImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -92,11 +99,14 @@ abstract class _$$_TeamCopyWith<$Res> implements $TeamCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TeamCopyWithImpl<$Res> extends _$TeamCopyWithImpl<$Res, _$_Team>
-    implements _$$_TeamCopyWith<$Res> {
-  __$$_TeamCopyWithImpl(_$_Team _value, $Res Function(_$_Team) _then)
+class __$$TeamImplCopyWithImpl<$Res>
+    extends _$TeamCopyWithImpl<$Res, _$TeamImpl>
+    implements _$$TeamImplCopyWith<$Res> {
+  __$$TeamImplCopyWithImpl(_$TeamImpl _value, $Res Function(_$TeamImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Team
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -104,7 +114,7 @@ class __$$_TeamCopyWithImpl<$Res> extends _$TeamCopyWithImpl<$Res, _$_Team>
     Object? detailUrl = null,
     Object? name = null,
   }) {
-    return _then(_$_Team(
+    return _then(_$TeamImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -123,14 +133,15 @@ class __$$_TeamCopyWithImpl<$Res> extends _$TeamCopyWithImpl<$Res, _$_Team>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Team implements _Team {
-  const _$_Team(
+class _$TeamImpl implements _Team {
+  const _$TeamImpl(
       {@JsonKey(required: true, disallowNullValue: true) required this.id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required this.detailUrl,
       @JsonKey(required: true, disallowNullValue: true) required this.name});
 
-  factory _$_Team.fromJson(Map<String, dynamic> json) => _$$_TeamFromJson(json);
+  factory _$TeamImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TeamImplFromJson(json);
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -148,29 +159,31 @@ class _$_Team implements _Team {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Team &&
+            other is _$TeamImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.detailUrl, detailUrl) ||
                 other.detailUrl == detailUrl) &&
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, detailUrl, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Team
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TeamCopyWith<_$_Team> get copyWith =>
-      __$$_TeamCopyWithImpl<_$_Team>(this, _$identity);
+  _$$TeamImplCopyWith<_$TeamImpl> get copyWith =>
+      __$$TeamImplCopyWithImpl<_$TeamImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TeamToJson(
+    return _$$TeamImplToJson(
       this,
     );
   }
@@ -182,9 +195,9 @@ abstract class _Team implements Team {
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required final String detailUrl,
       @JsonKey(required: true, disallowNullValue: true)
-      required final String name}) = _$_Team;
+      required final String name}) = _$TeamImpl;
 
-  factory _Team.fromJson(Map<String, dynamic> json) = _$_Team.fromJson;
+  factory _Team.fromJson(Map<String, dynamic> json) = _$TeamImpl.fromJson;
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -195,7 +208,11 @@ abstract class _Team implements Team {
   @override
   @JsonKey(required: true, disallowNullValue: true)
   String get name;
+
+  /// Create a copy of Team
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_TeamCopyWith<_$_Team> get copyWith => throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TeamImplCopyWith<_$TeamImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

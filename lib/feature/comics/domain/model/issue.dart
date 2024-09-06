@@ -42,6 +42,8 @@ class Issue with _$Issue {
     required int id,
     @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
     required String detailUrl,
+    @JsonKey(required: true)
+    required String? description,
     @JsonKey(name: 'cover_date')
     DateTime? coverDate,
     @JsonKey(required: true, disallowNullValue: true, name: 'date_added')

@@ -12,7 +12,7 @@ part of 'story_arc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 StoryArc _$StoryArcFromJson(Map<String, dynamic> json) {
   return _StoryArc.fromJson(json);
@@ -27,8 +27,12 @@ mixin _$StoryArc {
   @JsonKey(required: true, disallowNullValue: true)
   String get name => throw _privateConstructorUsedError;
 
+  /// Serializes this StoryArc to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of StoryArc
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StoryArcCopyWith<StoryArc> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$StoryArcCopyWithImpl<$Res, $Val extends StoryArc>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of StoryArc
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,10 +86,11 @@ class _$StoryArcCopyWithImpl<$Res, $Val extends StoryArc>
 }
 
 /// @nodoc
-abstract class _$$_StoryArcCopyWith<$Res> implements $StoryArcCopyWith<$Res> {
-  factory _$$_StoryArcCopyWith(
-          _$_StoryArc value, $Res Function(_$_StoryArc) then) =
-      __$$_StoryArcCopyWithImpl<$Res>;
+abstract class _$$StoryArcImplCopyWith<$Res>
+    implements $StoryArcCopyWith<$Res> {
+  factory _$$StoryArcImplCopyWith(
+          _$StoryArcImpl value, $Res Function(_$StoryArcImpl) then) =
+      __$$StoryArcImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,13 +101,15 @@ abstract class _$$_StoryArcCopyWith<$Res> implements $StoryArcCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_StoryArcCopyWithImpl<$Res>
-    extends _$StoryArcCopyWithImpl<$Res, _$_StoryArc>
-    implements _$$_StoryArcCopyWith<$Res> {
-  __$$_StoryArcCopyWithImpl(
-      _$_StoryArc _value, $Res Function(_$_StoryArc) _then)
+class __$$StoryArcImplCopyWithImpl<$Res>
+    extends _$StoryArcCopyWithImpl<$Res, _$StoryArcImpl>
+    implements _$$StoryArcImplCopyWith<$Res> {
+  __$$StoryArcImplCopyWithImpl(
+      _$StoryArcImpl _value, $Res Function(_$StoryArcImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of StoryArc
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -108,7 +117,7 @@ class __$$_StoryArcCopyWithImpl<$Res>
     Object? detailUrl = null,
     Object? name = null,
   }) {
-    return _then(_$_StoryArc(
+    return _then(_$StoryArcImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -127,15 +136,15 @@ class __$$_StoryArcCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StoryArc implements _StoryArc {
-  const _$_StoryArc(
+class _$StoryArcImpl implements _StoryArc {
+  const _$StoryArcImpl(
       {@JsonKey(required: true, disallowNullValue: true) required this.id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required this.detailUrl,
       @JsonKey(required: true, disallowNullValue: true) required this.name});
 
-  factory _$_StoryArc.fromJson(Map<String, dynamic> json) =>
-      _$$_StoryArcFromJson(json);
+  factory _$StoryArcImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StoryArcImplFromJson(json);
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -153,29 +162,31 @@ class _$_StoryArc implements _StoryArc {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StoryArc &&
+            other is _$StoryArcImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.detailUrl, detailUrl) ||
                 other.detailUrl == detailUrl) &&
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, detailUrl, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StoryArc
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StoryArcCopyWith<_$_StoryArc> get copyWith =>
-      __$$_StoryArcCopyWithImpl<_$_StoryArc>(this, _$identity);
+  _$$StoryArcImplCopyWith<_$StoryArcImpl> get copyWith =>
+      __$$StoryArcImplCopyWithImpl<_$StoryArcImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StoryArcToJson(
+    return _$$StoryArcImplToJson(
       this,
     );
   }
@@ -187,9 +198,10 @@ abstract class _StoryArc implements StoryArc {
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required final String detailUrl,
       @JsonKey(required: true, disallowNullValue: true)
-      required final String name}) = _$_StoryArc;
+      required final String name}) = _$StoryArcImpl;
 
-  factory _StoryArc.fromJson(Map<String, dynamic> json) = _$_StoryArc.fromJson;
+  factory _StoryArc.fromJson(Map<String, dynamic> json) =
+      _$StoryArcImpl.fromJson;
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -200,8 +212,11 @@ abstract class _StoryArc implements StoryArc {
   @override
   @JsonKey(required: true, disallowNullValue: true)
   String get name;
+
+  /// Create a copy of StoryArc
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_StoryArcCopyWith<_$_StoryArc> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$StoryArcImplCopyWith<_$StoryArcImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

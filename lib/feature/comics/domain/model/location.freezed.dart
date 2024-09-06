@@ -12,7 +12,7 @@ part of 'location.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Location _$LocationFromJson(Map<String, dynamic> json) {
   return _Location.fromJson(json);
@@ -27,8 +27,12 @@ mixin _$Location {
   @JsonKey(required: true, disallowNullValue: true)
   String get name => throw _privateConstructorUsedError;
 
+  /// Serializes this Location to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Location
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LocationCopyWith<Location> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Location
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,10 +86,11 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
 }
 
 /// @nodoc
-abstract class _$$_LocationCopyWith<$Res> implements $LocationCopyWith<$Res> {
-  factory _$$_LocationCopyWith(
-          _$_Location value, $Res Function(_$_Location) then) =
-      __$$_LocationCopyWithImpl<$Res>;
+abstract class _$$LocationImplCopyWith<$Res>
+    implements $LocationCopyWith<$Res> {
+  factory _$$LocationImplCopyWith(
+          _$LocationImpl value, $Res Function(_$LocationImpl) then) =
+      __$$LocationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,13 +101,15 @@ abstract class _$$_LocationCopyWith<$Res> implements $LocationCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LocationCopyWithImpl<$Res>
-    extends _$LocationCopyWithImpl<$Res, _$_Location>
-    implements _$$_LocationCopyWith<$Res> {
-  __$$_LocationCopyWithImpl(
-      _$_Location _value, $Res Function(_$_Location) _then)
+class __$$LocationImplCopyWithImpl<$Res>
+    extends _$LocationCopyWithImpl<$Res, _$LocationImpl>
+    implements _$$LocationImplCopyWith<$Res> {
+  __$$LocationImplCopyWithImpl(
+      _$LocationImpl _value, $Res Function(_$LocationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Location
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -108,7 +117,7 @@ class __$$_LocationCopyWithImpl<$Res>
     Object? detailUrl = null,
     Object? name = null,
   }) {
-    return _then(_$_Location(
+    return _then(_$LocationImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -127,15 +136,15 @@ class __$$_LocationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Location implements _Location {
-  const _$_Location(
+class _$LocationImpl implements _Location {
+  const _$LocationImpl(
       {@JsonKey(required: true, disallowNullValue: true) required this.id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required this.detailUrl,
       @JsonKey(required: true, disallowNullValue: true) required this.name});
 
-  factory _$_Location.fromJson(Map<String, dynamic> json) =>
-      _$$_LocationFromJson(json);
+  factory _$LocationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LocationImplFromJson(json);
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -153,29 +162,31 @@ class _$_Location implements _Location {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Location &&
+            other is _$LocationImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.detailUrl, detailUrl) ||
                 other.detailUrl == detailUrl) &&
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, detailUrl, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Location
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LocationCopyWith<_$_Location> get copyWith =>
-      __$$_LocationCopyWithImpl<_$_Location>(this, _$identity);
+  _$$LocationImplCopyWith<_$LocationImpl> get copyWith =>
+      __$$LocationImplCopyWithImpl<_$LocationImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LocationToJson(
+    return _$$LocationImplToJson(
       this,
     );
   }
@@ -187,9 +198,10 @@ abstract class _Location implements Location {
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required final String detailUrl,
       @JsonKey(required: true, disallowNullValue: true)
-      required final String name}) = _$_Location;
+      required final String name}) = _$LocationImpl;
 
-  factory _Location.fromJson(Map<String, dynamic> json) = _$_Location.fromJson;
+  factory _Location.fromJson(Map<String, dynamic> json) =
+      _$LocationImpl.fromJson;
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -200,8 +212,11 @@ abstract class _Location implements Location {
   @override
   @JsonKey(required: true, disallowNullValue: true)
   String get name;
+
+  /// Create a copy of Location
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_LocationCopyWith<_$_Location> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LocationImplCopyWith<_$LocationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

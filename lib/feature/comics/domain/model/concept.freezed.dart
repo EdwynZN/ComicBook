@@ -12,7 +12,7 @@ part of 'concept.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Concept _$ConceptFromJson(Map<String, dynamic> json) {
   return _Concept.fromJson(json);
@@ -27,8 +27,12 @@ mixin _$Concept {
   @JsonKey(required: true, disallowNullValue: true)
   String get name => throw _privateConstructorUsedError;
 
+  /// Serializes this Concept to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Concept
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ConceptCopyWith<Concept> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -54,6 +58,8 @@ class _$ConceptCopyWithImpl<$Res, $Val extends Concept>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Concept
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -79,10 +85,10 @@ class _$ConceptCopyWithImpl<$Res, $Val extends Concept>
 }
 
 /// @nodoc
-abstract class _$$_ConceptCopyWith<$Res> implements $ConceptCopyWith<$Res> {
-  factory _$$_ConceptCopyWith(
-          _$_Concept value, $Res Function(_$_Concept) then) =
-      __$$_ConceptCopyWithImpl<$Res>;
+abstract class _$$ConceptImplCopyWith<$Res> implements $ConceptCopyWith<$Res> {
+  factory _$$ConceptImplCopyWith(
+          _$ConceptImpl value, $Res Function(_$ConceptImpl) then) =
+      __$$ConceptImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -93,12 +99,15 @@ abstract class _$$_ConceptCopyWith<$Res> implements $ConceptCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ConceptCopyWithImpl<$Res>
-    extends _$ConceptCopyWithImpl<$Res, _$_Concept>
-    implements _$$_ConceptCopyWith<$Res> {
-  __$$_ConceptCopyWithImpl(_$_Concept _value, $Res Function(_$_Concept) _then)
+class __$$ConceptImplCopyWithImpl<$Res>
+    extends _$ConceptCopyWithImpl<$Res, _$ConceptImpl>
+    implements _$$ConceptImplCopyWith<$Res> {
+  __$$ConceptImplCopyWithImpl(
+      _$ConceptImpl _value, $Res Function(_$ConceptImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Concept
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,7 +115,7 @@ class __$$_ConceptCopyWithImpl<$Res>
     Object? detailUrl = null,
     Object? name = null,
   }) {
-    return _then(_$_Concept(
+    return _then(_$ConceptImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -125,15 +134,15 @@ class __$$_ConceptCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Concept implements _Concept {
-  const _$_Concept(
+class _$ConceptImpl implements _Concept {
+  const _$ConceptImpl(
       {@JsonKey(required: true, disallowNullValue: true) required this.id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required this.detailUrl,
       @JsonKey(required: true, disallowNullValue: true) required this.name});
 
-  factory _$_Concept.fromJson(Map<String, dynamic> json) =>
-      _$$_ConceptFromJson(json);
+  factory _$ConceptImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ConceptImplFromJson(json);
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -151,29 +160,31 @@ class _$_Concept implements _Concept {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Concept &&
+            other is _$ConceptImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.detailUrl, detailUrl) ||
                 other.detailUrl == detailUrl) &&
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, detailUrl, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Concept
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ConceptCopyWith<_$_Concept> get copyWith =>
-      __$$_ConceptCopyWithImpl<_$_Concept>(this, _$identity);
+  _$$ConceptImplCopyWith<_$ConceptImpl> get copyWith =>
+      __$$ConceptImplCopyWithImpl<_$ConceptImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ConceptToJson(
+    return _$$ConceptImplToJson(
       this,
     );
   }
@@ -185,9 +196,9 @@ abstract class _Concept implements Concept {
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required final String detailUrl,
       @JsonKey(required: true, disallowNullValue: true)
-      required final String name}) = _$_Concept;
+      required final String name}) = _$ConceptImpl;
 
-  factory _Concept.fromJson(Map<String, dynamic> json) = _$_Concept.fromJson;
+  factory _Concept.fromJson(Map<String, dynamic> json) = _$ConceptImpl.fromJson;
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -198,8 +209,11 @@ abstract class _Concept implements Concept {
   @override
   @JsonKey(required: true, disallowNullValue: true)
   String get name;
+
+  /// Create a copy of Concept
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_ConceptCopyWith<_$_Concept> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ConceptImplCopyWith<_$ConceptImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

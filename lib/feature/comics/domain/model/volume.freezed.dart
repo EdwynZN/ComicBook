@@ -12,7 +12,7 @@ part of 'volume.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Volume _$VolumeFromJson(Map<String, dynamic> json) {
   return _Volume.fromJson(json);
@@ -27,8 +27,12 @@ mixin _$Volume {
   @JsonKey(required: true, disallowNullValue: true)
   String get name => throw _privateConstructorUsedError;
 
+  /// Serializes this Volume to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Volume
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VolumeCopyWith<Volume> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -54,6 +58,8 @@ class _$VolumeCopyWithImpl<$Res, $Val extends Volume>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Volume
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -79,9 +85,10 @@ class _$VolumeCopyWithImpl<$Res, $Val extends Volume>
 }
 
 /// @nodoc
-abstract class _$$_VolumeCopyWith<$Res> implements $VolumeCopyWith<$Res> {
-  factory _$$_VolumeCopyWith(_$_Volume value, $Res Function(_$_Volume) then) =
-      __$$_VolumeCopyWithImpl<$Res>;
+abstract class _$$VolumeImplCopyWith<$Res> implements $VolumeCopyWith<$Res> {
+  factory _$$VolumeImplCopyWith(
+          _$VolumeImpl value, $Res Function(_$VolumeImpl) then) =
+      __$$VolumeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -92,12 +99,15 @@ abstract class _$$_VolumeCopyWith<$Res> implements $VolumeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_VolumeCopyWithImpl<$Res>
-    extends _$VolumeCopyWithImpl<$Res, _$_Volume>
-    implements _$$_VolumeCopyWith<$Res> {
-  __$$_VolumeCopyWithImpl(_$_Volume _value, $Res Function(_$_Volume) _then)
+class __$$VolumeImplCopyWithImpl<$Res>
+    extends _$VolumeCopyWithImpl<$Res, _$VolumeImpl>
+    implements _$$VolumeImplCopyWith<$Res> {
+  __$$VolumeImplCopyWithImpl(
+      _$VolumeImpl _value, $Res Function(_$VolumeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Volume
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -105,7 +115,7 @@ class __$$_VolumeCopyWithImpl<$Res>
     Object? detailUrl = null,
     Object? name = null,
   }) {
-    return _then(_$_Volume(
+    return _then(_$VolumeImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -124,15 +134,15 @@ class __$$_VolumeCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Volume implements _Volume {
-  const _$_Volume(
+class _$VolumeImpl implements _Volume {
+  const _$VolumeImpl(
       {@JsonKey(required: true, disallowNullValue: true) required this.id,
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required this.detailUrl,
       @JsonKey(required: true, disallowNullValue: true) required this.name});
 
-  factory _$_Volume.fromJson(Map<String, dynamic> json) =>
-      _$$_VolumeFromJson(json);
+  factory _$VolumeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VolumeImplFromJson(json);
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -150,29 +160,31 @@ class _$_Volume implements _Volume {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Volume &&
+            other is _$VolumeImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.detailUrl, detailUrl) ||
                 other.detailUrl == detailUrl) &&
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, detailUrl, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Volume
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VolumeCopyWith<_$_Volume> get copyWith =>
-      __$$_VolumeCopyWithImpl<_$_Volume>(this, _$identity);
+  _$$VolumeImplCopyWith<_$VolumeImpl> get copyWith =>
+      __$$VolumeImplCopyWithImpl<_$VolumeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VolumeToJson(
+    return _$$VolumeImplToJson(
       this,
     );
   }
@@ -184,9 +196,9 @@ abstract class _Volume implements Volume {
       @JsonKey(required: true, disallowNullValue: true, name: 'api_detail_url')
       required final String detailUrl,
       @JsonKey(required: true, disallowNullValue: true)
-      required final String name}) = _$_Volume;
+      required final String name}) = _$VolumeImpl;
 
-  factory _Volume.fromJson(Map<String, dynamic> json) = _$_Volume.fromJson;
+  factory _Volume.fromJson(Map<String, dynamic> json) = _$VolumeImpl.fromJson;
 
   @override
   @JsonKey(required: true, disallowNullValue: true)
@@ -197,8 +209,11 @@ abstract class _Volume implements Volume {
   @override
   @JsonKey(required: true, disallowNullValue: true)
   String get name;
+
+  /// Create a copy of Volume
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$_VolumeCopyWith<_$_Volume> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$VolumeImplCopyWith<_$VolumeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

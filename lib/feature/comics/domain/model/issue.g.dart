@@ -6,7 +6,7 @@ part of 'issue.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SimpleIssue _$$SimpleIssueFromJson(Map<String, dynamic> json) {
+_$SimpleIssueImpl _$$SimpleIssueImplFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
     requiredKeys: const [
@@ -24,8 +24,8 @@ _$SimpleIssue _$$SimpleIssueFromJson(Map<String, dynamic> json) {
       'image'
     ],
   );
-  return _$SimpleIssue(
-    id: json['id'] as int,
+  return _$SimpleIssueImpl(
+    id: (json['id'] as num).toInt(),
     detailUrl: json['api_detail_url'] as String,
     dateAdded: DateTime.parse(json['date_added'] as String),
     name: json['name'] as String?,
@@ -35,7 +35,7 @@ _$SimpleIssue _$$SimpleIssueFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$$SimpleIssueToJson(_$SimpleIssue instance) {
+Map<String, dynamic> _$$SimpleIssueImplToJson(_$SimpleIssueImpl instance) {
   final val = <String, dynamic>{
     'id': instance.id,
     'api_detail_url': instance.detailUrl,
@@ -55,12 +55,13 @@ Map<String, dynamic> _$$SimpleIssueToJson(_$SimpleIssue instance) {
   return val;
 }
 
-_$DetailedIssue _$$DetailedIssueFromJson(Map<String, dynamic> json) {
+_$DetailedIssueImpl _$$DetailedIssueImplFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
     requiredKeys: const [
       'id',
       'api_detail_url',
+      'description',
       'date_added',
       'date_last_updated',
       'image',
@@ -77,9 +78,10 @@ _$DetailedIssue _$$DetailedIssueFromJson(Map<String, dynamic> json) {
       'issue_number'
     ],
   );
-  return _$DetailedIssue(
-    id: json['id'] as int,
+  return _$DetailedIssueImpl(
+    id: (json['id'] as num).toInt(),
     detailUrl: json['api_detail_url'] as String,
+    description: json['description'] as String?,
     coverDate: json['cover_date'] == null
         ? null
         : DateTime.parse(json['cover_date'] as String),
@@ -125,7 +127,7 @@ _$DetailedIssue _$$DetailedIssueFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$$DetailedIssueToJson(_$DetailedIssue instance) {
+Map<String, dynamic> _$$DetailedIssueImplToJson(_$DetailedIssueImpl instance) {
   final val = <String, dynamic>{
     'id': instance.id,
     'api_detail_url': instance.detailUrl,
@@ -137,6 +139,7 @@ Map<String, dynamic> _$$DetailedIssueToJson(_$DetailedIssue instance) {
     }
   }
 
+  writeNotNull('description', instance.description);
   writeNotNull('cover_date', instance.coverDate?.toIso8601String());
   val['date_added'] = instance.dateAdded.toIso8601String();
   val['date_last_updated'] = instance.dateLastUpdated.toIso8601String();

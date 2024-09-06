@@ -6,7 +6,7 @@ part of 'comic_image.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ComicImage _$$_ComicImageFromJson(Map<String, dynamic> json) {
+_$ComicImageImpl _$$ComicImageImplFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
     requiredKeys: const [
@@ -34,7 +34,7 @@ _$_ComicImage _$$_ComicImageFromJson(Map<String, dynamic> json) {
       'image_tags'
     ],
   );
-  return _$_ComicImage(
+  return _$ComicImageImpl(
     iconUrl: json['icon_url'] as String,
     mediumUrl: json['medium_url'] as String,
     screenUrl: json['screen_url'] as String,
@@ -48,7 +48,7 @@ _$_ComicImage _$$_ComicImageFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$$_ComicImageToJson(_$_ComicImage instance) =>
+Map<String, dynamic> _$$ComicImageImplToJson(_$ComicImageImpl instance) =>
     <String, dynamic>{
       'icon_url': instance.iconUrl,
       'medium_url': instance.mediumUrl,
