@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:comic_book/feature/comics/presentation/bloc/details/details_event.dart';
 import 'package:comic_book/feature/comics/presentation/bloc/details/details_issue_bloc.dart';
 import 'package:comic_book/feature/comics/domain/model/issue.dart';
 import 'package:comic_book/shared/utils/state.dart';
@@ -6,6 +7,7 @@ import 'package:comic_book/feature/comics/presentation/widget/details_slivers.da
 import 'package:comic_book/feature/comics/presentation/widget/error_button.dart';
 import 'package:comic_book/feature/comics/presentation/widget/image_issue.dart';
 import 'package:comic_book/feature/comics/domain/repository/comic_book_repository.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -135,7 +137,7 @@ class _DetailIssueBody extends StatelessWidget {
       ),
     ];
     final DetailedIssue detailedIssue;
-    if (state case LoadingState()) {
+    if (state case LoadingState(: final value) when value == null) {
       sliver.add(
         const SliverFillRemaining(
           hasScrollBody: false,
@@ -149,18 +151,44 @@ class _DetailIssueBody extends StatelessWidget {
           child: Center(
             child: ErrorButton(
               message: state.failure.message,
-              onPressed: () => context.read<DetailsIssuesBloc>().retry(),
+              onPressed: () => context
+                  .read<DetailsIssuesBloc>()
+                  .add(const FetchIssueEvent()),
             ),
           ),
         ),
       );
     }
-    if (state case DataValue<DetailedIssue>(: final value) when value != null) {
+    if (state case DataValue<DetailedIssue>(:final value) when value != null) {
       detailedIssue = value;
     } else {
       return CustomScrollView(slivers: sliver);
     }
     sliver.addAll([
+      CupertinoSliverRefreshControl(
+        onRefresh: () async {
+          final bloc = context.read<DetailsIssuesBloc>();
+          bloc.add(const FetchIssueEvent());
+          await Future.doWhile(() async {
+            await Future.delayed(const Duration(milliseconds: 800));
+            if (bloc.state
+                case LoadingState<DetailedIssue>(:final isRefreshing)) {
+              return isRefreshing;
+            }
+            return false;
+          });
+        },
+        builder: (context, refreshState, pulledExtent,
+            refreshTriggerPullDistance, refreshIndicatorExtent) {
+          return const Padding(
+            padding: EdgeInsets.only(top: 8.0),
+            child: SizedBox.square(
+              dimension: 24.0,
+              child: CircularProgressIndicator.adaptive(),
+            ),
+          );
+        },
+      ),
       DetailsSliver(detailedIssue: detailedIssue),
       SliverPadding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -233,7 +261,7 @@ class _DetailIssueBody extends StatelessWidget {
     ///
     /// We insert the image at the beginning of the scroll
     sliver.insert(
-      1,
+      2,
       SliverToBoxAdapter(
         child: Container(
           alignment: Alignment.centerLeft,

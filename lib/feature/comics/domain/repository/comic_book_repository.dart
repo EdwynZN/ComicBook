@@ -67,8 +67,16 @@ interface class ComicBookRepository {
 
   Future<DetailedIssue> issueDetails({
     required final String id,
+    bool refresh = false,
   }) async {
-    final result = await _dio.get('issue/4000-$id/');
+    final result = await _dio.get(
+      'issue/4000-$id/',
+      options: Options(
+        extra: {
+          if (refresh) 'refresh': true,
+        },
+      ),
+    );
     final data = result.data as Map<String, dynamic>;
     final issue = DetailedIssue.fromJson(data);
     return issue;
@@ -76,11 +84,18 @@ interface class ComicBookRepository {
 
   Future<DetailedIssue> issueDetailsFromUrl({
     required final String url,
+    bool refresh = false,
   }) async {
     final uri = Uri.parse(url);
     final result = await _dio.fetch(
       Options(method: 'GET').compose(
-        _dio.options.copyWith(baseUrl: uri.origin),
+        _dio.options.copyWith(
+          baseUrl: uri.origin,
+          extra: {
+            ..._dio.options.extra,
+            if (refresh) 'refresh': true,
+          },
+        ),
         uri.path,
         queryParameters: {'field_list': _issueDetailFields},
       ),
