@@ -230,6 +230,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.7.0"
+  dio_cache_interceptor:
+    dependency: "direct main"
+    description:
+      name: dio_cache_interceptor
+      sha256: fb7905c0d12075d8786a6b63bffd64ae062d053f682cfaf28d145a2686507308
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.5.0"
+  dio_cache_interceptor_db_store:
+    dependency: "direct main"
+    description:
+      name: dio_cache_interceptor_db_store
+      sha256: "920d9984b97522dc5bdd78a7d228ab41f3e64df57704490c5a367ca28e682e72"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.1.1"
   dio_web_adapter:
     dependency: transitive
     description:
@@ -238,6 +254,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  drift:
+    dependency: transitive
+    description:
+      name: drift
+      sha256: "15b51e0ee1970455c0c3f7e560f3ac02ecb9c04711a9657586e470b234659dba"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.20.0"
   fake_async:
     dependency: transitive
     description:
@@ -542,7 +566,7 @@ packages:
     source: hosted
     version: "2.1.0"
   path:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path
       sha256: "087ce49c3f0dc39180befefc60fdb4acd8f8620e5682fe2476afd0b3688bb4af"
@@ -550,7 +574,7 @@ packages:
     source: hosted
     version: "1.9.0"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       sha256: fec0d61223fba3154d87759e3cc27fe2c8dc498f6386c6d6fc80d1afdd1bf378
@@ -786,6 +810,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.5.4+2"
+  sqlite3:
+    dependency: transitive
+    description:
+      name: sqlite3
+      sha256: "45f168ae2213201b54e09429ed0c593dc2c88c924a1488d6f9c523a255d567cb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.6"
   stack_trace:
     dependency: transitive
     description:

@@ -17,13 +17,14 @@ import 'package:dio/dio.dart';
 /// This Interceptor detects the Response/Error,
 /// unwraps it and returns the correct object ('data')
 /// or a DioException with the message from the server
-class ResponseWrapperInterceptor extends Interceptor with DioApiWrapper {
-  const ResponseWrapperInterceptor();
+class ResponseWrapperInterceptor extends QueuedInterceptor with DioApiWrapper {
+  ResponseWrapperInterceptor();
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     final int? code = response.statusCode;
-    if (code != null && code > 201) {
+    /// 304 is the cache response, so we need to make sure the response is 200 or 304
+    if (code != null && (code > 201 ? code != 304 : false)) {
       return handler.reject(serverError(response));
     }
     if (validateServerResponse(response)) {

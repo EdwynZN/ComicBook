@@ -4,12 +4,12 @@ targets:
       freezed:freezed:
         generate_for:
           include:
-            - lib/model/**.dart
+            - lib/feature/**/domain/model/**.dart
       json_serializable:
         generate_for:
           include:
-            - lib/model/**.dart
-            - lib/model/**.freezed.dart
+            - lib/feature/**/domain/model/**.dart
+            - lib/feature/**/domain/model/**.freezed.dart
         options:
           # Options configure how source code is generated for every
           # `@JsonSerializable`-annotated class in the package.
