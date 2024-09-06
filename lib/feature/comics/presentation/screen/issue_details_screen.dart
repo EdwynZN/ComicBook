@@ -116,8 +116,8 @@ class _DetailIssueBody extends StatelessWidget {
         titleTextStyle: const TextStyle(color: Colors.white),
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
-          statusBarBrightness: Brightness.dark,
-          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.light,
         ),
         title: BlocBuilder<DetailsIssuesBloc, BState<DetailedIssue>>(
           builder: (context, state) {
